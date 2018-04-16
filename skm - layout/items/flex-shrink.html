@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" class="u-themeGold">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layout Modes</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        ul {
+            display: flex;
+            max-width: 100%;
+        }
+        li {
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        li:nth-child(2) {
+            flex-shrink: 1;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <p>Try to resize the browser and observe the 2nd item</p>
+        <ul>
+            <li>Lorem.</li>
+            <li>Nesciunt.</li>
+            <li>Voluptate.</li>
+            <li>Veritatis?</li>
+        </ul>
+        <p>Explanation</p>
+        <p><code>flex-shrink</code> is <code>1</code> by default, so in order for one item to "take all the shrinking" we need to first reset it to <code>0</code> for all other items.</p>
+        <p>Once we have one item which "takes all the shrinking" we need to be in a situation where shrinking can occur:</p>
+        <p>
+            - The flex container's width is less then items' width<br>
+            - The items are not wrapping (<code>flex-wrap: no-wrap;</code> - default)<br>
+            - The items are not overflowing the container (either container has <code>overflow: hidden;</code> or another constraint like <code>max-width: 100%</code> and parent less than items' width)<br>
+            - The item itself can lose pixels (either computed <code>flex-base</code> is more than content width or item has <code>overflow: hidden;</code>)
+        </p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+:root {
+  --space: 1em;
+
+  --font-sizeBase: 1rem;
+  --font-sizeSm: 0.875rem;
+  --font-size1: 1.5rem;
+  --font-size2: 2.25rem;
+  --font-sans: sans-serif;
+  --font-fancySans: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+  --width-max: 980px;
+  --width-8: 80%;
+
+  --border-size1: 1px;
+  --border-radius1: 5px;
+
+  --color-darkBlue: #2A3F4F;
+  --color-white: white;
+  --color-green:#648880;
+}
+
+@custom-media --bp-md (min-width: 600px);

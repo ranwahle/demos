@@ -1,0 +1,65 @@
+:root {
+  --type-sans: {
+    font-family: var(--font-sans);
+  }
+
+  --type-fancySans: {
+    font-family: var(--font-fancySans);
+  }
+
+  --type-sizeBase: {
+    font-size: var(--font-sizeBase);
+  }
+
+  --type-size1: {
+    font-size: var(--font-size1);
+  }
+
+  --type-size2: {
+    font-size: var(--font-size2);
+  }
+
+  --type-sizeSm: {
+    font-size: var(--font-sizeSm);
+  }
+
+  --type-weight1 {
+    font-weight: 100;
+  }
+
+  --type-weight3 {
+    font-weight: 300;
+  }
+}
+
+.type-sizeBase {
+  @apply --type-sizeBase;
+}
+
+.type-sans {
+  @apply --type-sans;
+}
+
+.type-fancySans {
+  @apply --type-fancySans;
+}
+
+.type-sizeSm {
+  @apply --type-sizeSm;
+}
+
+.type-size1 {
+  @apply --type-size1;
+}
+
+.type-size2 {
+  @apply --type-size2;
+}
+
+.type-weight1 {
+  @apply --type-weight1;
+}
+
+.type-weight3 {
+  @apply --type-weight3;
+}

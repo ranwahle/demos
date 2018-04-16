@@ -1,0 +1,93 @@
+.u-theme--blue .Page {
+    background-color: darkcyan;
+    color: white;
+}
+.u-theme--blue .Product {
+    background-color: burlywood;
+    color: darkslategray;
+}
+.u-theme--blue .Product-text {
+    background-color: steelblue;
+    color: white;
+}
+.u-theme--blue .Product-title {
+    background-color: skyblue;
+    color: darkslategray;
+}
+.u-theme--blue .Product-image img {
+    border: 3px solid darkcyan;
+    border-radius: 5px;
+}
+.u-theme--blue .Button {
+    border-radius: 5px;
+    background-color: skyblue;
+    color: white;
+}
+.u-theme--blue .Button:hover {
+    background-color: white;
+    color: skyblue;
+}
+
+
+
+.u-theme--purple .Page {
+    background-color: darkorchid;
+    color: white;
+}
+.u-theme--purple .Product {
+    background-color: coral;
+    color: white;
+}
+.u-theme--purple .Product-text {
+    background-color: purple;
+    color: white;
+}
+.u-theme--purple .Product-title {
+    background-color: slateblue;
+    color: white;
+}
+.u-theme--purple .Product-image img {
+    border: 3px solid darkorchid;
+    border-radius: 5px;
+}
+.u-theme--purple .Button {
+    border-radius: 5px;
+    background-color: slateblue;
+    color: white;
+}
+.u-theme--purple .Button:hover {
+    background-color: white;
+    color: slateblue;
+}
+
+
+
+.u-theme--red .Page {
+    background-color: tomato;
+    color: white;
+}
+.u-theme--red .Product {
+    background-color: darkred;
+    color: white;
+}
+.u-theme--red .Product-text {
+    background-color: crimson;
+    color: white;
+}
+.u-theme--red .Product-title {
+    background-color: firebrick;
+    color: white;
+}
+.u-theme--red .Product-image img {
+    border: 3px solid tomato;
+    border-radius: 5px;
+}
+.u-theme--red .Button {
+    border-radius: 5px;
+    background-color: firebrick;
+    color: white;
+}
+.u-theme--red .Button:hover {
+    background-color: white;
+    color: firebrick;
+}

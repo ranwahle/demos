@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section>
+        <h1>Employee Management System</h1>
+        <form action="">
+            <input name="name" type="text" aria-label="Employee Name" placeholder="Employee Name...">
+            <input name="skill" type="text" aria-label="Employee Skill" placeholder="Employee Skill...">
+            <select name="type">
+                <option value="Developer">Developer</option>
+                <option value="Manager">Manager</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Designer">Designer</option>
+            </select>
+            <input class="Button" type="submit" value="Add Employee">
+        </form>
+    </section>
+
+    <section>
+        <h2>Employees List:</h2>
+        <ul class="Employees"></ul>
+    </section>
+
+    <script id="employee-template" type="text/x-handlebars-template">
+        {{#each employees}}
+            <li class="Employee" data-id="{{id}}">
+                <dl>
+                    <dt>ID</dt>
+                    <dd>{{id}}</dd>
+                    <dt>Name</dt>
+                    <dd>{{name}}</dd>
+                    <dt>Skill</dt>
+                    <dd>{{skill}}</dd>
+                    <dt>Title</dt>
+                    <dd>{{type}}</dd>
+                    <dt>Last Check In</dt>
+                    <dd>{{#if lastCheckIn}}{{lastCheckIn}}{{else}}---{{/if}}</dd>
+                </dl>
+                <ul>
+                    {{#each actions}}
+                        <li><button data-action="{{id}}" class="Button">{{name}}</button></li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+    </script>
+
+    <script src="bower_components/handlebars/handlebars.min.js"></script>
+    <script src="ems.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

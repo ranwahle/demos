@@ -1,0 +1,13 @@
+:root {
+
+}
+
+.theme-typeSans.Site {
+  font-family: var(--font-sans);
+}
+
+.theme-typeSans .Hero-title,
+.theme-typeSans .Heading,
+.theme-typeSans .Heading--sm {
+  font-family: var(--font-fancySans);
+}

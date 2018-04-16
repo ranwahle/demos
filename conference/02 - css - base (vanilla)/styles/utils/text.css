@@ -1,0 +1,16 @@
+.text-center {
+  text-align: center;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-underline,
+.text-underline--hover:hover {
+  text-decoration: underline;
+}
+
+.text-track {
+  letter-spacing: var(--track-normal);
+}

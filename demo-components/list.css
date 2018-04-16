@@ -1,0 +1,94 @@
+.List,
+.List--stacked,
+.List--cards {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+.ListItem {
+    border: 1px solid hsl(0, 0%, 90%);
+    padding: 16px;
+    border-radius: 5px;
+}
+
+.ListItem-title {
+    font-size: 150%;
+    margin-bottom: 16px;
+}
+
+.ListItem-footer {
+    margin-top: 16px;
+}
+
+.ListItem:first-child,
+.ListItem + .ListItem {
+    margin-bottom: 16px;
+}
+
+.List--stacked .ListItem {
+    height: 40px;
+    overflow: hidden;
+}
+
+.List--stacked .ListItem-title,
+.List--stacked .ListItem-body,
+.List--stacked .ListItem-footer {
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.List--stacked .ListItem-title,
+.List--stacked .ListItem-body,
+.List--stacked .ListItem-footer {
+    line-height: 40px;
+}
+
+.List--stacked .ListItem-title {
+    font-size: 100%;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 8px;
+    width: 10%;
+}
+
+.List--stacked .ListItem-body {
+    margin-right: 8px;
+    width: 50%;
+}
+
+.List--stacked .ListItem-footer {
+    margin-top: 0;
+    width: 20%;
+
+    float: right;
+    text-align: right;
+}
+
+.List--stacked .ListItem-footer  > * {
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.List--cards .ListItem {
+    width: 25%;
+    float: left;
+    height: 300px;
+    margin-right: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.List--cards .ListItem-body {
+    overflow: auto;
+    height: 200px;
+}
+
+.List--cards .ListItem-footer {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+}

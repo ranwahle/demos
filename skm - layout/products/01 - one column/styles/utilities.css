@@ -1,0 +1,34 @@
+.u-vSpace {
+    margin-top: var(--space);
+    margin-bottom: var(--space);
+}
+.u-vSpace-top {
+    margin-top: var(--space);
+}
+.u-vSpace-top--small {
+    margin-top: calc(var(--space)/2);
+}
+.u-vSpace--small {
+    margin-top: calc(var(--space)/2);
+    margin-bottom: calc(var(--space)/2);
+}
+.u-hSpace {
+    margin-left: var(--space);
+    margin-right: var(--space);
+}
+.u-vPad {
+    padding-top: var(--space);
+    padding-bottom: var(--space);
+}
+.u-vPad-bottom {
+    padding-bottom: var(--space);
+}
+.u-hPad {
+    padding-right: var(--space);
+    padding-left: var(--space);
+}
+.u-hCenter {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}

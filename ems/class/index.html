@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EMS - Employee Management System</title>
+</head>
+<body>
+    <form action="">
+        <ul>
+            <li>
+                <input name="name" type="text" aria-label="Employee Name" placeholder="John Doe">
+            </li>
+            <li>
+                <input name="skill" type="text" aria-label="Employee Skill" placeholder="TDD">
+            </li>
+            <li>
+                <select name="type" aria-label="Employee Type">
+                    <option value="Developer">Developer</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Manager">Manager</option>
+                </select>
+            </li>
+        </ul>
+        <button>Add Employee</button>
+    </form>
+    <section>
+        <h2>Employees List:</h2>
+        <ul class="js-list"></ul>
+    </section>
+    <script src="ems.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.theme-dark [c-Page-section~="header"],
+.theme-dark [c-Page-section~="intro"],
+.theme-dark [c-Page-section~="footer"] {
+  background-color: var(--color-darkBlue);
+  color: var(--color-white);
+}
+
+.theme-dark [c-Hero-title],
+.theme-dark [c-Heading],
+.theme-dark [c-Heading~="small"] {
+  color: var(--color-green);
+}
+
+.theme-dark [c-Button]:hover {
+  background-color: var(--color-white);
+  color: var(--color-green);
+}

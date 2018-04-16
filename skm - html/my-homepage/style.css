@@ -1,0 +1,19 @@
+html {
+    font-family: sans-serif;
+}
+
+a {
+    background-color: #E3175B;
+    color: white;
+    text-decoration: none;
+    padding: 0.25em;
+}
+
+body {
+    background-color: #00BCD4;
+    color: #222;
+}
+
+img {
+    max-width: 100%;
+}

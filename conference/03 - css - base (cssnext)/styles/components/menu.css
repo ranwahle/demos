@@ -1,0 +1,9 @@
+.Menu-item {
+  @apply --reset-link;
+  @apply --text-upper;
+  @apply --type-sizeSm;
+}
+
+.Menu-item:hover {
+  @apply --text-underline;
+}

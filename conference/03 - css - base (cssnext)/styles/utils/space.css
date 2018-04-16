@@ -1,0 +1,9 @@
+:root {
+  --space-p1: {
+    padding: var(--space);
+  }
+}
+
+.space-p1 {
+  @apply --space-p1;
+}

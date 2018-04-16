@@ -1,0 +1,12 @@
+@media (min-width: 1000px) {
+    .u-type {
+        font-size: 1.5rem;
+    }
+    .Product-buy,
+    .Product-price {
+        margin-left: auto;
+    }
+    .Product-price {
+        text-align: right;
+    }
+}

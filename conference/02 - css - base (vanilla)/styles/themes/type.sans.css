@@ -1,0 +1,9 @@
+.theme-typeSans[c-Site] {
+  font-family: var(--font-sans);
+}
+
+.theme-typeSans [c-Logo],
+.theme-typeSans [c-Heading],
+.theme-typeSans [c-Heading~="small"] {
+  font-family: var(--font-fancySans);
+}

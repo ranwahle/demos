@@ -1,0 +1,15 @@
+.u-themeGold body {
+    background-color: gold;
+    color: white;
+}
+.u-themeGold main { background-color: goldenrod; }
+.u-themeGold li:nth-child(1) { background-color: rgba(0, 0, 0, 0.6); }
+.u-themeGold li:nth-child(2) { background-color: rgba(25, 0, 10, 0.6); }
+.u-themeGold li:nth-child(3) { background-color: rgba(50, 0, 20, 0.6); }
+.u-themeGold li:nth-child(4) { background-color: rgba(75, 0, 30, 0.6); }
+.u-themeGold li:nth-child(5) { background-color: rgba(100, 0, 40, 0.6); }
+.u-themeGold li:nth-child(6) { background-color: rgba(125, 0, 50, 0.6); }
+.u-themeGold li:nth-child(7) { background-color: rgba(150, 0, 60, 0.6); }
+.u-themeGold li:nth-child(8) { background-color: rgba(175, 0, 70, 0.6); }
+.u-themeGold li:nth-child(9) { background-color: rgba(200, 0, 80, 0.6); }
+.u-themeGold li:nth-child(10) { background-color: rgba(225, 0, 90, 0.6); }

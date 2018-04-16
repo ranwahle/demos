@@ -1,0 +1,56 @@
+.Tabs {
+  font-family: "Open Sans", sans-serif;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+}
+.Tabs:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.Tab,
+.Tab--active {
+  float: left;
+  padding: 8px 16px;
+  background-color: white;
+  margin-left: 8px;
+  border-radius: 5px;
+  position: relative;
+  top: 1px;
+  color: hsl(208, 98%, 43%);
+}
+.Tab--active,
+.Tab:hover {
+  border: 1px solid hsl(0, 0%, 90%);
+  margin-top: -1px;
+  border-bottom: 1px solid white;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  color: inherit;
+}
+.Tab:hover {
+  border-color: hsl(0, 0%, 95%);
+  border-bottom-color: hsl(0, 0%, 90%);
+  position: relative;
+  left: -1px;
+  margin-right: -2px;
+}
+.Tab:first-child,
+.Tab--active:first-child {
+  margin-left: 0;
+}
+.Tab a,
+.Tab--active a {
+  text-decoration: none;
+  color: inherit;
+}
+.TabPanel {
+  padding: 8px 16px;
+  font-family: "Open Sans", sans-serif;
+  display: none;
+}
+.TabPanel:target {
+  display: block;
+}

@@ -1,0 +1,17 @@
+:root {
+  --border-size1: {
+    border: var(--border-size1) solid;
+  }
+
+  --border-round1: {
+    border-radius: var(--border-radius1);
+  }
+}
+
+.border-size1 {
+  @apply --border-size1;
+}
+
+.border-round1 {
+  @apply --border-round1;
+}

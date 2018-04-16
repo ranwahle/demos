@@ -1,0 +1,21 @@
+{
+  "name": "framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm run test-browser & npm run test-node",
+    "test-browser": "karma start",
+    "test-node": "jasmine test/**/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "jasmine-core": "^2.99.1",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1"
+  }
+}

@@ -1,0 +1,12 @@
+ul.reset,
+.reset-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a.reset,
+.reset-link {
+  color: inherit;
+  text-decoration: none;
+}

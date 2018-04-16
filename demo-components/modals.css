@@ -1,0 +1,83 @@
+.Modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+
+  display: none;
+}
+
+.Modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+  max-width: 768px;
+  display: table;
+  z-index: 1;
+  margin: auto;
+
+  display: none;
+
+  font-family: "Open Sans", sans-serif;
+  padding: 16px 0;
+  border-radius: 5px;
+  border: 1px solid hsl(0, 0%, 90%);
+  background-color: white;
+}
+
+.Modal:target {
+  display: table;
+}
+
+.Modal:target ~ .Modal-overlay {
+    display: block;
+}
+
+.Modal-header,
+.Modal-footer,
+.Modal-body {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.Modal-header {
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+
+  font-size: 150%;
+}
+
+.Modal-footer {
+  border-top: 1px solid hsl(0, 0%, 90%);
+  margin-top: 16px;
+  padding-top: 16px;
+  text-align: right;
+}
+
+.Modal-close {
+  color: inherit;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.Modal-close:hover {
+  color: hsl(0, 0%, 50%);
+}
+
+.u-visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

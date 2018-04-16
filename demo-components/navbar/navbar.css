@@ -1,0 +1,87 @@
+/* Base style */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.Navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.Navbar {
+    background-color: #f8f8f8;    
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Links menu */
+.Navbar-menu {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Navbar-menu > li {
+    padding: 10px;
+}
+
+.Navbar-menu > li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.Navbar-menu > li a:hover {
+    color: #333;
+}
+
+/* Links menu - 2nd level */
+.Navbar-menu > li > ul {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.Navbar-menu > li:hover > ul {
+    display: block;
+}
+
+.Navbar-menu > li > ul > li {
+    padding: 10px;
+}
+
+/* Search form */
+.Navbar-search {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.Navbar-search input,
+.Navbar-search button {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    border: 1px solid lightgray;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Navbar-search button {
+    cursor: pointer;
+}
+
+.Navbar-search button:hover {
+    background-color: darkgray;
+    color: white;
+}
+
+/* Brand */
+.Navbar-brand {
+    margin: 10px;
+}

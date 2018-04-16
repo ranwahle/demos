@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Papa</title>
+</head>
+<body>
+
+  <a href="#feature-a">feature-a</a>
+  <a href="#feature-b">feature-b</a>
+
+  <main ng-view></main>
+
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/oclazyload/dist/oclazyload.js"></script>
+
+  <script src="modules/app.module.js"></script>
+  <script src="modules/app.config.js"></script>
+
+  <script src="modules/feature-a/feature-a.module.js"></script>
+  <script src="modules/feature-a/feature-a.config.js"></script>
+  <script src="modules/feature-a/feature-a.controller.js"></script>
+
+  <script src="modules/feature-b/feature-b.module.js"></script>
+  <script src="modules/feature-b/feature-b.config.js"></script>
+  <script src="modules/feature-b/feature-b.controller.js"></script>
+</body>
+</html>

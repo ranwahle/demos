@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bubbling</title>
+    <style>
+        table, td {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td data-id="1" data-action="delete">Hello 1</td>
+        </tr>
+        <tr>
+            <td data-id="2" data-action="edit">Hello 2</td>
+        </tr>
+        <tr>
+            <td data-id="3">Hello 3</td>
+        </tr>
+        <tr>
+            <td data-id="4">Hello 4</td>
+        </tr>
+        <tr>
+            <td data-id="5">Hello 5</td>
+        </tr>
+    </table>
+
+    <script>
+        let table = document.querySelector('table');
+        table.addEventListener('click', onClick);
+
+        function onClick(e) {
+            console.log('table clicked', e.target.dataset.id);
+
+            let action = e.target.dataset.action;
+            if (action == 'delete') {
+                console.warn(e.target.dataset.id, 'is going to be deleted');
+            }
+        }
+    </script>
+</body>
+</html>

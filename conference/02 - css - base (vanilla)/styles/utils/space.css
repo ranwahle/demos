@@ -1,0 +1,11 @@
+.space-p1 {
+  padding: var(--space);
+}
+
+.space-p2 {
+  padding: calc(var(--space) * 2);
+}
+
+.space-pr1 {
+  padding-right: var(--space);
+}

@@ -1,0 +1,34 @@
+:root {
+  --layout-hCenter: {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  --layout-maxWidth8: {
+    max-width: var(--width-8);
+  }
+
+  --layout-maxWidthMax: {
+    max-width: var(--width-max);
+  }
+
+  --layout-inlineBlock: {
+    display: inline-block;
+  }
+}
+
+.layout-hCenter {
+  @apply --layout-hCenter;
+}
+
+.layout-maxWidth8 {
+  @apply --layout-maxWidth8;
+}
+
+.layout-inlineBlock {
+  @apply --layout-inlineBlock;
+}
+
+.layout-maxWidthMax {
+  @apply --layout-maxWidthMax;
+}

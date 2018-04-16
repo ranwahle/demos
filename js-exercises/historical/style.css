@@ -1,0 +1,30 @@
+body {
+	color: #001F3F;
+    padding: 1em;
+    font-family: sans-serif;
+}
+
+.BarChart-graph, .BarChart-category, .BarChart-value {
+	padding: 0;
+	margin: 0;
+}
+
+.BarChart-graph {
+	display: grid;
+	grid-template-columns: 20% 1fr;
+    grid-gap: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.BarChart-category, .BarChart-value data {
+	padding: 0.5em;
+}
+
+.BarChart-category {
+	padding-left: 0;
+}
+
+.BarChart-value data {
+	display: block;
+}

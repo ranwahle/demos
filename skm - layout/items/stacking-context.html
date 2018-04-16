@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="u-themeGold">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layout Modes</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        ul, p {
+            position: relative;
+        }
+        li:nth-child(10) {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        p {
+            background-color: green;
+            top: -40px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>Try to set the <code>z-index</code> of the <code>ul</code> and <code>p</code> to anything other than <code>auto</code>, such that <code>p</code>'s <code>z-index</code> will be greater than / equals the <code>z-index</code> of the <code>ul</code></section>
+        <ul>
+            <li>Lorem.</li>
+            <li>Nesciunt.</li>
+            <li>Voluptate.</li>
+            <li>Veritatis?</li>
+            <li>Quas.</li>
+            <li>Quibusdam!</li>
+            <li>Dolor?</li>
+            <li>Tempore!</li>
+            <li>Cupiditate?</li>
+            <li>Ut.</li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, quod?</p>
+        <section>
+            Explanation<br>
+            - Since the <code>z-index</code> of the last item is positive and all other elements are <code>auto</code>, the last item is above the paragraph even though it's coming first in the source order.<br>
+            - When changing the <code>z-index</code> of the container of the item to anything lower than the next container, the last item's <code>z-index</code> becomes irrelevant to the next container since it's contained in a different (lower) stacking-context.<br>
+            <img src="https://cdn.tutsplus.com/webdesign/uploads/2013/11/stacking-order1.png" alt="">
+        </section>
+    </main>
+</body>
+</html>

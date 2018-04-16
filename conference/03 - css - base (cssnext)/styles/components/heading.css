@@ -1,0 +1,19 @@
+:root {
+  --Heading: {
+    @apply --type-size2;
+    @apply --type-weight3;
+  }
+
+  --Heading--sm: {
+    @apply --type-size1;
+    @apply --type-weight1;
+  }
+}
+
+.Heading {
+  @apply --Heading;
+}
+
+.Heading--sm {
+  @apply --Heading--sm;
+}

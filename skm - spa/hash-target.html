@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .Section {
+            display: none;
+        }
+        .Section:target {
+            display: block;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Single Page App</h1>
+    <ul>
+        <li><a href="#users">Users</a></li>
+        <li><a href="#posts">Posts</a></li>
+    </ul>
+    <div id="users" class="Section">
+        <h2>Users</h2>
+        <ul>
+            <li>Lorem.</li>
+            <li>Magni.</li>
+            
+        </ul>
+    </div>
+    <div id="posts" class="Section">
+        <h2>Posts</h2>
+        <article>Lorem ipsum dolor sit amet.</article>
+        <article>Quod consectetur expedita, enim quibusdam.</article>
+        <article>Culpa placeat sint suscipit pariatur.</article>
+        <article>Dignissimos illo non maxime omnis.</article>
+    </div>
+</body>
+</html>

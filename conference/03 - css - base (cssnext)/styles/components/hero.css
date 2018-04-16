@@ -1,0 +1,9 @@
+.Hero {
+  @apply --layout-hCenter;
+  @apply --layout-maxWidth8;
+  @apply --text-center;
+}
+
+.Hero-title {
+  @apply --Heading;
+}

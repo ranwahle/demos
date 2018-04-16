@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Average</title>
+    <style>
+        body {
+            padding: 1em;
+        }
+
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        th,
+        td {
+            border: 1px solid;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Einstein</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Freud</td>
+                <td>88</td>
+            </tr>
+            <tr>
+                <td>Edison</td>
+                <td>62</td>
+            </tr>
+            <tr>
+                <td>Newton</td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td>Darwin</td>
+                <td>94</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Average</td>
+                <td>?</td>
+            </tr>
+        </tfoot>
+    </table>
+    <button>Calc Average</button>
+
+    <script>
+
+        let button = document.querySelector('button');
+        button.addEventListener('click', onClick);
+
+        function onClick() {
+            let grades = parseGradesTable(document.querySelector('table'));
+            let avg = getAverage(grades);
+            let avgCell = document.querySelector('tfoot td:last-child');
+            avgCell.textContent = avg;
+        }
+
+        function parseGradesTable(table) {
+            let grades = [];
+            let cells = table.querySelectorAll('tbody td');
+            for (let i = 1; i < cells.length; i += 2) {
+                grades.push(Number(cells[i].textContent));
+            }
+            return grades;
+        }
+
+        function getAverage(grades) {
+            let sum = 0;
+            for (grade of grades) {
+                sum += grade;
+            }
+            return sum / grades.length;
+        }
+
+    </script>
+</body>
+
+</html>

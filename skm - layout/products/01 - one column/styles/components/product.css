@@ -1,0 +1,21 @@
+.Product {
+    font-size: 1rem;
+}
+.Product-image {
+    text-align: center;
+}
+.Product-image img {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.Product-buy.Button {
+    display: block;
+}
+.Product-buy {
+    width: 2em;
+    text-align: center;
+}
+.Product-price {
+    display: block;
+    width: 8em;
+}

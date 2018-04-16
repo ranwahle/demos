@@ -1,0 +1,20 @@
+{
+  "name": "conference",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "postcss styles/index.css --verbose -w -o styles/index.build.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "postcss": "^6.0.19",
+    "postcss-cli": "^5.0.0",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^11.1.0",
+    "postcss-load-config": "^1.2.0"
+  }
+}

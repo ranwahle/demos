@@ -1,0 +1,35 @@
+.type-sans {
+  font-family: var(--font-sans);
+}
+
+.type-fancySans {
+  font-family: var(--font-fancySans);
+}
+
+.type-sizeBase {
+  font-size: var(--font-sizeBase);
+}
+
+.type-size1 {
+  font-size: var(--font-size1);
+}
+
+.type-size2 {
+  font-size: var(--font-size2);
+}
+
+.type-size3 {
+  font-size: var(--font-size3);
+}
+
+.type-sizeSm {
+  font-size: var(--font-sizeSm);
+}
+
+.type-weight1 {
+  font-weight: 100;
+}
+
+.type-weight3 {
+  font-weight: 300;
+}

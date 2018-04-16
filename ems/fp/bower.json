@@ -1,0 +1,17 @@
+{
+  "name": "fp",
+  "homepage": "https://github.com/krulik/demos",
+  "authors": [
+    "krulik <iwillkissyou@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

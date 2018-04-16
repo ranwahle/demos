@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+    background-color: #2F2F2F;
+}
+
+section {
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    padding: 1em;
+    margin: 1em;
+}
+
+[type="text"],
+select,
+option,
+.Button {
+    padding: 0.5em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.Button {
+    background-color: #5cb85c;
+    color: white;
+    text-shadow: 0 0 2px black;
+    cursor: pointer;
+}

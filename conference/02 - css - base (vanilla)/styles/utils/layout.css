@@ -1,0 +1,39 @@
+.layout-hCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout-maxWidth80 {
+  max-width: var(--width-80);
+}
+
+.layout-maxWidth50 {
+  max-width: var(--width-50);
+}
+
+.layout-inlineBlock {
+  display: inline-block;
+}
+
+.layout-maxWidthMax {
+  max-width: var(--width-max);
+}
+
+.layout-borderBox {
+  box-sizing: border-box;
+}
+
+.layout-justifyBetween {
+  justify-content: space-between;
+}
+
+@media (min-width: 45em) {
+/* @media (min-width: 720px) { */
+  .layout-flex--ns {
+    display: flex;
+  }
+
+  .layout-maxWidth50--ns {
+    max-width: var(--width-50);
+  }
+}

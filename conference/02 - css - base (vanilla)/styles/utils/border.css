@@ -1,0 +1,7 @@
+.border-size1 {
+  border: var(--border-size1) solid;
+}
+
+.border-round1 {
+  border-radius: var(--border-radius1);
+}

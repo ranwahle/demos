@@ -1,0 +1,7 @@
+{
+    "extends": "standard",
+    "rules": {
+        "semi": "off",
+        "space-before-function-paren": "off"
+    }
+}

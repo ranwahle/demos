@@ -1,0 +1,14 @@
+main ul {
+    display: flex;
+}
+
+li {
+
+}
+
+
+
+
+li:nth-child(n + 4) {
+    display: none;
+}

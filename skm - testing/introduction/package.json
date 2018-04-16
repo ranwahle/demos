@@ -1,0 +1,12 @@
+{
+  "name": "introduction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "manual.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="helloApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Hello World</title>
+    <style>
+        [ng-cloak] {visibility: hidden;}
+        .dark { background-color: black; color: white; }
+        .light { background-color: white; color: black; }
+    </style>
+</head>
+<body ng-controller="AppCtrl" ng-class="{'light': theme === 'light', 'dark': theme === 'dark'}">
+    
+    <div>
+        <h2>Theme Selector</h2>
+        <label for="">Please select a theme:</label>
+        <input type="radio" name="theme" id="theme-dark" value="dark" ng-model="theme"> Dark
+        <input type="radio" name="theme" id="theme-light" value="light" ng-model="theme"> Light
+    </div>
+    
+    <div ng-controller="PersonCtrl">
+        <h1 ng-cloak>Hello {{firstName}}!</h1>
+        <h2>Your chosen theme is {{theme}}</h2>
+    
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" ng-model="firstName">
+        
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" ng-model="lastName">
+        
+        <button ng-click="submit()">Submit</button>
+    </div>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

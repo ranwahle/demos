@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="profilesApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Profiles</title>
+</head>
+<body ng-controller="ProfilesCtrl">
+    <div>
+        <button ng-click="updateList()">Update List</button>
+    </div>
+    <div>
+        <h2>Add profile:</h2>
+
+        <label for="name">First Name</label>
+        <input id="name" type="text" ng-model="newUser.name">
+
+        <label for="email">Email</label>
+        <input id="email" type="text" ng-model="newUser.email">
+
+        <button ng-click="add(newUser)">Add</button>
+    </div>
+
+    <ul>
+        <li ng-repeat="user in users track by $index" ng-click="selectProfile(user)">
+            <profile profile="user"></profile>
+        </li>
+    </ul>
+
+    <div ng-if="!selectedProfile">
+        Please select a user....
+    </div>
+    <div ng-if="selectedProfile">
+        <h2>Current Profile</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd>{{selectedProfile.name}}</dd>
+            <dt>Email</dt>
+            <dd>{{selectedProfile.email}}</dd>
+            <dt>ID</dt>
+            <dd>{{selectedProfile.id}}</dd>
+        </dl>
+    </div>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

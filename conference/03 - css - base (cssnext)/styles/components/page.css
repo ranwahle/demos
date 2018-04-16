@@ -1,0 +1,9 @@
+:root {
+
+}
+
+.Page-section {
+  @apply --space-p1;
+  @apply --layout-hCenter;
+  @apply --layout-maxWidthMax;
+}

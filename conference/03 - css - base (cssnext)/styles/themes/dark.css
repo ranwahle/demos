@@ -1,0 +1,31 @@
+:root {
+  --theme-whiteOnBlue: {
+    background-color: var(--color-darkBlue);
+    color: var(--color-white);
+  }
+
+  --theme-greenOnWhite: {
+    background-color: var(--color-white);
+    color: var(--color-green);
+  }
+
+  --theme-greenText: {
+    color: var(--color-green);
+  }
+}
+
+.theme-dark .Page-header,
+.theme-dark .Page-intro,
+.theme-dark .Page-footer {
+  @apply --theme-whiteOnBlue;
+}
+
+.theme-dark .Hero-title,
+.theme-dark .Heading,
+.theme-dark .Heading--sm {
+  @apply --theme-greenText;
+}
+
+.theme-dark .Button:hover {
+  @apply --theme-greenOnWhite;
+}

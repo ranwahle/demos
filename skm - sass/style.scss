@@ -1,0 +1,9 @@
+$w: 200px;
+$h: 200px;
+$c: gold;
+
+.box {
+    width: $w;
+    background-color: $c;
+    height: $h;
+}

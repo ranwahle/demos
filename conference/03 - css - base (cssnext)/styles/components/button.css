@@ -1,0 +1,11 @@
+a.Button {
+  @apply --reset-link;
+}
+
+.Button {
+   @apply --text-upper;
+   @apply --space-p1;
+   @apply --layout-inlineBlock;
+   @apply --border-size1;
+   @apply --border-round1;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    textarea,
+    output {
+      display: block;
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: inherit;
+      font-family: monospace;
+    }
+    output {
+      padding: 20px 0;
+      color: firebrick;
+    }
+    .rejected,
+    .resolved {
+      text-transform: capitalize;
+    }
+    .resolved { color: forestgreen; }
+  </style>
+</head>
+<body>
+
+  <h1>Impactful Repair in Report</h1>
+  <fieldset>
+    <legend>Visit Data</legend>
+    <label for="visit-data">Paste JSON from <code>/visits/:id</code></label>
+    <textarea name="" id="visit-data" cols="50" rows="20"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Next Visit Data</legend>
+    <label for="next-visit-data">Paste JSON from <code>/visits/:id</code></label>
+    <textarea name="" id="next-visit-data" cols="50" rows="20"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Previous Visit Data</legend>
+    <label for="previous-visit-data">Paste JSON from <code>/visits/:id</code></label>
+    <textarea name="" id="previous-visit-data" cols="50" rows="20"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Result</legend>
+    <button>Get Result</button>
+    <output></output>
+  </fieldset>
+
+  <script src='state-machine.js'></script>
+  <script src="fsm.js"></script>
+  <script src="main.js"></script>
+
+  <script src="mock.js"></script>
+  <script src="test.js"></script>
+</body>
+</html>

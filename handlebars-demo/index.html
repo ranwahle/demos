@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="container"></div>
+
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="entries">
+      {{#each entries}}
+        <div class="entry">
+          <h1>{{title}} - {{id}}</h1>
+          <div class="body">
+            {{body}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </script>
+
+  <script src="node_modules/handlebars/dist/handlebars.js"></script>
+  <script src="handlebars.js"></script>
+  <!-- <script src="dom.js"></script> -->
+  <!-- <script src="template-string.js"></script> -->
+</body>
+</html>
