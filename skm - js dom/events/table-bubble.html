@@ -36,12 +36,7 @@
         table.addEventListener('click', onClick);
 
         function onClick(e) {
-            console.log('table clicked', e.target.dataset.id);
-
-            let action = e.target.dataset.action;
-            if (action == 'delete') {
-                console.warn(e.target.dataset.id, 'is going to be deleted');
-            }
+            console.log(`clicked [id=${e.target.dataset.id}] [action=${e.target.dataset.action}]`);
         }
     </script>
 </body>

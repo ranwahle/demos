@@ -10,11 +10,11 @@
   <input type="button" onclick="clearTimeout(timeoutId)" value="stop timeout">
   <script>
     let counter = 0;
-    let timeoutId = setTimeout(announce, 2000);;
+    let timeoutId = setTimeout(announce, 2000);
 
     function announce() {
       let moment = new Date();
-      console.log(`Counter is ${++counter} at ${moment}`);
+      console.log(`Counter is ${++counter} at ${moment.getTime()}`);
 
       timeoutId = setTimeout(announce, 2000);
     }
