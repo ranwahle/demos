@@ -1,0 +1,14 @@
+@function em($px) {
+  @return ($px / 16px) + 'em';
+}
+
+@mixin mq($bp) {
+  @if $bp == 'md' {
+      @media (min-width: em(600px)) { @content; }
+  }
+}
+
+@mixin dimensions($w, $h: $w) {
+  width: $w;
+  height: $h;
+}

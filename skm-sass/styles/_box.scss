@@ -1,0 +1,16 @@
+$palette: red green blue;
+
+@each $c in $palette {
+  .box-#{$c} {
+      @include dimensions($w);
+      background-color: $c;
+
+      &:hover {
+          background-color: lighten($c, 20%);
+      }
+
+      @include mq('md') {
+          background-color: darken($c, 20%);
+      }
+  }
+}
