@@ -1,0 +1,42 @@
+/*
+@see https://meyerweb.com/eric/css/inline-format.html
+@see http://book.mixu.net/css/1-positioning.html#vertical-align-middle-doesn-t-quite-do-what-you-d-expect
+*/
+
+main:after {
+  content: "Height of the parent have no effect. \A Boxes are aligned within parent's line-box which is defined by the line-height. \A \A Change the parent's height to line-height to see the effect.";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li:nth-child(4) ~ li {
+  display: none;
+}
+
+ul {
+/*   line-height: 5em; */
+  height: 5em;
+}
+
+li {
+  line-height: initial;
+  display: inline-block;
+}
+
+li:nth-child(1) {
+  vertical-align: baseline;
+}
+
+li:nth-child(2) {
+  vertical-align: bottom;
+}
+
+li:nth-child(3) {
+  vertical-align: top;
+}
+
+li:nth-child(4) {
+  vertical-align: middle;
+}

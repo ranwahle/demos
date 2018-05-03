@@ -1,0 +1,26 @@
+/*
+@see https://www.w3.org/TR/CSS2/visudet.html#abs-non-replaced-width
+*/
+
+main:after {
+  content: "Opposite offsets cause element to 'stretch'. \A Explicit width+height constraint the element dimensions. \A Auto margins cause element to center to solve the equation.";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li:nth-child(1) ~ li {
+  display: none;
+}
+
+li:nth-child(1) {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+  height: 25%;
+}

@@ -1,0 +1,19 @@
+main:after {
+  content: "html, body { height: 100%; } \A main { height: 100%; }";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li {
+  display: inline-block;
+}
+
+html, body {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}

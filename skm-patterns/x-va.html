@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vertical-align Middle</title>
+  <style>
+    .parent {
+      height: 60px;
+      font-family: monospace;
+    }
+    .parent2 {
+      height: 60px;
+      font-family: monospace;
+      font-size: 40px;
+    }
+    .large {
+      font-size: 40px;
+    }
+    .child {
+      font-size: medium;
+      vertical-align: middle;
+    }
+    .blue {
+      background-color: lightblue;
+      border: 1px solid navy;
+    }
+    .green {
+      background-color: lightgreen;
+      border: 1px solid darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent blue">
+    x
+    <span class="child green">&lt;</span>
+    <span class="large green">&lt;</span>
+  </div>
+  <div class="parent2 blue">
+    x
+    <span class="child green">&lt;</span>
+    <span class="large green">&lt;</span>
+  </div>
+  <blockquote>
+    <p><code>vertical-align</code>: Align the vertical midpoint of the box with the baseline of the parent box plus half the x-height of the parent.</p>
+    <cite>https://www.w3.org/wiki/CSS/Properties/vertical-align</cite>
+  </blockquote>
+  <blockquote>
+    <p>"place the child element above the baseline of the parent element at half the height of an x character in the parent font"</p>
+    <cite>http://book.mixu.net/css/1-positioning.html#vertical-align-middle-doesn-t-quite-do-what-you-d-expect</cite>
+  </blockquote>
+</body>
+</html>

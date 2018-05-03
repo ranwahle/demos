@@ -1,0 +1,38 @@
+main:after {
+  content: "Sticky Footer";
+  color: #333;
+  display: block;
+  border: 1px solid;
+  box-sizing: border-box;
+  padding: 0 1em;
+  height: 2em;
+  line-height: 2em;
+}
+
+ul:after {
+  content: "Sticky Footer Placeholder";
+  color: #333;
+  display: block;
+  border: 1px solid;
+  box-sizing: border-box;
+  padding: 0 1em;
+  height: 2em;
+  line-height: 2em;
+}
+
+html, body {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}
+
+ul {
+  height: 100%;
+  margin-bottom: -2em;
+}
+
+li {
+  display: none;
+}

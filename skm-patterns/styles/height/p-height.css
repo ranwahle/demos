@@ -1,0 +1,27 @@
+main:after {
+  content: "height: 100% uses only EXPLICIT parent height. \A Have no effect when parent height is computed. \A Change parent height to 10em to see 1st box fill height.";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li:nth-child(2) ~ li {
+  display: none;
+}
+
+li {
+  display: inline-block;
+}
+
+ul {
+  height: auto;
+}
+
+li:nth-child(1) {
+  height: 100%;
+}
+
+li:nth-child(2) {
+  height: 5em;
+}

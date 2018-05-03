@@ -1,0 +1,31 @@
+main:after {
+  content: "Absolute positioned element with height: 100% fills parent height.";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li:nth-child(2) ~ li {
+  display: none;
+}
+
+li {
+  display: inline-block;
+}
+
+ul {
+  height: auto;
+  text-align: right;
+  position: relative;
+}
+
+li:nth-child(1) {
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+
+li:nth-child(2) {
+  height: 5em;
+}

@@ -1,0 +1,22 @@
+main:after {
+  content: "Uses the fact that percentage based padding (y) is based of parent's width (x).";
+  color: #333;
+  display: block;
+  margin: 2em;
+  white-space: pre;
+}
+
+li {
+  font-size: 0;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  padding: 0;
+  width: 20%;
+  padding-top: 10%;
+}
