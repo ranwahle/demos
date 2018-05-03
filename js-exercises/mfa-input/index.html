@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <style>
+        input {
+          width: 50px;
+          font-size: 20px;
+          border: none;
+          background: #ececec;
+        }
+      </style>
+
+      1. make the first digit focus by default<br>
+      2. make each input receive one character and move the focus to the next empty one (like MFA code entering)
+
+      <div id="inputs">
+
+        <input id="1" type="text">
+        <input id="2" type="text">
+        <input id="3" type="text">
+        <input id="4" type="text">
+
+      </div>
+
+      <script>
+        document.querySelector("#inputs")
+          .addEventListener("keypress", e => {
+            if (e.target.nextElementSibling) {
+              e.target.nextElementSibling.focus();
+            }
+        });
+
+        document.querySelector("#inputs :first-child").focus();
+
+      </script>
+</body>
+</html>
