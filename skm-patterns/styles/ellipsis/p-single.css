@@ -17,5 +17,5 @@ li:nth-child(1):after {
 li:nth-child(1) {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis
+  text-overflow: ellipsis;
 }

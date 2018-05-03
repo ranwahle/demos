@@ -6,6 +6,10 @@ main:after {
   white-space: pre;
 }
 
+main {
+  background-color: lightgoldenrodyellow;
+}
+
 li {
   display: inline-block;
 }

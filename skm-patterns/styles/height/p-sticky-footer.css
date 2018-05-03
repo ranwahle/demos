@@ -20,11 +20,14 @@ ul:after {
   line-height: 2em;
 }
 
+
+
 html, body {
   height: 100%;
 }
 
 main {
+  background-color: lightgoldenrodyellow;
   height: 100%;
 }
 
