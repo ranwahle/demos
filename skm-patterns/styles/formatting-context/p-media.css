@@ -1,5 +1,5 @@
 /*
-@see https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context
+@see https://www.smashingmagazine.com/2017/12/understanding-css-layout-block-formatting-context/
 */
 main:after {
   content: "";
