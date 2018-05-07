@@ -10,9 +10,27 @@
 <body>
   <header>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta reiciendis id cumque commodi, aspernatur quia eius soluta odit voluptas est ipsa sed, numquam, dolore aut accusantium culpa minima dolores laudantium.</p>
-    <nav>
+    <nav class="Navbar">
+      <img class="Navbar-brand" src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5">
       <ul class="Dropdown u-clearfix">
         <li class="Dropdown-item" tabindex="0">
+          <a href="">Fire & Kindle</a>
+          <div class="Dropdown-subMenu">
+            <ul>
+              <li><a href="">Lorem ipsum.</a></li>
+              <li><a href="">Et, nobis!</a></li>
+              <li><a href="">Repellat, recusandae.</a></li>
+              <li><a href="">Repellat, porro.</a></li>
+              <li><a href="">Eveniet, quasi!</a></li>
+            </ul>
+            <ul>
+              <li><a href="">Lorem ipsum.</a></li>
+              <li><a href="">Sint, odio?</a></li>
+              <li><a href="">Facilis, doloremque?</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="Dropdown-item">
           <a href="">Departments</a>
           <div class="Dropdown-subMenu">
             <ul>
@@ -24,23 +42,6 @@
               <li><a href="">Ducimus, enim autem!</a></li>
               <li><a href="">Officiis, voluptatibus, aliquid.</a></li>
               <li><a href="">Consequuntur, iste, explicabo?</a></li>
-            </ul>
-            <ul>
-              <li><a href="">Lorem ipsum.</a></li>
-              <li><a href="">Sint, odio?</a></li>
-              <li><a href="">Facilis, doloremque?</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="Dropdown-item">
-          <a href="">Fire & Kindle</a>
-          <div class="Dropdown-subMenu">
-            <ul>
-              <li><a href="">Lorem ipsum.</a></li>
-              <li><a href="">Et, nobis!</a></li>
-              <li><a href="">Repellat, recusandae.</a></li>
-              <li><a href="">Repellat, porro.</a></li>
-              <li><a href="">Eveniet, quasi!</a></li>
             </ul>
             <ul>
               <li><a href="">Lorem ipsum.</a></li>
@@ -65,6 +66,10 @@
           </div>
         </li>
       </ul>
+      <form action="/search" class="Navbar-search">
+        <input type="search" placeholder="Search" aria-label="Search">
+        <button>Submit</button>
+    </form>
     </nav>
   </header>
   <main>

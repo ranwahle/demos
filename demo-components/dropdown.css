@@ -20,8 +20,9 @@ ul {
   margin: 0;
 }
 
-.Dropdown {
+.Navbar {
   background-color: white;
+  position: relative;
 }
 
 .Dropdown-item {
@@ -98,6 +99,54 @@ ul {
   padding-bottom: 1em;
   border-bottom: 1px solid darkgray;
   margin-bottom: 1em;
+}
+
+.Navbar-brand {
+  max-width: 5em;
+  max-height: 2em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.Navbar-brand + .Dropdown {
+  margin-left: 5em;
+  margin-right: 30em;
+}
+
+/* Search form */
+.Navbar-search {
+  max-height: 2.5em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 1em;
+}
+
+.Navbar-search input,
+.Navbar-search button {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  border: 1px solid lightgray;
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+.Navbar-search button {
+  cursor: pointer;
+}
+
+.Navbar-search button:hover {
+  background-color: darkgray;
+  color: white;
 }
 
 
