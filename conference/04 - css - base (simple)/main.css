@@ -1,0 +1,48 @@
+html {
+  font-family: 'Lato';
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+header,
+header + section {
+  background-color: #283f51;
+  color: white;
+  overflow: hidden;
+}
+
+body > header,
+body > section,
+body > main,
+body > footer {
+  padding-right: 2em;
+  padding-left: 2em;
+}
+
+h1 {
+  font-weight: 100;
+  text-transform: uppercase;
+
+}
+
+h2 {
+  color: #658780;
+}
+
+header a {
+
+}
