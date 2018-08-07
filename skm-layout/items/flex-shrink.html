@@ -9,7 +9,7 @@
     <style>
         ul {
             display: flex;
-            max-width: 100%;
+            border: 1px solid;
         }
         li {
             flex-shrink: 0;
@@ -35,7 +35,6 @@
         <p>
             - The flex container's width is less then items' width<br>
             - The items are not wrapping (<code>flex-wrap: no-wrap;</code> - default)<br>
-            - The items are not overflowing the container (either container has <code>overflow: hidden;</code> or another constraint like <code>max-width: 100%</code> and parent less than items' width)<br>
             - The item itself can lose pixels (either computed <code>flex-base</code> is more than content width or item has <code>overflow: hidden;</code>)
         </p>
     </main>
