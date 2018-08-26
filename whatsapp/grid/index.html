@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="theme--greenish">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pen</title>
+<style>
+  body.u-reset {
+    margin: 0;
+  }
+  ul.u-reset,
+  ol.u-reset {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  :root {
+    --space: 1em;
+    --c-black: #333;
+    --c-white: #fff;
+    --c-gray: #EEEEEE;
+    --c-gray--darker: #E0E0E0;
+    --c-brown: #E1D9D1;
+    --c-green: #DDF7C8;
+
+    --h-header: 3em;
+    --h-write: 5em;
+  }
+  .App {
+    min-height: 100vh;
+    display: grid;
+    grid-template:
+      "sidebar main" var(--h-header)
+      "sidebar main" 1fr /
+      30% 1fr;
+  }
+  .Main {
+    grid-area: main;
+  }
+  .Sidebar {
+    grid-area: sidebar;
+  }
+
+  .Main-head,
+  .Sidebar-head {
+    height: var(--h-header);
+  }
+
+  .Main-chat {
+    display: grid;
+    height: calc(100vh - var(--h-write));
+    grid-template: 1fr var(--h-header) / 1fr;
+  }
+
+  .u-reset.Main-messages {
+    padding: var(--space);
+  }
+
+  .Main-write {
+    padding: var(--space);
+  }
+
+  .u-reset.Sidebar-chats {
+    padding: var(--space);
+  }
+
+  .Main-messages {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+  .Message {
+    width: 10em;
+    padding: calc(var(--space) / 2);
+  }
+  .Message--in {
+    align-self: flex-end;
+  }
+
+  .theme--greenish {
+    font-family: sans-serif;
+    color: var(--c-black);
+  }
+  .theme--greenish .Sidebar-head,
+  .theme--greenish .Main-head {
+    background-color: var(--c-gray);
+  }
+  .theme--greenish .Sidebar {
+    border-right: 1px solid var(--c-gray--darker);
+  }
+  .theme--greenish .Main-messages {
+    background-color: var(--c-brown);
+  }
+  .theme--greenish .Message {
+    border-radius: calc(var(--space) * 0.3);
+  }
+  .theme--greenish .Message--in {
+    background-color: var(--c-white);
+  }
+  .theme--greenish .Message--out {
+    background-color: var(--c-green);
+  }
+</style>
+</head>
+<body class="App u-reset">
+  <main class="Main">
+    <header class="Main-head"></header>
+    <div class="Main-chat">
+      <ol class="Main-messages u-reset">
+        <li class="Message Message--in">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, dicta.</li>
+        <li class="Message Message--out">Mollitia maiores odio ratione dolor repudiandae tenetur iste fugit enim!</li>
+        <li class="Message Message--in">Aut dolor, consequatur libero eveniet officia dolore expedita id quod?</li>
+        <li class="Message Message--out">Assumenda dicta voluptates architecto repudiandae. Vitae illum aut adipisci ut!</li>
+        <li class="Message Message--in">Praesentium, quidem aspernatur perferendis placeat cupiditate error vero fugiat magnam?</li>
+        <li class="Message Message--out">Mollitia maiores odio ratione dolor repudiandae tenetur iste fugit enim!</li>
+        <li class="Message Message--in">Aut dolor, consequatur libero eveniet officia dolore expedita id quod?</li>
+        <li class="Message Message--out">Assumenda dicta voluptates architecto repudiandae. Vitae illum aut adipisci ut!</li>
+        <li class="Message Message--in">Praesentium, quidem aspernatur perferendis placeat cupiditate error vero fugiat magnam?</li>
+      </ol>
+      <div class="Main-write" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, architecto?</div>
+    </div>
+  </main>
+  <div class="Sidebar">
+    <header class="Sidebar-head"></header>
+    <ol class="Sidebar-chats u-reset">
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, dicta.</li>
+        <li>Mollitia maiores odio ratione dolor repudiandae tenetur iste fugit enim!</li>
+        <li>Aut dolor, consequatur libero eveniet officia dolore expedita id quod?</li>
+        <li>Assumenda dicta voluptates architecto repudiandae. Vitae illum aut adipisci ut!</li>
+        <li>Praesentium, quidem aspernatur perferendis placeat cupiditate error vero fugiat magnam?</li>
+    </ol>
+  </div>
+</body>
+</html>
