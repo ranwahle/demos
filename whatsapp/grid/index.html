@@ -21,6 +21,7 @@
     --c-white: #fff;
     --c-gray: #EEEEEE;
     --c-gray--darker: #E0E0E0;
+    --c-gray-lighter: #F5F1EE;
     --c-brown: #E1D9D1;
     --c-green: #DDF7C8;
 
@@ -34,6 +35,16 @@
       "sidebar main" var(--h-header)
       "sidebar main" 1fr /
       30% 1fr;
+  }
+  @media (max-width: 38em) {
+    .App {
+      grid-template:
+        "main" var(--h-header)
+        "main" 1fr / 1fr
+    }
+    .Sidebar {
+      display: none;
+    }
   }
   .Main {
     grid-area: main;
@@ -49,8 +60,8 @@
 
   .Main-chat {
     display: grid;
-    height: calc(100vh - var(--h-write));
-    grid-template: 1fr var(--h-header) / 1fr;
+    height: calc(100vh - var(--h-header));
+    grid-template: 1fr var(--h-write) / 1fr;
   }
 
   .u-reset.Main-messages {
@@ -59,6 +70,14 @@
 
   .Main-write {
     padding: var(--space);
+    height: var(--h-write);
+    box-sizing: border-box;
+    overflow: auto;
+    transition: all .2s ease;
+  }
+  .Main-write:focus {
+    outline: none;
+    background-color: var(--c-gray-lighter);
   }
 
   .u-reset.Sidebar-chats {
@@ -73,6 +92,7 @@
   }
   .Message {
     width: 10em;
+    margin: var(--space) 0;
     padding: calc(var(--space) / 2);
   }
   .Message--in {
