@@ -29,6 +29,24 @@ function getElementsByTagNameB (root, tagName) {
   }
 }
 
+function getElementsByTagNameC(node, tagName) {
+  let results = [];
+  recurse(node, tagName);
+  return results;
+
+  function recurse(node, tagName) {
+    for(let child of node.childNodes) {
+      if (child.nodeType !== 1) {
+        continue;
+      }
+      if (child.nodeName.toLowerCase() === tagName.toLowerCase()) {
+        results.push(child);
+      }
+      recurse(child, tagName);
+    }
+  }
+}
+
 function getElementsByTagName (root, tagName) {
   var elements = [];
   var childNodes = getElementNodes(root);
