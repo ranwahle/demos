@@ -1,3 +1,5 @@
+'use strict';
+
 let sum = arr => arr.reduce((sum, val) => sum + val, 0);
 let avg = arr => sum(arr) / arr.length;
 let $ = selector => document.querySelector(selector);
