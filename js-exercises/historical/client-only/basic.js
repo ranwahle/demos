@@ -1,17 +1,7 @@
 'use strict';
 
-window.addEventListener('error', onWindowError);
+request('ancestry.json', onAncestryData);
 
-loadFile('ancestry.json', onAncestryData, onError);
-
-function onWindowError(e) {
-    e.preventDefault();
-    console.error(`Caught [error=${e.message}]`);
-}
-
-function onError(err) {
-    console.error(`Caught [error=${err}]`);
-}
 
 function onAncestryData(ancestry) {
     document.body.appendChild(barChart({
@@ -25,7 +15,7 @@ function onAncestryData(ancestry) {
         title: 'Age of Death Histogram',
         label: v => `Died at age ${v}`,
         series: getDiedHistogram(ancestry),
-        percent: (v, series) => Math.ceil((v / series.size) * 100)
+        percent: (v, series) => Math.ceil((v / Object.keys(series).length) * 100)
     }));
 }
 
@@ -44,10 +34,10 @@ function getDiedHistogram(ancestry) {
 }
 
 function groupReduce(group, method, normalize) {
-    return keys(group).reduce((hash, key) => {
-        hash.set(key, method(group.get(key).map(normalize)));
+    return Object.keys(group).reduce((hash, key) => {
+        hash[key] = method(group[key].map(normalize));
         return hash;
-    }, new Map());
+    }, {});
 }
 
 function count(list) {
@@ -60,10 +50,6 @@ function average(list, precision = 1) {
 
 function sum(list) {
     return (list.reduce((sum, val) => sum + val));
-}
-
-function keys(map) {
-    return Array.from(map.keys());
 }
 
 function withSuffix(ordinal) {
@@ -86,14 +72,14 @@ function barChart({title, label, series, percent}) {
     barChart.innerHTML = `
         <h2 class="BarChart-title">${title}</h2>
         <dl class="BarChart-graph">
-            ${keys(series).sort((a, b) => a - b).map(bar).join('')}
+            ${Object.keys(series).sort((a, b) => a - b).map(bar).join('')}
         </dl>
     `;
     return barChart;
 
     function bar(category) {
         let color = getColor(category);
-        let value = series.get(category);
+        let value = series[category];
         return `
             <dt class="BarChart-category">${label(category)}</dt>
             <dd class="BarChart-value">
@@ -122,30 +108,18 @@ function groupBy(list, method) {
     let hash = new Map();
     for (let value of list) {
         let key = method(value);
-        if (hash.get(key)) {
-            hash.get(key).push(value);
+        if (hash[key]) {
+            hash[key].push(value);
             continue;
         }
-        hash.set(key, [value]);
+        hash[key] = [value];
     }
     return hash;
 }
 
-function loadFile(url, successCallback, errorCallback) {
+function request(url, resolve) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
-    xhr.addEventListener('load', e => {
-        if (e.target.status > 200) {
-            errorCallback(e.target.statusText);
-            return;
-        }
-        try {
-            let data =  JSON.parse(e.target.responseText);
-            successCallback(data.ANCESTRY_FILE);
-        } catch(err) {
-            errorCallback(err);
-        }
-    });
-    xhr.addEventListener('error', err => errorCallback(err.message || 'Network Error'));
+    xhr.addEventListener('load', e => resolve(JSON.parse(e.target.responseText)));
     xhr.send();
 }

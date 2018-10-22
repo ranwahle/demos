@@ -1,7 +1,36 @@
 'use strict';
 
-loadFile('ancestry.json', onAncestryData);
+window.addEventListener('error', onWindowError);
+window.addEventListener('unhandledrejection', onPromiseError);
 
+const URL = 'ancestry.json';
+
+request(URL)
+    .then(onAncestryData)
+    .catch(err => {
+        displayError(`Something went wrong while loading <code>${URL}</code>`);
+        console.error(`Error loading file [error=${err}]`);
+    });
+
+function displayError(message, delay = 3000) {
+    let error = document.createElement('div');
+    error.classList.add('error');
+    error.innerHTML = message;
+    document.body.appendChild(error);
+    setTimeout(() => {
+        error.remove();
+    }, delay);
+}
+
+function onWindowError(e) {
+    e.preventDefault();
+    console.error(`Caught on window [message=${e.message}]`);
+}
+
+function onPromiseError(e) {
+    e.preventDefault();
+    console.error(`Caught in Promise [message=${e.reason}]`);
+}
 
 function onAncestryData(ancestry) {
     document.body.appendChild(barChart({
@@ -13,9 +42,12 @@ function onAncestryData(ancestry) {
 
     document.body.appendChild(barChart({
         title: 'Age of Death Histogram',
-        label: v => `Died at age ${v}`,
+        label: v => `Died at his ${v}0s`,
         series: getDiedHistogram(ancestry),
-        percent: (v, series) => Math.ceil((v / series.size) * 100)
+        percent: (v, series) => {
+            let total = sum(Array.from(series.values()));
+            return (v / total) * 100;
+        }
     }));
 }
 
@@ -29,7 +61,8 @@ function getHistoricalAverage(ancestry) {
 
 function getDiedHistogram(ancestry) {
     let diedAge = person => person.died - person.born;
-    let grouped = groupBy(ancestry, diedAge);
+    let decade = person => Math.floor(diedAge(person) / 10);
+    let grouped = groupBy(ancestry, decade);
     return groupReduce(grouped, count, v => v);
 }
 
@@ -64,7 +97,7 @@ function withSuffix(ordinal) {
         case '2':
             return `${ordinal}nd`;
         case '3':
-            return `${ordinal}3d`;
+            return `${ordinal}rd`;
         default:
             return `${ordinal}th`;
     }
@@ -121,12 +154,22 @@ function groupBy(list, method) {
     return hash;
 }
 
-function loadFile(url, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.addEventListener('load', e => {
-        let data = JSON.parse(e.target.responseText);
-        callback(data.ANCESTRY_FILE);
+function request(url) {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.addEventListener('load', e => {
+            if (e.target.status > 200) {
+                reject(e.target.statusText);
+            }
+            try {
+                resolve(JSON.parse(e.target.responseText));
+            } catch (err) {
+                reject(err);
+            }
+        });
+        xhr.addEventListener('error', e => reject(e.target.statusText || 'Network Error'));
+        xhr.addEventListener('abort', e => reject(e.target.statusText || 'Network Error'));
+        xhr.send();
     });
-    xhr.send();
 }
