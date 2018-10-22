@@ -9,49 +9,32 @@ function onRequest(request, response) {
   let urlObj = url.parse(request.url);
 
   if (urlObj.pathname === '/ancestry') {
-    getFile(
-      'data',
-      'ancestry.json',
-      data => handleFile(request, response, data),
-      err => {
-        console.error(err);
-        sendStatus(request, response, 500)
-      }
-    );
+    handleFile(request, response, 'data', 'ancestry.json');
     return;
   }
 
-  getFile(
-    'client',
-    urlObj.pathname,
-    data => handleFile(request, response, data),
-    err => handleFileError(request, response, err)
-  );
+  handleFile(request, response, 'client', urlObj.pathname);
 }
 
-function handleFile(request, response, data) {
-  response.end(data);
-}
-
-function handleFileError(request, response, err) {
-  if (err.code === 'ENOENT') {
-    sendStatus(request, response, 404);
-    return;
-  }
-  sendStatus(request, response, 500);
-}
-
-function getFile(folder,pathName, resolve, reject) {
+function handleFile(request, response, folder, pathName) {
   if (pathName === '/') {
     pathName = 'index.html';
   }
   fs.readFile(`./${folder}/${pathName}`, (err, data) => {
     if (err) {
-      reject(err);
+      if (err.code === 'ENOENT') {
+        sendStatus(request, response, 404);
+        return;
+      }
+      sendStatus(request, response, 500);
       return;
     }
-    resolve(data);
+    sendFile(request, response, data);
   });
+}
+
+function sendFile(request, response, data) {
+  response.end(data);
 }
 
 function sendStatus(request, response, statusCode) {
