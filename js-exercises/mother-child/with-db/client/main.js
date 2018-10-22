@@ -1,5 +1,13 @@
 request('GET', '/ancestry', ancestry => {
-  console.log(getAverage(ancestry));
+  let fullData = [];
+  ancestry.forEach(person => {
+    request('GET', `/ancestry/${person._id}`, personData => {
+      fullData.push(personData);
+      if (fullData.length === ancestry.length) {
+        console.log(getAverage(fullData));
+      }
+    }, console.error);
+  });
 }, console.error);
 
 function request(method, url, resolve, reject) {
