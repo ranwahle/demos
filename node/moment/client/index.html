@@ -10,9 +10,11 @@
 <body>
   <h1>Moment.js API</h1>
   <img src="clock.png" alt="Clock">
-  <label for="id-format">Date format:</label>
-  <input type="text" id="id-format" autofocus>
-  <button>Get the time</button>
+  <form action="/api/moment">
+    <label for="id-format">Date format:</label>
+    <input type="text" id="id-format" autofocus>
+    <button>Get the time</button>
+  </form>
   <p>
     Result: <data></data>
   </p>
