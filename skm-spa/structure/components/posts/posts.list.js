@@ -2,11 +2,14 @@
   let PostsList = {
     url: '/posts',
     title: posts => `Posts (${posts.length})`,
+    log: e => {
+      console.log(JSON.parse(decodeURI(e.target.dataset.post)).body);
+    },
     render: posts => {
       return `
           <h2>Posts (${posts.length})</h2>
           <ol>
-              ${posts.map(p => `<li>${p.title}</li>`).join('')}
+              ${posts.map(p => `<li data-post="${encodeURI(JSON.stringify(p))}" onclick="PostsList.log(event)">${p.title}</li>`).join('')}
           </ol>
       `;
     },
