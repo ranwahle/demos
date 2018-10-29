@@ -12,15 +12,24 @@ mongo.MongoClient.connect('mongodb://localhost:27017', (err, client) => {
 
   app = express();
   app.use(express.static('client'));
-  app.get('/ancestry', (request, response) => {
-    handleAncestry(request, response);
+  app.use((request, response, next) => {
+    request.startTime = Date.now();
+    next();
   });
-  app.get('/ancestry/:id', (request, response) => {
+  app.get('/ancestry', (request, response, next) => {
+    handleAncestry(request, response);
+    next();
+  });
+  app.get('/ancestry/:id', (request, response, next) => {
     if (!mongo.ObjectId.isValid(request.params.id)) {
       response.sendStatus(400);
-      return;
+      return next();
     }
-    handlePerson(request, response, request.params.id)
+    handlePerson(request, response, request.params.id);
+    next();
+  });
+  app.use((request, response) => {
+    console.log(`${request.url}: ${Date.now() - request.startTime}`);
   });
   app.listen(8000);
 });
