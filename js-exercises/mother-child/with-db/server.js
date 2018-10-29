@@ -26,6 +26,14 @@ function onRequest(request, response) {
 
   if (urlObj.pathname.includes('/ancestry/')) {
     let id = urlObj.pathname.split('/')[2];
+    if (id === '') {
+      handleAncestry(request, response);
+      return;
+    }
+    if (!mongo.ObjectId.isValid(id)) {
+      sendStatus(request, response, 400);
+      return;
+    }
     handlePerson(request, response, id);
     return;
   }
