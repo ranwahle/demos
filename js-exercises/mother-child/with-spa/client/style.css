@@ -1,0 +1,14 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: rgb(128, 246, 255);
+  color: #333;
+  padding: 1em;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
