@@ -4,17 +4,17 @@ let bodyParser = require('body-parser');
 
 let ancestry, app;
 
-mongo.MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+mongo.MongoClient.connect('mongodb://localhost:27018', (err, client) => {
   if (err) {
     console.error(`Error connecting to db [err=${err}]`);
     return;
   }
+
   ancestry = client.db('course').collection('ancestry');
 
   app = express();
   app.use(express.static('client'));
 
-  let bodyParser = require('body-parser');
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: false}));
 
@@ -31,7 +31,7 @@ mongo.MongoClient.connect('mongodb://localhost:27017', (err, client) => {
     next();
   });
   app.post('/ancestry', (request, response, next) => {
-    response.send(`You're age is ${request.body.age} and you're name is ${request.body.name}`);
+    handleInsert(request, response, request.body);
     next();
   });
   app.get('/ancestry/:id', (request, response, next) => {
@@ -42,12 +42,39 @@ mongo.MongoClient.connect('mongodb://localhost:27017', (err, client) => {
     handlePerson(request, response, request.params.id);
     next();
   });
+  app.delete('/ancestry/:id', (request, response, next) => {
+    if (!mongo.ObjectId.isValid(request.params.id)) {
+      response.sendStatus(400);
+      return next();
+    }
+    handleDelete(request, response, request.params.id);
+    next();
+  });
   app.use((request, response) => {
     console.log(`${request.url}: ${Date.now() - request.startTime}`);
   });
   app.listen(8000);
 });
 
+function handleDelete(request, response, id) {
+  ancestry.deleteOne({_id: mongo.ObjectId(id)}, (err, result) => {
+    if (err) {
+      response.sendStatus(500);
+      return;
+    }
+    response.json({count: result.deletedCount});
+  });
+}
+
+function handleInsert(request, response, personData) {
+  ancestry.insertOne(personData, (err, res) => {
+    if (err) {
+      response.sendStatus(500);
+      return;
+    }
+    response.json({_id: res.insertedId});
+  })
+}
 
 function handlePerson(request, response, id) {
   ancestry.find({_id: mongo.ObjectId(id)}).toArray((err, result) => {

@@ -10,6 +10,9 @@ if (typeof module !== 'undefined' && typeof module.exports === 'object') {
 
 function getAncestryFullData(callback) {
   request('GET', '/ancestry', ancestry => {
+    if (ancestry.length === 0) {
+      callback(ancestry);
+    }
     let fullData = [];
     ancestry.forEach(person => {
       request('GET', `/ancestry/${person._id}`, personData => {
