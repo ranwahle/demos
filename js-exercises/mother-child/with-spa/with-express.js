@@ -4,7 +4,7 @@ let bodyParser = require('body-parser');
 
 let ancestry, app;
 
-mongo.MongoClient.connect('mongodb://localhost:27018', (err, client) => {
+mongo.MongoClient.connect('mongodb://localhost:27017', (err, client) => {
   if (err) {
     console.error(`Error connecting to db [err=${err}]`);
     return;
