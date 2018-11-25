@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Page</title>
+</head>
+
+<body>
+  <main></main>
+
+  <script>
+    const DEFAULT_VIEW = 'navigation';
+    let views = {
+      navigation: function (callback) {
+        callback(`
+          <ul>
+            <li><a href="#users">Users</a></li>
+          </ul>
+        `);
+      },
+      users: {
+        render: function (callback) {
+          request(
+            'GET',
+            'https://jsonplaceholder.typicode.com/users/',
+            users => {
+              callback(`
+                <ul>
+                  ${users.map(u => `
+                    <li onclick="views.users.showUser(${u.id})">${u.name}</li>
+                  `).join('')}
+                </ul>
+              `);
+            },
+            err => {
+              console.error(err);
+            });
+        },
+        showUser: function(id) {
+          document.location.hash = `#user/${id}`;
+        }
+      },
+      user: function(callback, id) {
+        request(
+          'GET',
+          `https://jsonplaceholder.typicode.com/users/${id}`,
+          user => {
+            callback(`<p>${user.address.street}</p>`);
+          },
+          err => {
+            console.error(err);
+          }
+        );
+      },
+      loading: function() {
+        return `<p><i>Loading...</i></p>`;
+      }
+    };
+
+    window.addEventListener('hashchange', e => {
+      onRouteChange(e.newURL.split('#')[1]);
+    });
+
+    window.addEventListener('load', e => {
+      onRouteChange(document.location.hash.split('#')[1] || DEFAULT_VIEW);
+    });
+
+    function onRouteChange(viewName) {
+      let parts = viewName.split('/');
+      let param;
+      if (parts.length === 2) {
+        viewName = parts[0];
+        param = parts[1];
+      }
+      let view = views[viewName];
+      let main = document.querySelector('main');
+
+      main.innerHTML = views.loading();
+
+      if (typeof view.render === 'function') {
+        view = view.render;
+      }
+
+      view(html => {
+        main.innerHTML = html;
+      }, param);
+    }
+
+    function request(method, url, resolve, reject, data) {
+      let xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.addEventListener('load', e => {
+        resolve(JSON.parse(e.target.responseText))
+      });
+      xhr.addEventListener('error', err => {
+        reject(err);
+      });
+      xhr.send(data);
+    }
+
+  </script>
+</body>
+
+</html>
