@@ -3,13 +3,13 @@
 const DEFAULT_VIEW = 'clocks';
 let views = {
   clocks: {
-    createNew() {
+    new() {
       return {
         id: `clocks_${Math.random()}`,
         children: [
-          views.clock.createNew({ name: 'Tel Aviv', offset: 0, start: Date.now() }),
-          views.clock.createNew({ name: 'London', offset: -2, start: Date.now() }),
-          views.clock.createNew({ name: 'New York', offset: -7, start: Date.now() })
+          views.clock.new({ name: 'Tel Aviv', offset: 0, start: Date.now() }),
+          views.clock.new({ name: 'London', offset: -2, start: Date.now() }),
+          views.clock.new({ name: 'New York', offset: -7, start: Date.now() })
         ],
         render() {
           return `
@@ -23,16 +23,16 @@ let views = {
         },
         reset() {
           this.children = [
-            views.clock.createNew({ name: 'Tel Aviv', offset: 0, start: Date.now() }),
-            views.clock.createNew({ name: 'London', offset: -2, start: Date.now() }),
-            views.clock.createNew({ name: 'New York', offset: -7, start: Date.now() })
+            views.clock.new({ name: 'Tel Aviv', offset: 0, start: Date.now() }),
+            views.clock.new({ name: 'London', offset: -2, start: Date.now() }),
+            views.clock.new({ name: 'New York', offset: -7, start: Date.now() })
           ];
         }
       }
     }
   },
   clock: {
-    createNew(props) {
+    new(props) {
       return {
         id: `clock_${Math.random()}`,
         state: {
@@ -144,7 +144,7 @@ let root;
 function onRouteChange(viewName) {
   let view = views[viewName];
   if (!root) {
-    root = view.createNew();
+    root = view.new();
   }
   let main = document.querySelector('main');
   main.innerHTML = render(root);
