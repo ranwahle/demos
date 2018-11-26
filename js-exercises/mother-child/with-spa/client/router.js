@@ -23,6 +23,14 @@ let views = {
       `);
     });
   },
+  person: {
+    render: function(person) {
+      return `
+        ${person.name}
+        <button data-id="${person._id}" onclick="onAction('list', 'delete', event)">Delete</button>
+      `;
+    }
+  },
   list: {
     render: function(callback) {
       getAncestryFullData(ancestry => {
@@ -32,8 +40,8 @@ let views = {
             <ul>
               ${ancestry.map(el => `
                 <li>
-                  ${el.name}
-                  <button data-id="${el._id}" onclick="onAction('list', 'delete', event)">Delete</button>
+                  <person data="el"></person>
+                  ${views.person.render(el)}
                 </li>
               `).join('')}
             </ul>
