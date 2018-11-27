@@ -37,7 +37,7 @@ class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: null,
+      time: Clock.getOffsetTime(props.start, props.offset),
       lastStart: props.start
     };
   }
@@ -50,7 +50,7 @@ class Clock extends React.Component {
     return nextTime;
   }
   static getDerivedStateFromProps(props, state) {
-    if (state.time === null || state.lastStart !== props.start) {
+    if (state.lastStart !== props.start) {
       return {
         time: Clock.getOffsetTime(props.start, props.offset),
         lastStart: props.start
