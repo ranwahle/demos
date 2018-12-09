@@ -21,6 +21,9 @@ describe('Router', function() {
     });
     beforeEach(function() {
       main = {innerHTML: ''};
+      router.register('navigation', {
+        loading: jest.fn()
+      });
     });
 
     it('should execute view function', function() {
