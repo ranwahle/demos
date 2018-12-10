@@ -5,12 +5,12 @@ let Navigation = function (callback) {
 
   function render(user) {
     return `
-      ${user ? `<p>Hello ${user.username}</p>` : ''}
+      <p>Hello ${user.username}</p>
       <ul>
         <li><a href="#list">List</a></li>
         <li><a href="#add">Add</a></li>
         <li><a href="#average">Average</a></li>
-        ${user ? `<li><a href="/logout">Logout</a></li>` : ''}
+        <li><a href="/logout">Logout</a></li>
       </ul>
     `;
   }

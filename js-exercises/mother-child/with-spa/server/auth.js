@@ -4,7 +4,7 @@ let sessions, users;
 const LOGIN = '/login';
 const LOGOUT = '/logout';
 const LOGIN_PAGE = '/login.html';
-const COOKIE_NAME = 'tokenId';
+const COOKIE_NAME = 'sessionId';
 
 module.exports = {
   init
@@ -47,7 +47,7 @@ function handleLogin(req, res) {
         res.sendStatus(500);
         return;
       }
-      setToken(user.username, (err, result) => {
+      setSession(user.username, (err, result) => {
         if (err) {
           res.sendStatus(500);
           return;
@@ -60,7 +60,7 @@ function handleLogin(req, res) {
 }
 
 function userMiddleware(req, res, next) {
-  findUser(req.token.username, (err, user) => {
+  findUser(req.session.username, (err, user) => {
     if (err || !user) {
       res.sendStatus(500);
       return;
@@ -72,18 +72,18 @@ function userMiddleware(req, res, next) {
 
 function ensureAuthenticated(req, res, next) {
   if (req.url === LOGIN || req.url === LOGIN_PAGE) {
-  next();
+    next();
     return;
   }
 
-  let tokenId = req.cookies[COOKIE_NAME];
-  if (mongo.ObjectId.isValid(tokenId)) {
-    findToken(tokenId, (err, token) => {
-      if (err || !token || !token.valid) {
+  let sessionId = req.cookies[COOKIE_NAME];
+  if (mongo.ObjectId.isValid(sessionId)) {
+    findSession(sessionId, (err, session) => {
+      if (err || !session || !session.valid) {
         res.sendStatus(401);
         return;
       }
-      req.token = token;
+      req.session = session;
       next();
     });
     return;
@@ -95,14 +95,14 @@ function findUser(username, callback) {
   users.findOne({ username }, callback);
 }
 
-function setToken(username, callback) {
-  sessions.insertOne({ username, valid: true }, {}, callback);
+function setSession(username, callback) {
+  sessions.insertOne({ username, valid: true, created_at: Date.now() }, {}, callback);
 }
 
 function invalidateUser(username, callback) {
   sessions.updateMany({ username }, { $set: { valid: false } }, callback);
 }
 
-function findToken(tokenId, callback) {
-  sessions.findOne({ _id: mongo.ObjectId(tokenId) }, callback);
+function findSession(sessionId, callback) {
+  sessions.findOne({ _id: mongo.ObjectId(sessionId) }, callback);
 }
