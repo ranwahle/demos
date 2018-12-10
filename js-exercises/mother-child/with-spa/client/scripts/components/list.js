@@ -1,4 +1,4 @@
-let list = {
+let List = {
   render: function(callback) {
     getAncestryFullData(ancestry => {
       callback(`

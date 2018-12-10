@@ -1,4 +1,4 @@
-let person = {
+let Person = {
   render: function(person) {
     return `
       ${person.name}

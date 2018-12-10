@@ -1,12 +1,12 @@
 'use strict';
 
 Router.register('navigation', {
-  add,
-  ancestryAverage,
-  list,
-  loading,
-  navigation,
-  person
+  add: Add,
+  average: AncestryAverage,
+  list: List,
+  loading: Loading,
+  navigation: Navigation,
+  person: Person
 });
 
 Router.listen(window);

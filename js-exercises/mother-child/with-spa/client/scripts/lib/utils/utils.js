@@ -1,15 +1,17 @@
-if (typeof module !== 'undefined' && typeof module.exports === 'object') {
-  module.exports = {
+
+{
+  let utils = {
     average,
     createHash,
     request,
+    handleHttpError
   };
-} else {
-  window.utils = {
-    average,
-    createHash,
-    request,
-  };
+
+  if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = utils;
+  } else {
+    window.utils = utils;
+  }
 }
 
 function average(list) {
@@ -31,10 +33,22 @@ function request(method, url, resolve, reject, data) {
   xhr.open(method, url);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.addEventListener('load', e => {
-    resolve(JSON.parse(e.target.responseText))
+    if (e.target.status > 200) {
+      reject(e.target.statusText);
+      return;
+    }
+    resolve(JSON.parse(e.target.responseText));
   });
   xhr.addEventListener('error', err => {
     reject(err);
   });
   xhr.send(data);
+}
+
+function handleHttpError(error) {
+  if (error === 'Unauthorized') {
+    document.location = '/login.html';
+    return;
+  }
+  console.error(error);
 }

@@ -1,11 +1,13 @@
 let utils;
 
-if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+if (typeof module === 'object' && typeof module.exports === 'object') {
   module.exports = {
     getAverage,
     getAncestryFullData
   };
   utils = require('../utils/utils');
+} else {
+  utils = window.utils;
 }
 
 function getAncestryFullData(callback) {
@@ -21,9 +23,9 @@ function getAncestryFullData(callback) {
         if (fullData.length === ancestry.length) {
           callback(fullData);
         }
-      }, console.error);
+      }, utils.handleHttpError);
     });
-  }, console.error);
+  }, utils.handleHttpError);
 }
 
 function getAverage(list) {

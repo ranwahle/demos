@@ -1,4 +1,4 @@
-let add = {
+let Add = {
   render: function(callback) {
     callback(`
       <div>

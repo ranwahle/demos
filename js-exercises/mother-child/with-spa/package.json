@@ -2,11 +2,11 @@
   "name": "with-db",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "jest --i --watch",
     "debug-test": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "start": "nodemon --inspect with-express.js",
+    "start": "nodemon --inspect server/server.js",
     "migration": "node data/migration.js"
   },
   "keywords": [],
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "mongodb": "^3.1.8"
   },

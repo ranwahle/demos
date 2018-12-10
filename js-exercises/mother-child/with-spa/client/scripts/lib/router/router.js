@@ -9,7 +9,7 @@ let Router = {
   register
 };
 
-if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+if (typeof module === 'object' && typeof module.exports === 'object') {
   module.exports = Router;
 }
 
