@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#gallery {
+  column-count: 3;
+  column-gap: 0.5em;
+}
+
+#gallery img {
+  display: block;
+  margin-bottom: 0.5em;
+}
