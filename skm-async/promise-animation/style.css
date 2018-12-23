@@ -19,14 +19,16 @@ img {
   --rotate: 0deg;
   --scale: 1;
   --translateX: 0;
+
+  transform:
+    scale(var(--scale))
+    rotate(var(--rotate))
+    translateX(var(--translateX));
+
   border-radius: 50%;
   overflow: hidden;
   width: 200px;
   display: block;
   cursor: pointer;
   box-shadow: 0 0 10px 0;
-  transform:
-    scale(var(--scale))
-    rotate(var(--rotate))
-    translateX(var(--translateX));
 }
