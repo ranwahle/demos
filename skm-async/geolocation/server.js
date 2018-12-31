@@ -6,6 +6,7 @@ const LOCATION_URL = `https://www.metaweather.com/api/location/search/`;
 const WEATHER_URL = `https://www.metaweather.com/api/location`;
 
 app.use(express.static('client'));
+
 app.get('/location', (req, res) => {
   https.get(
     `${LOCATION_URL}?lattlong=${req.query.lat},${req.query.lng}`,
@@ -16,7 +17,7 @@ app.get('/location', (req, res) => {
       });
       result.on('end', () => {
         res.send(body);
-      })
+      });
     }
   ).on('error', err => {
     res.send(err);

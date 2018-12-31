@@ -2,7 +2,7 @@ getGeolocation({
   enableHighAccuracy: true,
   timeout: 5000,
   maximumAge: 0
-}).then(pos => getPlaces(pos.coords))
+}).then(position => getPlaces(position.coords))
   .then(places => getWeather(places[0]))
   .then(weather => {
     console.log(weather);

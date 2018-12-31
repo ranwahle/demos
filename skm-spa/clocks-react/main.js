@@ -1,6 +1,3 @@
-let e = React.createElement;
-
-
 class Clocks extends React.Component {
   constructor(props) {
     super(props);
@@ -24,10 +21,10 @@ class Clocks extends React.Component {
   }
 
   render() {
-    return e('div', {}, [
-      e('button', { onClick: () => this.reset() }, 'Reset'),
-      e('ul', {}, this.state.clocks.map(clock => {
-        return e('li', {}, e(Clock, clock))
+    return React.createElement('div', {}, [
+      React.createElement('button', { onClick: () => this.reset() }, 'Reset'),
+      React.createElement('ul', {}, this.state.clocks.map(clock => {
+        return React.createElement('li', {}, e(Clock, clock))
       }))
     ]);
   }
@@ -72,17 +69,17 @@ class Clock extends React.Component {
   }
   render() {
     let time = (new Date(this.state.time)).toLocaleString();
-    return e('div', {}, [
-      e('span', {}, `Name: ${this.props.name}`),
-      e('span', {}, `Time: ${time}`),
-      e('button', { onClick: () => this.pause() }, 'Pause'),
-      e('button', { onClick: () => this.start() }, 'Start'),
+    return React.createElement('div', {}, [
+      React.createElement('span', {}, `Name: ${this.props.name}`),
+      React.createElement('span', {}, `Time: ${time}`),
+      React.createElement('button', { onClick: () => this.pause() }, 'Pause'),
+      React.createElement('button', { onClick: () => this.start() }, 'Start'),
     ]);
   }
 }
 
 
 ReactDOM.render(
-  e(Clocks),
+  React.createElement(Clocks),
   document.querySelector('main')
 );
