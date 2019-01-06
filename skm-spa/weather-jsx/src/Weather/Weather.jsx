@@ -25,8 +25,8 @@ class Weather extends Component {
       .then(weather => {
         this.setState({weather});
       }).catch(err => {
-      alert(`Can't get your position [code=${err.code}]`);
-    });
+        alert(`Can't get your position [code=${err.code}]`);
+      });
   }
   render() {
     if (!this.state.weather.title) {
@@ -41,25 +41,25 @@ class Weather extends Component {
         <h2>Weather for {this.state.weather.title}</h2>
         <table>
           <tbody>
-          {this.state.weather.consolidated_weather.map(d =>
-            <tr key={d.id}>
-              <td>
-                <img width="20" src={`https://www.metaweather.com/static/img/weather/${d.weather_state_abbr}.svg`} />
-              </td>
-              <td>
-                {d.applicable_date}
-              </td>
-              <td>
-                {d.weather_state_name}
-              </td>
-              <td>
-                {Math.round(d.min_temp)}&deg;
-              </td>
-              <td>
-                {Math.round(d.max_temp)}&deg;
-              </td>
-            </tr>
-          )}
+            {this.state.weather.consolidated_weather.map(d =>
+              <tr key={d.id}>
+                <td>
+                  <img width="20" src={`https://www.metaweather.com/static/img/weather/${d.weather_state_abbr}.svg`} />
+                </td>
+                <td>
+                  {d.applicable_date}
+                </td>
+                <td>
+                  {d.weather_state_name}
+                </td>
+                <td>
+                  {Math.round(d.min_temp)}&deg;
+                </td>
+                <td>
+                  {Math.round(d.max_temp)}&deg;
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
