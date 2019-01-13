@@ -4,20 +4,19 @@ $conditions: (
   h: blue,
   t: orchid,
   hr: hotpink,
-  lr: lightgreen,
-  s: lightgray,
+  lr: lightgray,
+  s: gray,
   hc: rebeccapurple,
   lc: lightblue,
   c: lightyellow
 );
 
-td {
-  padding: space(1/2);
-  margin: var(--space);
-}
-
 @each $condition in map-keys($conditions) {
   .Weather--#{$condition} {
-    background-color: map-get($map: $conditions, $key: $condition);
+    background-color: map-get($conditions, $condition);
   }
+}
+
+td {
+  padding: space(1/2);
 }
