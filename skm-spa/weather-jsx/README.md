@@ -6,10 +6,17 @@ A minimal template with:
 - Webpack
 - ExpressJS server
 
+Additional tools configured:
+- ESLint (with [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react))
+- SASS
+- PostCSS (with [postcss-preset-env](https://github.com/csstools/postcss-preset-env))
+
 Inspired by:
 - [React Docs](https://reactjs.org/docs/create-a-new-react-app.html#creating-a-toolchain-from-scratch)
 - [Creating a React App… From Scratch.](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658)
 - [How to Create a React app from scratch using Webpack 4](https://medium.freecodecamp.org/part-1-react-app-from-scratch-using-webpack-4-562b1d231e75)
+- [A tale of Webpack 4 and how to finally configure it in the right way.](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1)
+- [SurviveJS (Webpack Book)](https://survivejs.com/webpack/)
 
 ## Setup
 To install the project dependencies:
@@ -21,10 +28,22 @@ npm install
 
 ## Development
 
-During development the client code is served by Webpack Dev Server (`http://localhost:3000`) and tries to connect to the Express server on `http://localhost:8000` (see below).
+During development the client code is served by Webpack Dev Server (`http://localhost:3001`) and tries to connect to the Express server on `http://localhost:8000` (see below).
 
 ```
 npm start
+```
+
+### Lint
+
+```
+npm run lint
+````
+
+### Browsers List
+
+```
+npx browserslist
 ```
 
 This is watching and compiling from the `./src` folder into the `./public` folder (using hot-module-replacement).

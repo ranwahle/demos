@@ -1,0 +1,10 @@
+:root {
+  --space: 1em;
+}
+
+@function space($portion) {
+  @return calc(var(--space) * #{$portion});
+}
+
+@import './App/App';
+@import './Weather/Weather';

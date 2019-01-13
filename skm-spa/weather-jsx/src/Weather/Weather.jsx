@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
-import './Weather.css';
-
 const API_URL = 'http://localhost:8000';
 
 class Weather extends Component {
@@ -42,7 +40,7 @@ class Weather extends Component {
         <table>
           <tbody>
             {this.state.weather.consolidated_weather.map(d =>
-              <tr key={d.id}>
+              <tr key={d.id} className={`Weather--${d.weather_state_abbr}`}>
                 <td>
                   <img width="20" src={`https://www.metaweather.com/static/img/weather/${d.weather_state_abbr}.svg`} />
                 </td>
