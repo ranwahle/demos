@@ -18,6 +18,9 @@ Inspired by:
 - [A tale of Webpack 4 and how to finally configure it in the right way.](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1)
 - [SurviveJS (Webpack Book)](https://survivejs.com/webpack/)
 
+Walkthrough guide:
+https://github.com/krulik/materials/blob/master/guides/webpack-react.md
+
 ## Setup
 To install the project dependencies:
 ```
@@ -34,6 +37,8 @@ During development the client code is served by Webpack Dev Server (`http://loca
 npm start
 ```
 
+This is watching and compiling from the `./src` folder into the `./public` folder (using hot-module-replacement).
+
 ### Lint
 
 ```
@@ -45,8 +50,6 @@ npm run lint
 ```
 npx browserslist
 ```
-
-This is watching and compiling from the `./src` folder into the `./public` folder (using hot-module-replacement).
 
 ### Server
 The server has its own `package.json` inside the `./server` folder and to run it first `cd server` and `npm start`. It will open the Express server on `http://localhost:8000`
