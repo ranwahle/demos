@@ -22,23 +22,26 @@ person.name = 'Mira';
 console.log(person);
 person = {name: 'Kinneret'};
 
-// Users
-// https://jsonplaceholder.typicode.com/users
-// Declarative
-let users = require('./users.json');
-users
-  .map(({name, username}) => `name: ${name}, username: ${username}`)
-  .forEach(str => console.log(str));
+// Destructuring and default
+function getUserEmailLink({name, email} = {name: 'John Doe', email: 'jdoe@email.com'}) {
+  return `<a href="mailto:${email}">${name}</a>`;
+}
+console.log(getUserEmailLink());
+console.log(getUserEmailLink({name: 'Serge Krul', email: 'skrul@email.com'}));
 
-// Imperative
-let users = require('./users.json');
-for (let user of users) {
-  console.log(`name: ${user.name}, username: ${user.username}`);
+// Rest
+function multiply(by, ...rest) {
+  return rest.map(n => n * by);
 }
 
-// Old method
-let users = require('./users.json');
-for (let i = 0; i < users.length; i++) {
-  let user = users[i];
-  console.log('name:' + user.name + ', username: ' + user.username);
-}
+console.log(multiply(2, 1, 2, 3));
+
+// Spread Arrays
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5, 6];
+console.log([...arr1, ...arr2]);
+
+// Spread Objects
+let personalDetails = {name: 'Serge', age: 37};
+let address = {city: 'Hararit', code: '20182'};
+console.log({...personalDetails, ...address});
