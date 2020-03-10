@@ -1,8 +1,4 @@
 import users from './users.mjs';
-import {getUserEmailLink} from './lib.mjs';
+import {getUsersList} from './lib.mjs';
 
-let usersList = users
-  .map(getUserEmailLink)
-  .join('<br>');
-
-document.body.innerHTML = usersList;
+document.querySelector('main').innerHTML = getUsersList(users);
