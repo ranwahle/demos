@@ -1,0 +1,76 @@
+body {
+  background-color: #333333;
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: larger;
+  background-image: url(./city.jpg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+a {
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+h1 {
+  font-size: xxx-large;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+p {
+  margin-top: 0;
+}
+
+.intro header,
+.summary,
+.preamble,
+.explanation,
+.participation,
+.benefits,
+.requirements,
+.main footer,
+.design-selection,
+.design-archives,
+.zen-resources {
+  background-color: black;
+  padding: 24px;
+  margin: 16px;
+  display: inline-block;
+  max-width: 300px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.main footer {
+  display: block;
+  max-width: none;
+}
+
+.page-wrapper {
+  width: 780px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+nav ul,
+.zen-resources ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav li,
+.zen-resources li {
+  margin-bottom: 8px;
+}
