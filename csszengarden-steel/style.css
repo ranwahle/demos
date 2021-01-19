@@ -47,14 +47,14 @@ p {
   padding: 24px;
   margin: 16px;
   display: inline-block;
-  max-width: 300px;
+  width: 300px;
   vertical-align: top;
   text-align: center;
 }
 
 .main footer {
   display: block;
-  max-width: none;
+  width: auto;
 }
 
 .page-wrapper {
