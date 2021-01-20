@@ -58,6 +58,11 @@ img {
   max-width: 800px;
 }
 
+.block-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .button {
   border: 1px solid;
   display: inline-block;
@@ -140,9 +145,4 @@ main h2 {
 main p {
   margin-top: 0;
   max-width: 600px;
-}
-
-.block-center {
-  margin-right: auto;
-  margin-left: auto;
 }
