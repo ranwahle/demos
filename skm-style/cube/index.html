@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 800px;
+      perspective-origin: top right;
+    }
+    .cube {
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      animation: rotate 5s linear infinite;
+    }
+    .side {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0.8;
+      border: 2px solid white;
+    }
+    .front {
+      background-color: gold;
+      transform: translateZ(100px);
+    }
+    .back {
+      background-color: firebrick;
+      transform: translateZ(-100px);
+    }
+    .left {
+      background-color: skyblue;
+      transform: rotateY(90deg) translateZ(-100px);
+    }
+    .right {
+      background-color: forestgreen;
+      transform: rotateY(90deg) translateZ(100px);
+    }
+    .top {
+      background-color: rebeccapurple;
+      transform: rotateX(-90deg) translateZ(-100px);
+    }
+    .bottom {
+      background-color: hotpink;
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+    @keyframes rotate {
+      from {
+        transform: rotateY(0deg) rotateZ(0deg) rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg) rotateZ(360deg) rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cube">
+    <div class="side front"></div>
+    <div class="side back"></div>
+    <div class="side left"></div>
+    <div class="side right"></div>
+    <div class="side top"></div>
+    <div class="side bottom"></div>
+  </div>
+</body>
+</html>
