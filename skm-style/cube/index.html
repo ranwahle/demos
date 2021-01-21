@@ -30,8 +30,24 @@
 
       font-size: 10em;
       color: #333;
-      text-align: center;
       font-family: serif;
+      transition: font-size .2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .side:hover {
+      font-size: 5em;
+      transition: font-size .2s ease;
+    }
+    .side span {
+      line-height: 1;
+      transition: transform .5s linear;
+      transform: rotateZ(0);
+    }
+    .side:hover span {
+      transition: transform .5s linear;
+      transform: rotateZ(360deg);
     }
     .front {
       background-color: gold;
@@ -69,12 +85,12 @@
 </head>
 <body>
   <div class="cube">
-    <div class="side front">א</div>
-    <div class="side back">ב</div>
-    <div class="side left">ג</div>
-    <div class="side right">ד</div>
-    <div class="side top">ה</div>
-    <div class="side bottom">ו</div>
+    <div class="side front"><span>א</span></div>
+    <div class="side back"><span>ב</span></div>
+    <div class="side left"><span>ג</span></div>
+    <div class="side right"><span>ד</span></div>
+    <div class="side top"><span>ה</span></div>
+    <div class="side bottom"><span>ו</span></div>
   </div>
 </body>
 </html>
