@@ -28,25 +28,25 @@
       opacity: 0.8;
       border: 2px solid white;
 
-      font-size: 10em;
-      color: #333;
-      font-family: serif;
-      transition: font-size .2s ease;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .side:hover {
-      font-size: 5em;
-      transition: font-size .2s ease;
-    }
-    .side span {
+    .side .letter {
+      font-size: 10em;
+      color: #333;
+      font-family: serif;
       line-height: 1;
-      transition: transform .5s linear;
+      transition:
+        transform .5s linear
+        font-size .2s ease;
       transform: rotateZ(0);
     }
-    .side:hover span {
-      transition: transform .5s linear;
+    .side:hover .letter {
+      font-size: 5em;
+      transition:
+        transform .5s linear,
+        font-size .2s ease;
       transform: rotateZ(360deg);
     }
     .front {
@@ -85,12 +85,12 @@
 </head>
 <body>
   <div class="cube">
-    <div class="side front"><span>א</span></div>
-    <div class="side back"><span>ב</span></div>
-    <div class="side left"><span>ג</span></div>
-    <div class="side right"><span>ד</span></div>
-    <div class="side top"><span>ה</span></div>
-    <div class="side bottom"><span>ו</span></div>
+    <div class="side front"><span class="letter">🐻</span></div>
+    <div class="side back"><span class="letter">🦇</span></div>
+    <div class="side left"><span class="letter">🦔</span></div>
+    <div class="side right"><span class="letter">🦫</span></div>
+    <div class="side top"><span class="letter">🐿️</span></div>
+    <div class="side bottom"><span class="letter">🦥</span></div>
   </div>
 </body>
 </html>
