@@ -93,11 +93,6 @@ ul.menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 5px solid red;
-}
-
-.layout-horizontal > * {
-  border: 2px solid gold;
 }
 
 .info section:not(:last-child) {
