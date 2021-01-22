@@ -1,0 +1,58 @@
+/* --------------------------------------------------------------- */
+/* Phase 1 - Basic style */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #333;
+}
+header {
+  background-color: black;
+  color: white;
+}
+header a {
+  color: white;
+}
+main.page-bg {
+  background-color: #10102F;
+  color: white;
+}
+main.page-bg a {
+  color: white;
+}
+header {
+  padding: 16px;
+}
+.page-section {
+  padding: 36px;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* --------------------------------------------------------------- */
+/* Phase 2A - Centered sections column */
+.center-block {
+  margin-right: auto;
+  margin-left: auto;
+}
+.page-section {
+  max-width: 720px;
+}
+/* --------------------------------------------------------------- */
+/* Phase 2B - Header layout */
+.layout-horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  margin-right: 32px;
+}
+header nav {
+  flex-grow: 1;
+}
+header nav li {
+  margin-right: 8px;
+}
