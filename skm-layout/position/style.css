@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  background-color: lavender;
+  font-family: sans-serif;
+  padding: 16px;
+  line-height: 1.5;
+}
+.parent {
+  border: 5px solid;
+  flex-grow: 1;
+  display: flex;
+}
+.child {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.purple { background-color: rebeccapurple; color: white; }
+.golden { background-color: gold; }
+.green { background-color: lightseagreen; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+.top { top: 50px; }
+.left { left: 50px; }
+.z-index { z-index: 1; }
+
+.fluid { width: auto; height: auto; }
+.stretch-horizontal { left: 0; right: 0; }
+.center-horizontal { margin-left: auto; margin-right: auto; }
+.stretch-vertical { top: 0; bottom: 0; }
+.center-vertical { margin-top: auto; margin-bottom: auto; }
+
+h2 {
+  background-color: rgba(255,255,255,0.8);
+  padding: 16px;
+}
