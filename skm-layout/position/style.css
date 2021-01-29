@@ -32,10 +32,17 @@ body {
 .z-index { z-index: 1; }
 
 .fluid { width: auto; height: auto; }
+
 .stretch-horizontal { left: 0; right: 0; }
 .center-horizontal { margin-left: auto; margin-right: auto; }
 .stretch-vertical { top: 0; bottom: 0; }
 .center-vertical { margin-top: auto; margin-bottom: auto; }
+.absolute-center {
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  margin-top: auto; margin-bottom: auto;
+  margin-left: auto; margin-right: auto;
+}
 
 h2 {
   background-color: rgba(255,255,255,0.8);
