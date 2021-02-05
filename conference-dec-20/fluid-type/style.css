@@ -1,0 +1,163 @@
+body {
+  background-color: #283F50;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+body, a {
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 2%;
+}
+
+.text-green {
+  color: #5C817B;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-light {
+  font-weight: 100;
+}
+
+.text-size--xlarge {
+  font-size: 2.4rem;
+}
+
+.text-size--large {
+  font-size: 1.8rem;
+}
+
+.text-size--normal {
+  font-size: 1.2rem;
+}
+
+.text-size--small {
+  font-size: 0.8125rem;
+}
+
+.text-size--xsmall {
+  font-size: 0.7rem;
+}
+
+.bg-white {
+  background-color: white;
+  color: #333;
+}
+
+.page-section {
+  padding: 16px;
+  max-width: 800px;
+}
+
+.block-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.button {
+  border: 1px solid;
+  display: inline-block;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+a.button:hover {
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: white;
+  color: #333;
+}
+
+ul.menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.menu li:not(:last-child) {
+  margin-right: 8px;
+}
+
+.layout-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info section:not(:last-child) {
+  margin-right: 16px;
+}
+
+.info section {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.info h4 {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.info p {
+  margin-top: 0;
+}
+
+.info {
+  align-items: stretch;
+  padding-bottom: 36px;
+}
+
+header.page-section {
+  padding-top: 0;
+  align-items: flex-end;
+}
+
+header h1 {
+  line-height: 1;
+  border-top: 4px solid #5C817B;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 16px;
+  max-width: 250px;
+}
+
+main.page-section {
+  padding-bottom: 36px;
+}
+
+main h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+main p {
+  margin-top: 0;
+  max-width: 600px;
+}
