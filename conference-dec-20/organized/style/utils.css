@@ -1,0 +1,70 @@
+.img-circle {
+  max-width: 130px;
+  border-radius: 50%;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-light {
+  font-weight: 100;
+}
+
+.text-size--xlarge {
+  font-size: var(--text-size--xlarge);
+}
+
+.text-size--large {
+  font-size: var(--text-size--large);
+}
+
+.text-size--normal {
+  font-size: var(--text-size--normal);
+}
+
+.text-size--small {
+  font-size: var(--text-size--small);
+}
+
+.text-size--xsmall {
+  font-size: var(--text-size--xsmall);
+}
+
+.bg-surface {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+.bg-gradient {
+  background-image: var(--gradient);
+  color: var(--color-on-gradient);
+}
+
+.page-section {
+  padding: var(--space);
+  max-width: var(--column-width);
+}
+
+.block-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.layout-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
