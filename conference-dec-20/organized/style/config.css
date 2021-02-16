@@ -1,6 +1,6 @@
 :root {
   --space: 1em;
-  --space-absolute: 16px;
+  --space-px: 16px;
   --space-large: calc(var(--space)*2.25);
   --space-small: calc(var(--space)*0.8);
 
