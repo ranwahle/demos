@@ -1,0 +1,74 @@
+:root {
+  --space: 1em;
+  --c-background: #f0f0f0;
+  --c-onbackground: #f0f0f0;
+  --c-primary: #d2b6b6;
+  --c-item: #fff;
+  --c-on-item: #666;
+  --c-on-item-dimmed: #aaa;
+  --c-line: #eee;
+  --fw-thin: 100;
+  --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 1.2em;
+  background-color: var(--c-background);
+  margin: 0;
+}
+
+* {
+  /* border: 1px solid; */
+}
+
+h1 {
+  font-weight: var(--fw-thin);
+  font-size: 3em;
+  text-transform: lowercase;
+  text-align: center;
+  color: var(--c-primary);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.column {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.TodoInput {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+}
+
+.TodoInput:focus {
+  outline: none;
+}
+
+.TodoInput::placeholder {
+  font-style: italic;
+  color: var(--c-on-item-dimmed);
+}
+
+.Item {
+  font-weight: var(--fw-thin);
+  background-color: var(--c-item);
+  color: var(--c-on-item);
+  padding: var(--space);
+  padding-left: calc(var(--space) * 3);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.List {
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
+}
