@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo MVC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="column">
+    <h1>Todos</h1>
+    <main>
+      <header>
+        <input class="TodoInput Item" type="text" placeholder="What needs to be done?">
+      </header>
+      <ul class="List">
+        <li class="Item flex">
+          <input type="checkbox" name="" id="id-1">
+          <label for="id-1">foo</label>
+          <button class="Item-remove flex-alignSelf--right" aria-label="Remove">&times;</button>
+        </li>
+        <li class="Item flex">
+          <input type="checkbox" name="" id="id-2" checked>
+          <label for="id-2">bar</label>
+          <button class="Item-remove flex-alignSelf--right" aria-label="Remove">&times;</button>
+        </li>
+        <li class="Item flex">
+          <input type="checkbox" name="" id="id-3" disabled>
+          <label for="id-3" contenteditable>baz</label>
+          <button class="Item-remove flex-alignSelf--right" aria-label="Remove">&times;</button>
+        </li>
+      </ul>
+      <footer class="Item Item--full flex flex-justify--between text-small">
+        <span>2 items left</span>
+        <ul class="flex flex-gapRight--small">
+          <li><a class="Tab" id="all" href="#all">All</a></li>
+          <li><a class="Tab" id="active" href="#active">Active</a></li>
+          <li><a class="Tab" id="completed" href="#completed">Completed</a></li>
+        </ul>
+        <button class="text-decoration:hover">Clear completed</button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
