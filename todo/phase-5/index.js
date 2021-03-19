@@ -41,9 +41,8 @@ let footerTemplate = ({todo, tab}) => `
   </footer>
 `;
 
-window.addEventListener('load', onLoad);
-
 let state = {};
+window.addEventListener('load', onLoad);
 
 function setState(newState) {
   setTimeout(() => {
@@ -59,7 +58,7 @@ function onLoad() {
       {name: "Shopping", status: 'completed'},
       {name: "Bank", status: 'active'}
     ],
-    tab: getCurrentHash() || 'all'
+    tab: getHash(document.location) || 'all'
   });
 
   window.addEventListener('hashchange', (e) => {
@@ -69,7 +68,6 @@ function onLoad() {
       console.log('skipping hashchange');
       return;
     }
-    console.log(`from: ${from} to: ${to}`);
     setState({tab: to});
   });
 }
@@ -81,7 +79,7 @@ function render(state) {
   input.innerHTML = inputTemplate(state);
   list.innerHTML = listTemplate(state);
   footer.innerHTML = footerTemplate(state);
-  if (getCurrentHash() !== state.tab) {
+  if (getHash(document.location) !== state.tab) {
     document.location.hash = state.tab;
   }
   document.querySelector('input').focus();
@@ -119,12 +117,8 @@ function getPlaceholder(name) {
   return document.querySelector(`[data-placeholder=${name}]`);
 }
 
-function getCurrentHash() {
-  return getHash(String(document.location));
-}
-
 function getHash(url) {
-  return url.split('#')[1];
+  return String(url).split('#')[1];
 }
 
 // Todo Methods
