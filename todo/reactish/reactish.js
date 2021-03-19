@@ -4,52 +4,32 @@ export function factory(settings) {
 }
 
 class Reactish {
-  constructor({onAction, onHashChange}) {
+  constructor({components, actions}) {
     this.state = {};
+    this.components = components;
+    this.actions = actions;
 
-    window.addEventListener('hashchange', (e) => {
-      let from = getHash(e.oldURL);
-      let to = getHash(e.newURL);
-      if (from === to) {
-        console.log('skipping hashchange');
+    // TODO  multiple action handlerssupport
+    window.action = (event, actionName, ...rest) => {
+      if (actionName in this.actions === false) {
+        console.error(`Unsupported action [${actionName}]`);
         return;
       }
-      onHashChange(e, {from, to});
-    });
-
-    // TODO support multiple action handlers
-    window.action = onAction;
+      this.actions[actionName](event, ...rest);
+    };
   }
 
-  setState(newState) {
+  setState(getNewState, callback) {
     setTimeout(() => {
-      let state = {...this.state, ...newState};
-      this.render(state);
+      this.state = {...this.state, ...getNewState(this.state)};
+      this.render(this.state, callback);
     });
   }
 
-  render(state) {
-    let input = getPlaceholder('input');
-    let list = getPlaceholder('list');
-    let footer = getPlaceholder('footer');
-    input.innerHTML = inputTemplate(state);
-    list.innerHTML = listTemplate(state);
-    footer.innerHTML = footerTemplate(state);
-    if (getHash(document.location) !== state.tab) {
-      document.location.hash = state.tab;
-    }
-    document.querySelector('input').focus();
+  render(state, callback) {
+    document.querySelectorAll('[data-component]').forEach(el => {
+      el.innerHTML = this.components[el.dataset.component](state);
+    });
+    callback(state);
   }
 }
-
-function getHash(url) {
-  return String(url).split('#')[1];
-}
-
-function getPlaceholder(name) {
-  return document.querySelector(`[data-placeholder=${name}]`);
-}
-
-export let utils = {
-  getHash
-};

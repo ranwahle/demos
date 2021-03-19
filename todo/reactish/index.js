@@ -1,31 +1,32 @@
-import {factory, utils} from './reactish';
+import {factory} from './reactish.js';
+import {router} from './router.js';
 
-let inputTemplate = ({todo, tab}) => `
+let Input = ({todo, tab}) => `
   <input
     class="TodoInput Item" type="text" placeholder="What needs to be done?"
-    onchange="action(event, 'new')">
+    onchange="action(event, 'newItem')">
 `;
 
-let listTemplate = ({todo, tab}) => `
+let List = ({todo, tab}) => `
   <ul class="List">
     ${todo.filter(item => tab === 'all' || item.status === tab).map((item, index) => `
       <li class="Item flex">
         <input
           type="checkbox" name="" id="id-${index}"
           ${item.status === 'completed' ? 'checked': ''}
-          onclick="action(event, 'toggle', ${index})">
+          onclick="action(event, 'toggleItem', ${index})">
         <label
           for="id-${index}"
-          action(event, 'toggle', ${index})>${item.name}</label>
+          action(event, 'toggleItem', ${index})>${item.name}</label>
         <button
           class="Item-remove flex-alignSelf--right" aria-label="Remove"
-          onclick="action(event, 'delete', ${index})">&times;</button>
+          onclick="action(event, 'deleteItem', ${index})">&times;</button>
       </li>
     `).join('')}
   </ul>
 `;
 
-let footerTemplate = ({todo, tab}) => `
+let Footer = ({todo, tab}) => `
   <footer class="Item Item--full flex flex-justify--between text-small">
     <span>${todo.filter(item => item.status === 'active').length} items left</span>
     <ul class="flex flex-gapRight--small">
@@ -37,67 +38,77 @@ let footerTemplate = ({todo, tab}) => `
       todo.length > 0 ?
         `<button
           class="text-decoration:hover"
-          onclick="action(event, 'clear')">Clear completed</button>`
+          onclick="action(event, 'clearCompleted')">Clear completed</button>`
         : ''
     }
   </footer>
 `;
 
-let R = factory({
-  onAction: (event, actionName, index) => {
-    switch (actionName) {
-      case 'toggle':
-        toggleItemStatus(state.todo[index]);
-        let onTransitionEnd = () => {
-          R.setState({todo: state.todo});
-          event.target.removeEventListener('transitionend', onTransitionEnd);
-        }
-        event.target.addEventListener('transitionend', onTransitionEnd);
-        break;
+// Somehow inherit from reactish and combine with state
+let Todo = {
+  toggleItem(item) {
+    item.status = item.status === 'active' ? 'completed' : 'active';
+  },
 
-      case 'delete':
-        R.setState({todo: deleteItemFromList(state.todo, state.todo[index])});
-        break;
+  deleteItem(todo, item){
+    let idx = todo.indexOf(item);
+    todo.splice(idx, 1);
+    return todo;
+  },
 
-      case 'clear':
-        R.setState({todo: state.todo.filter(item => item.status === 'active')});
-        break;
-
-      case 'new':
-        R.setState({todo: addItemToList(state.todo, event.target.value)});
-        break;
-
-      default:
-        console.error(`Unsupported [action=${actionName}]`);
-    }
+  newItem(todo, name){
+    let newItem = {name: name, status: 'active'};
+    todo.push(newItem);
+    return todo;
   }
-})
+};
 
+let R = factory({
+  components: {Input, List, Footer},
+  actions: {toggleItem, deleteItem, clearCompleted, newItem}
+});
 
-function onLoad(window) {
-  R.setState({
+window.addEventListener('load', () => {
+  R.setState(() => ({
     todo: [
       {name: "Sleep", status: 'active'},
       {name: "Shopping", status: 'completed'},
       {name: "Bank", status: 'active'}
     ],
-    tab: utils.getHash(document.location) || 'all'
-  });
+    tab: router.hash() || 'all'
+  }), onRender);
+})
+
+router.hashchange((e, {from, to}) => {
+  R.setState(() => ({tab: to}), onRender);
+});
+
+function toggleItem(event, index) {
+  let onTransitionEnd = () => {
+    R.setState(prevState => {
+      Todo.toggleItem(prevState.todo[index]);
+      return {todo: prevState.todo};
+    }, onRender);
+    event.target.removeEventListener('transitionend', onTransitionEnd);
+  }
+  event.target.addEventListener('transitionend', onTransitionEnd);
 }
 
-// Todo Methods
-function toggleItemStatus(item) {
-  item.status = item.status === 'active' ? 'completed' : 'active';
+function deleteItem(event, index) {
+  R.setState(prevState => ({todo: Todo.deleteItem(prevState.todo, prevState.todo[index])}), onRender);
 }
 
-function deleteItemFromList(todo, item){
-  let idx = todo.indexOf(item);
-  todo.splice(idx, 1);
-  return todo;
+function clearCompleted(event) {
+  R.setState(prevState => ({todo: prevState.todo.filter(item => item.status === 'active')}), onRender);
 }
 
-function addItemToList(todo, name){
-  let newItem = {name: name, status: 'active'};
-  todo.push(newItem);
-  return todo;
+function newItem(event) {
+  R.setState(prevState => ({todo: Todo.newItem(prevState.todo, event.target.value)}), onRender);
+}
+
+function onRender(state) {
+  if (router.hash() !== state.tab) {
+    router.hash(state.tab);
+  }
+  document.querySelector('input').focus();
 }
