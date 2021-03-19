@@ -9,18 +9,18 @@ let Input = ({todo, tab}) => `
 
 let List = ({todo, tab}) => `
   <ul class="List">
-    ${todo.filter(item => tab === 'all' || item.status === tab).map((item, index) => `
+    ${todo.filter(item => tab === 'all' || item.status === tab).map((item) => `
       <li class="Item flex">
         <input
-          type="checkbox" name="" id="id-${index}"
+          type="checkbox" name="" id="id-${item.id}"
           ${item.status === 'completed' ? 'checked': ''}
-          onclick="action(event, 'toggleItem', ${index})">
+          onclick="action(event, 'toggleItem', ${item.id})">
         <label
-          for="id-${index}"
-          action(event, 'toggleItem', ${index})>${item.name}</label>
+          for="id-${item.id}"
+          action(event, 'toggleItem', ${item.id})>${item.name}</label>
         <button
           class="Item-remove flex-alignSelf--right" aria-label="Remove"
-          onclick="action(event, 'deleteItem', ${index})">&times;</button>
+          onclick="action(event, 'deleteItem', ${item.id})">&times;</button>
       </li>
     `).join('')}
   </ul>
@@ -46,20 +46,30 @@ let Footer = ({todo, tab}) => `
 
 // Somehow inherit from reactish and combine with state
 let Todo = {
-  toggleItem(item) {
+  find(list, id) {
+    return list.find(li => li.id === id);
+  },
+
+  toggleItem(list, id) {
+    let item = Todo.find(list, id);
     item.status = item.status === 'active' ? 'completed' : 'active';
   },
 
-  deleteItem(todo, item){
+  deleteItem(todo, id) {
+    let item = Todo.find(todo, id);
     let idx = todo.indexOf(item);
     todo.splice(idx, 1);
     return todo;
   },
 
   newItem(todo, name){
-    let newItem = {name: name, status: 'active'};
+    let newItem = {id: Math.random(), name: name, status: 'active'};
     todo.push(newItem);
     return todo;
+  },
+
+  getActive(todo) {
+    return todo.filter(item => item.status === 'active');
   }
 };
 
@@ -71,9 +81,9 @@ let R = factory({
 window.addEventListener('load', () => {
   R.setState(() => ({
     todo: [
-      {name: "Sleep", status: 'active'},
-      {name: "Shopping", status: 'completed'},
-      {name: "Bank", status: 'active'}
+      {id: 1, name: "Sleep", status: 'active'},
+      {id: 2, name: "Shopping", status: 'completed'},
+      {id: 3, name: "Bank", status: 'active'}
     ],
     tab: router.hash() || 'all'
   }), onRender);
@@ -83,10 +93,10 @@ router.hashchange((e, {from, to}) => {
   R.setState(() => ({tab: to}), onRender);
 });
 
-function toggleItem(event, index) {
+function toggleItem(event, id) {
   let onTransitionEnd = () => {
     R.setState(prevState => {
-      Todo.toggleItem(prevState.todo[index]);
+      Todo.toggleItem(prevState.todo, id);
       return {todo: prevState.todo};
     }, onRender);
     event.target.removeEventListener('transitionend', onTransitionEnd);
@@ -94,12 +104,12 @@ function toggleItem(event, index) {
   event.target.addEventListener('transitionend', onTransitionEnd);
 }
 
-function deleteItem(event, index) {
-  R.setState(prevState => ({todo: Todo.deleteItem(prevState.todo, prevState.todo[index])}), onRender);
+function deleteItem(event, id) {
+  R.setState(prevState => ({todo: Todo.deleteItem(prevState.todo, id)}), onRender);
 }
 
 function clearCompleted(event) {
-  R.setState(prevState => ({todo: prevState.todo.filter(item => item.status === 'active')}), onRender);
+  R.setState(prevState => ({todo: Todo.getActive(prevState.todo)}), onRender);
 }
 
 function newItem(event) {
