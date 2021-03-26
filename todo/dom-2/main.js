@@ -16,7 +16,11 @@ Input.addEventListener('change', onInputChange);
 
 function onInputChange() {
   var List = document.querySelector('.List');
-  List.appendChild(Item(Input.value));
+  var newTodo = {
+    name: Input.value,
+    active: true
+  };
+  List.appendChild(Item(newTodo));
 }
 
 function List(todoArray) {
@@ -40,7 +44,7 @@ function Item(todoItem) {
   var input = document.createElement('input');
   input.type = 'checkbox';
   input.id = 'id-' + todoItem.name;
-  input.checked = todoItem.active;
+  input.checked = todoItem.active === false;
   var label = document.createElement('label');
   label.htmlFor = 'id-' + todoItem.name;
   label.innerText = todoItem.name;
