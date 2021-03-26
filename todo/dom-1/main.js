@@ -1,9 +1,9 @@
-var Input = document.querySelector('[data-component="Input"]');
-var List = document.querySelector('[data-component="List"]');
+var Input = document.querySelector('.TodoInput');
+var List = document.querySelector('.List');
 Input.addEventListener('change', onInputChange);
 
-function onInputChange(e) {
-  List.appendChild(Item(e.target.value));
+function onInputChange() {
+  List.appendChild(Item(Input.value));
 }
 
 function Item(name) {
