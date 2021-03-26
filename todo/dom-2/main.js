@@ -1,6 +1,5 @@
-var List = document.querySelector('[data-component="List"]');
-var Input = document.querySelector('[data-component="Input"]');
-Input.addEventListener('change', onInputChange);
+var Input = document.querySelector('.TodoInput');
+var ListContainer = document.querySelector('.ListContainer');
 
 var todo = [
   { name: "Sleep", active: true},
@@ -8,23 +7,29 @@ var todo = [
   { name: "Bank", active: true}
 ];
 
-List.appendChild(TodoList(todo));
+ListContainer.appendChild(List(todo));
 
-function onInputChange(e) {
-  List.appendChild(TodoItem(e.target.value));
+Input.addEventListener('change', onInputChange);
+
+
+// ------------------------------------------------
+
+function onInputChange() {
+  var List = document.querySelector('.List');
+  List.appendChild(Item(Input.value));
 }
 
-function TodoList(todo) {
+function List(todoArray) {
   // <ul class="List">
   var ul = document.createElement('ul');
   ul.className = 'List';
-  for (var i = 0; i < todo.length; i++) {
-    ul.appendChild(TodoItem(todo[i].name));
+  for (var i = 0; i < todoArray.length; i++) {
+    ul.appendChild(Item(todoArray[i]))
   }
   return ul;
 }
 
-function TodoItem(name) {
+function Item(todoItem) {
   // <li class="Item flex">
   //   <input type="checkbox" name="" id="id-1">
   //   <label for="id-1">foo</label>
@@ -34,10 +39,11 @@ function TodoItem(name) {
   li.className = 'Item flex'
   var input = document.createElement('input');
   input.type = 'checkbox';
-  input.id = 'id-' + name;
+  input.id = 'id-' + todoItem.name;
+  input.checked = todoItem.active;
   var label = document.createElement('label');
-  label.htmlFor = 'id-' + name;
-  label.innerText = name;
+  label.htmlFor = 'id-' + todoItem.name;
+  label.innerText = todoItem.name;
   var button = document.createElement('button');
   button.className = 'Item-remove flex-alignSelf--right';
   button.setAttribute('aria-label', 'Remove');
