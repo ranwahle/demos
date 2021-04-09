@@ -8,10 +8,6 @@ var todo = [
 
 var selectedTab = 'all';
 
-var state = {
-
-}
-
 render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
 
 Input.addEventListener('change', onInputChange);
