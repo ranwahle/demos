@@ -1,19 +1,26 @@
 var Input = document.querySelector('.TodoInput');
 
-var todo = [
-  { id: getItemId("Sleep"), name: "Sleep", active: true},
-  { id: getItemId("Shopping"), name: "Shopping", active: false},
-  { id: getItemId("Bank"), name: "Bank", active: true}
-];
+var todo = [];
+var selectedTab;
 
-var selectedTab = 'all';
-
-render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+onPageLoad();
 
 Input.addEventListener('change', onInputChange);
 
 
 // - Actions ------------------------------------------------
+
+function onPageLoad() {
+  todo = [
+    { id: getItemId("Sleep"), name: "Sleep", active: true},
+    { id: getItemId("Shopping"), name: "Shopping", active: false},
+    { id: getItemId("Bank"), name: "Bank", active: true}
+  ];
+
+  selectedTab = 'all';
+
+  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+}
 
 function onInputChange() {
   // add item to the array list
