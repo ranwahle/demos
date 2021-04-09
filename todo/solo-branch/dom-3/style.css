@@ -15,15 +15,18 @@
   --fs-small: 0.8em;
   --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 }
+
 body {
   font-family: sans-serif;
   font-size: var(--fs-medium);
   background-color: var(--c-background);
   margin: 0;
 }
+
 * {
   /* border: 1px solid; */
 }
+
 h1 {
   font-weight: var(--fw-thin);
   font-size: 3em;
@@ -31,11 +34,13 @@ h1 {
   text-align: center;
   color: var(--c-primary);
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
+
 button {
   font-size: inherit;
   font-family: inherit;
@@ -46,29 +51,37 @@ button {
   padding: 0;
   margin: 0;
 }
+
 a {
   color: inherit;
 }
+
 .column {
   max-width: 80%;
   margin: 0 auto;
 }
+
 .flex {
   display: flex;
   align-items: center;
 }
+
 .flex-gapRight--small > *:not(:last-child) {
   margin-right: var(--space-small);
 }
+
 .flex-alignSelf--right {
   margin-left: auto;
 }
+
 .flex-justify--between {
   justify-content: space-between;
 }
+
 .text-small {
   font-size: var(--fs-small);
 }
+
 .text-decoration\:hover {
   text-decoration: none;
 }
@@ -78,9 +91,11 @@ a {
 .text-decoration\:hover:focus {
   outline: none;
 }
+
 main {
   box-shadow: var(--shadow);
 }
+
 .TodoInput {
   width: 100%;
   box-sizing: border-box;
@@ -88,13 +103,16 @@ main {
   font-family: inherit;
   border: none;
 }
+
 .TodoInput:focus {
   outline: none;
 }
+
 .TodoInput::placeholder {
   font-style: italic;
   color: var(--c-on-item-dimmed);
 }
+
 .Item {
   font-weight: var(--fw-thin);
   background-color: var(--c-item);
@@ -103,14 +121,17 @@ main {
   padding-left: calc(var(--space) * 3);
   border-bottom: 1px solid var(--c-line);
 }
+
 .Item--full {
   padding-left: var(--space);
 }
+
 .List {
   box-shadow: var(--shadow);
   position: relative;
   z-index: 1;
 }
+
 .Item [type='checkbox'] {
   margin: 0;
   padding: 0;
@@ -129,9 +150,11 @@ main {
     background-color .2s ease-out,
     border-color .2s ease-out;
 }
+
 .Item [type='checkbox']:focus {
   outline: none;
 }
+
 .Item [type='checkbox']:checked {
   background-color: var(--c-primary-variant);
   transition:
@@ -139,6 +162,7 @@ main {
     border-color .2s ease-in;
   border-color: transparent;
 }
+
 .Item label {
   text-decoration: none;
   will-change: transition;
@@ -146,6 +170,7 @@ main {
     text-decoration .2s ease-out,
     color .2s ease-out;
 }
+
 .Item :checked ~ label {
   text-decoration: line-through;
   color: var(--c-on-item-dimmed);
@@ -153,6 +178,7 @@ main {
     text-decoration .2s ease-in,
     color .2s ease-in;
 }
+
 .Item-remove {
   color: var(--c-primary);
   background-color: transparent;
@@ -164,22 +190,25 @@ main {
   right: var(--space);
   display: none;
 }
+
 .Item:hover .Item-remove {
   display: block;
 }
+
 .Item-remove:focus {
   outline: none;
 }
+
 .Item-remove:hover {
   filter: saturate(3);
 }
+
 .Tab {
   text-decoration: none;
   border: 1px solid transparent;
   padding: var(--space-xsmall);
   border-radius: 0.2em;
 }
-/* .Tab:target, */
-.Tab.is-selected {
+.Tab:target {
   border-color: var(--c-primary);
 }
