@@ -71,45 +71,45 @@ function render(allTodo, filteredTodo, selectedTab) {
   var ListContainer = document.querySelector('.ListContainer');
   var FooterContainer = document.querySelector('.FooterContainer');
 
-  var InputHeader = document.querySelector('.InputHeader');
-  if (InputHeader) {
-    InputContainer.removeChild(InputHeader);
+  var Input = document.querySelector('header');
+  if (Input) {
+    InputContainer.removeChild(Input);
   }
   InputContainer.appendChild(TodoInput(allTodo, filteredTodo, selectedTab));
-  onTodoInputRendered(document.querySelector('.InputHeader'));
+  TodoInputAfterRender(document.querySelector('header'));
 
   var List = document.querySelector('.List');
   if (List) {
     ListContainer.removeChild(List);
   }
-  ListContainer.appendChild(TodoList(filteredTodo));
+  ListContainer.appendChild(TodoList(allTodo, filteredTodo, selectedTab));
+  TodoListAfterRender(document.querySelector('.List'));
 
   var Footer = document.querySelector('footer');
   if (Footer) {
     FooterContainer.removeChild(Footer);
   }
   FooterContainer.appendChild(TodoFooter(allTodo, filteredTodo, selectedTab));
+  TodoFooterAfterRender(document.querySelector('footer'));
 }
 
-function TodoInput(allTodo, filteredTodo, selectedTab) {
-  // <header class="InputHeader">
+function TodoInput() {
+  // <header>
   //   <input class="TodoInput Item" type="text" placeholder="What needs to be done?">
   // </header>
   var header = document.createElement('header');
-  header.className = 'InputHeader';
   var input = document.createElement('input');
   input.className = 'TodoInput Item';
   input.type = 'text';
   input.placeholder = 'What needs to be done?';
-  input.autofocus = true;
   input.addEventListener('change', onInputChange);
+
   header.appendChild(input);
   return header;
 }
 
-function onTodoInputRendered(header) {
-  var input = header.querySelector('.TodoInput');
-  input.focus();
+function TodoInputAfterRender(header) {
+  header.querySelector('input').focus();
 }
 
 function TodoFooter(allTodo, filteredTodo, selectedTab) {
@@ -158,16 +158,18 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
   footer.appendChild(button);
   return footer;
 }
+function TodoFooterAfterRender() {}
 
-function TodoList(todoArray) {
+function TodoList(allTodo, filteredTodo, selectedTab) {
   // <ul class="List">
   var ul = document.createElement('ul');
   ul.className = 'List';
-  for (var i = 0; i < todoArray.length; i++) {
-    ul.appendChild(TodoItem(todoArray[i]))
+  for (var i = 0; i < filteredTodo.length; i++) {
+    ul.appendChild(TodoItem(filteredTodo[i]))
   }
   return ul;
 }
+function TodoListAfterRender() {}
 
 function TodoItem(todoItem) {
   // <li class="Item flex">
@@ -201,6 +203,7 @@ function TodoItem(todoItem) {
   li.appendChild(removeButton);
   return li;
 }
+function TodoItemAfterRender() {}
 
 
 // - Todo Model ------------------------------------------------
