@@ -64,6 +64,13 @@ function onTabClick(eventObject) {
   render(todo, filteredArray, selectedTab);
 }
 
+function onClearCompletedClick() {
+  // update the all todo list to be only active
+  todo = getItemsByStatus(todo, 'active');
+
+  // render
+  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+}
 
 // - View ------------------------------------------------
 function render(allTodo, filteredTodo, selectedTab) {
@@ -149,13 +156,14 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
     ul.appendChild(li);
   }
 
-  var button = document.createElement('button');
-  button.className = 'text-decoration:hover';
-  button.innerText = 'Clear completed';
+  var clearCompletedButton = document.createElement('button');
+  clearCompletedButton.className = 'text-decoration:hover';
+  clearCompletedButton.innerText = 'Clear completed';
+  clearCompletedButton.addEventListener('click', onClearCompletedClick);
 
   footer.appendChild(span);
   footer.appendChild(ul);
-  footer.appendChild(button);
+  footer.appendChild(clearCompletedButton);
   return footer;
 }
 function TodoFooterAfterRender() {}
@@ -188,8 +196,8 @@ function TodoItem(todoItem) {
   checkbox.addEventListener('change', onCheckboxChange);
 
   var label = document.createElement('label');
-  label.htmlFor = getItemId(todoItem.name);
-  label.innerText = todoItem.name;
+    label.htmlFor = getItemId(todoItem.name);
+    label.innerText = todoItem.name;
 
   var removeButton = document.createElement('button');
   removeButton.dataset.id = getItemId(todoItem.name);
