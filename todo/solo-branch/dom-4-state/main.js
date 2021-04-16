@@ -1,51 +1,52 @@
-var todo = [];
-var selectedTab;
+var Input = document.querySelector('.TodoInput');
 
-onPageLoad();
+var state = {
+  allTodo: [
+    { id: getItemId("Sleep"), name: "Sleep", active: true},
+    { id: getItemId("Shopping"), name: "Shopping", active: false},
+    { id: getItemId("Bank"), name: "Bank", active: true}
+  ],
+  selectedTab: 'all',
+  filteredTodo: [],
+}
+
+state.filteredTodo = getItemsByStatus(state.allTodo, state.selectedTab);
+
+render(state);
+
+Input.addEventListener('change', onInputChange);
 
 
 // - Actions ------------------------------------------------
 
-function onPageLoad() {
-  todo = [
-    { id: getItemId("Sleep"), name: "Sleep", active: true},
-    { id: getItemId("Shopping"), name: "Shopping", active: false},
-    { id: getItemId("Bank"), name: "Bank", active: true}
-  ];
-
-  selectedTab = 'all';
-
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
-}
-
-function onInputChange(eventObject) {
+function onInputChange() {
   // add item to the array list
-  addItemToList(todo, eventObject.target.value);
+  addItemToList(state.allTodo, Input.value);
 
   // use existing method of rendering the full array list
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  render(state);
 }
 
 function onCheckboxChange(eventObject) {
   // toggle item status in array
-  for (var i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      toggleItemStatus(todo[i]);
+  for (var i = 0; i < state.allTodo.length; i++) {
+    if (state.allTodo[i].id === eventObject.target.id) {
+      toggleItemStatus(state.allTodo[i]);
     }
   }
   // render the updated array
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  render(state);
 }
 
 function onRemoveButtonClick(eventObject) {
   // remove item from array
-  for (var i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      deleteItemFromList(todo, todo[i]);
+  for (var i = 0; i < state.allTodo.length; i++) {
+    if (state.allTodo[i].id === eventObject.target.id) {
+      deleteItemFromList(state.allTodo, state.allTodo[i]);
     }
   }
   // render the updated array
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  render(state);
 }
 
 // 1. action
@@ -54,65 +55,34 @@ function onTabClick(eventObject) {
 
   // 3. update our state
   // update selected tab based on the payload
-  selectedTab = eventObject.target.id;
+  state.selectedTab = eventObject.target.id;
 
   // filter the todo array according to selectedTab
-  var filteredArray = getItemsByStatus(todo, selectedTab);
+  state.filteredTodo = getItemsByStatus(state.allTodo, state.selectedTab);
 
   // 4. render
   // render only the filtered todo array
-  render(todo, filteredArray, selectedTab);
+  render(state);
 }
 
 
 // - View ------------------------------------------------
-function render(allTodo, filteredTodo, selectedTab) {
-  var InputContainer = document.querySelector('.InputContainer');
+function render(state) {
   var ListContainer = document.querySelector('.ListContainer');
   var FooterContainer = document.querySelector('.FooterContainer');
-
-  var InputHeader = document.querySelector('.InputHeader');
-  if (InputHeader) {
-    InputContainer.removeChild(InputHeader);
-  }
-  InputContainer.appendChild(TodoInput(allTodo, filteredTodo, selectedTab));
-  onTodoInputRendered(document.querySelector('.InputHeader'));
-
   var List = document.querySelector('.List');
   if (List) {
     ListContainer.removeChild(List);
   }
-  ListContainer.appendChild(TodoList(filteredTodo));
-
+  ListContainer.appendChild(TodoList(state));
   var Footer = document.querySelector('footer');
   if (Footer) {
     FooterContainer.removeChild(Footer);
   }
-  FooterContainer.appendChild(TodoFooter(allTodo, filteredTodo, selectedTab));
+  FooterContainer.appendChild(TodoFooter(state));
 }
 
-function TodoInput(allTodo, filteredTodo, selectedTab) {
-  // <header class="InputHeader">
-  //   <input class="TodoInput Item" type="text" placeholder="What needs to be done?">
-  // </header>
-  var header = document.createElement('header');
-  header.className = 'InputHeader';
-  var input = document.createElement('input');
-  input.className = 'TodoInput Item';
-  input.type = 'text';
-  input.placeholder = 'What needs to be done?';
-  input.autofocus = true;
-  input.addEventListener('change', onInputChange);
-  header.appendChild(input);
-  return header;
-}
-
-function onTodoInputRendered(header) {
-  var input = header.querySelector('.TodoInput');
-  input.focus();
-}
-
-function TodoFooter(allTodo, filteredTodo, selectedTab) {
+function TodoFooter(state) {
   // <footer class="Item Item--full flex flex-justify--between text-small">
   //   <span>2 items left</span>
   //   <ul class="flex flex-gapRight--small">
@@ -127,7 +97,7 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
   footer.className = 'Item Item--full flex flex-justify--between text-small';
 
   var span = document.createElement('span');
-  span.innerText = getItemsByStatus(allTodo, 'active').length + ' items left';
+  span.innerText = getItemsByStatus(state.allTodo, 'active').length + ' items left';
 
   var ul = document.createElement('ul');
   ul.className = 'flex flex-gapRight--small';
@@ -138,7 +108,7 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
     var li = document.createElement('li');
     var a = document.createElement('a');
     a.className = 'Tab';
-    if (tabId === selectedTab) {
+    if (tabId === state.selectedTab) {
       a.className += ' is-selected';
     }
     a.innerText = tabs[i];
@@ -159,12 +129,12 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
   return footer;
 }
 
-function TodoList(todoArray) {
+function TodoList(state) {
   // <ul class="List">
   var ul = document.createElement('ul');
   ul.className = 'List';
-  for (var i = 0; i < todoArray.length; i++) {
-    ul.appendChild(TodoItem(todoArray[i]))
+  for (var i = 0; i < state.filteredTodo.length; i++) {
+    ul.appendChild(TodoItem(state.filteredTodo[i]))
   }
   return ul;
 }
@@ -181,7 +151,7 @@ function TodoItem(todoItem) {
 
   var checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
-  checkbox.dataset.id = getItemId(todoItem.name);
+  checkbox.id = getItemId(todoItem.name);
   checkbox.checked = todoItem.active === false;
   checkbox.addEventListener('change', onCheckboxChange);
 
@@ -190,7 +160,7 @@ function TodoItem(todoItem) {
   label.innerText = todoItem.name;
 
   var removeButton = document.createElement('button');
-  removeButton.dataset.id = getItemId(todoItem.name);
+  removeButton.id = getItemId(todoItem.name);
   removeButton.className = 'Item-remove flex-alignSelf--right';
   removeButton.setAttribute('aria-label', 'Remove');
   removeButton.innerHTML = '&times;';
