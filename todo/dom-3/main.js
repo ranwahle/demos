@@ -33,7 +33,7 @@ function onInputChange() {
 function onCheckboxChange(eventObject) {
   // toggle item status in array
   for (var i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.id) {
+    if (todo[i].id === eventObject.target.dataset.id) {
       toggleItemStatus(todo[i]);
     }
   }
@@ -44,7 +44,7 @@ function onCheckboxChange(eventObject) {
 function onRemoveButtonClick(eventObject) {
   // remove item from array
   for (var i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.id) {
+    if (todo[i].id === eventObject.target.dataset.id) {
       deleteItemFromList(todo, todo[i]);
     }
   }
@@ -154,7 +154,7 @@ function TodoItem(todoItem) {
 
   var checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
-  checkbox.id = getItemId(todoItem.name);
+  checkbox.dataset.id = getItemId(todoItem.name);
   checkbox.checked = todoItem.active === false;
   checkbox.addEventListener('change', onCheckboxChange);
 
@@ -163,7 +163,7 @@ function TodoItem(todoItem) {
   label.innerText = todoItem.name;
 
   var removeButton = document.createElement('button');
-  removeButton.id = getItemId(todoItem.name);
+  removeButton.dataset.id = getItemId(todoItem.name);
   removeButton.className = 'Item-remove flex-alignSelf--right';
   removeButton.setAttribute('aria-label', 'Remove');
   removeButton.innerHTML = '&times;';
