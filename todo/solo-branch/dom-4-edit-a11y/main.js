@@ -74,6 +74,10 @@ function onClearCompletedClick() {
 
 function onNameClick(eventObject) {
   eventObject.preventDefault();
+}
+
+function onNameDoubleClick(eventObject) {
+  eventObject.preventDefault();
 
   for (var i = 0; i < todo.length; i++) {
     if (todo[i].id === eventObject.target.dataset.id) {
@@ -86,7 +90,7 @@ function onNameClick(eventObject) {
 
 function onNameKeyPress(eventObject) {
   if (eventObject.keyCode === 13) {
-    onNameClick(eventObject);
+    onNameDoubleClick(eventObject);
   }
 }
 
@@ -247,6 +251,7 @@ function TodoItem(todoItem) {
     label.innerText = todoItem.name;
     label.tabIndex = 0;
     label.addEventListener('click', onNameClick);
+    label.addEventListener('dblclick', onNameDoubleClick);
     label.addEventListener('keypress', onNameKeyPress);
     li.appendChild(label);
   }

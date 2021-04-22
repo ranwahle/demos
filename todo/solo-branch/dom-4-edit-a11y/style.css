@@ -3,9 +3,8 @@
   --space-small: calc(var(--space) * 0.5);
   --space-xsmall: calc(var(--space) * 0.25);
   --c-background: #f0f0f0;
-  --c-onbackground: #f0f0f0;
-  --c-primary: #d2b6b6;
-  --c-primary-variant: #b6d2c5;
+  --c-primary: hsl(0deg 24% 77%);
+  --c-primary-variant: hsl(152deg 24% 77%);
   --c-item: #fff;
   --c-on-item: #666;
   --c-on-item-dimmed: #aaa;
@@ -16,6 +15,20 @@
   --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   --radius: 0.2em;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-background: #222527;
+    --c-primary: hsl(0deg 60% 77%);
+    --c-primary-variant: hsl(152deg 60% 77%);
+    --c-item: #333;
+    --c-on-item: #e0e0e0;
+    --c-on-item-dimmed: #b0b0b0;
+    --c-line: #454545;
+    --shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
 body {
   font-family: sans-serif;
   font-size: var(--fs-medium);
@@ -91,6 +104,7 @@ main {
   font-weight: inherit;
   color: inherit;
   border: none;
+  background-color: transparent;
 }
 .TodoInput:focus {
   outline: none;
@@ -155,6 +169,9 @@ main {
     color .2s ease-out;
 }
 .Item label:focus {
+  outline: none;
+}
+.Item label:focus-visible {
   outline: 1px solid var(--c-on-item);
   outline-offset: 3px;
 }
