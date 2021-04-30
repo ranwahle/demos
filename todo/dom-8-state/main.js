@@ -8,56 +8,45 @@ onPageLoad();
 
 // - State ------------------------------------------------
 function setState(newState) {
-  // update our state with new state
   Object.assign(state, newState);
 
-  // render the new state
-  render(state.todo, getItemsByStatus(state.todo, state.selectedTab), state.selectedTab);
+  render(state);
 
-  // save the new state
-  save(state.todo);
+  save(state);
 }
 
 
 // - Actions ------------------------------------------------
 
 function onPageLoad() {
-  setState({todo: getSavedTodo(), selectedTab: 'all'});
+  setState(getSavedState() || {todo: [], selectedTab: 'all'});
 }
 
 function onInputChange(eventObject) {
-  setState({todo: addItemToList(todo, eventObject.target.value)});
+  setState({todo: addItemToList(state.todo, eventObject.target.value)});
 }
 
 function onCheckboxChange(eventObject) {
-  // toggle item status in array
-  for (let i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      toggleItemStatus(todo[i]);
-    }
-  }
-
-  save(todo);
-
   document.addEventListener('transitionend', onTransitionEnd);
 
   function onTransitionEnd() {
-    // render the updated array
-    render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+
+    setState({todo: toggleItemStatus(state.todo, eventObject.target.dataset.id)});
+
     document.removeEventListener('transitionend', onTransitionEnd);
   }
 }
 
 function onRemoveButtonClick(eventObject) {
-  setState(deleteItemFromList(todo, eventObject.target.dataset.id));
+  setState({todo: deleteItemFromList(state.todo, eventObject.target.dataset.id)});
 }
 
 function onTabClick(eventObject) {
-  setState(todo, eventObject.target.id);
+  setState({todo: state.todo, selectedTab: eventObject.target.id});
 }
 
 function onClearCompletedClick() {
-  setState(getItemsByStatus(todo, 'active'));
+  setState({todo: getItemsByStatus(state.todo, 'active')});
 }
 
 function onNameClick(eventObject) {
@@ -67,49 +56,36 @@ function onNameClick(eventObject) {
 function onNameDoubleClick(eventObject) {
   eventObject.preventDefault();
 
-  for (let i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      toggleEditableState(todo[i]);
-    }
-  }
-
-  save(todo);
-
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState({todo: toggleEditableState(state.todo, eventObject.target.dataset.id)})
 }
 
 function onNameKeyPress(eventObject) {
-  if (eventObject.keyCode === 13) {
+  if (eventObject.key === 'Enter') {
     onNameDoubleClick(eventObject);
   }
 }
 
 function onNameChange(eventObject) {
-  for (let i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      renameItem(todo[i], eventObject.target.value);
-      toggleEditableState(todo[i]);
-    }
-  }
+  let id = eventObject.target.dataset.id;
+  let todo = toggleEditableState(state.todo, id);
+  todo = renameItem(todo, id, eventObject.target.value);
 
-  save(todo);
-
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState({todo});
 }
 
 // - View ------------------------------------------------
-function render(allTodo, filteredTodo, selectedTab) {
+function render(state) {
   let InputContainer = document.querySelector('.InputContainer');
   let ListContainer = document.querySelector('.ListContainer');
   let FooterContainer = document.querySelector('.FooterContainer');
 
-  InputContainer.innerHTML = TodoInput(allTodo, filteredTodo, selectedTab);
+  InputContainer.innerHTML = TodoInput(state);
   TodoInputAfterRender(document.querySelector('header'));
 
-  ListContainer.innerHTML = TodoList(allTodo, filteredTodo, selectedTab);
+  ListContainer.innerHTML = TodoList(state);
   TodoListAfterRender(document.querySelector('.List'));
 
-  FooterContainer.innerHTML = TodoFooter(allTodo, filteredTodo, selectedTab);
+  FooterContainer.innerHTML = TodoFooter(state);
   TodoFooterAfterRender(document.querySelector('footer'));
 }
 
@@ -125,15 +101,15 @@ function TodoInputAfterRender(header) {
   header.querySelector('input').focus();
 }
 
-function TodoFooter(allTodo, filteredTodo, selectedTab) {
-  let numItems = getItemsByStatus(allTodo, 'active').length;
+function TodoFooter(state) {
+  let numItems = getItemsByStatus(state.todo, 'active').length;
   let id = tab => tab.toLowerCase();
   return `<footer class="Item Item--full flex flex-justify--between text-small">
     <span>${numItems} items left</span>
     <ul class="flex flex-gapRight--small">
       ${['All', 'Active', 'Completed'].map((tab) => `
       <li>
-        <a class="Tab ${id(tab) === selectedTab ? 'is-selected' : ''}"
+        <a class="Tab ${id(tab) === state.selectedTab ? 'is-selected' : ''}"
           id="${id(tab)}" href="#${id(tab)}"
           onclick="onTabClick(event)">${tab}</a>
       </li>`
@@ -146,8 +122,9 @@ function TodoFooter(allTodo, filteredTodo, selectedTab) {
 }
 function TodoFooterAfterRender() {}
 
-function TodoList(allTodo, filteredTodo, selectedTab) {
+function TodoList(state) {
   let id = todoItem => getItemId(todoItem.name);
+  let filteredTodo = getItemsByStatus(state.todo, state.selectedTab);
   return `<ul class="List">
     ${filteredTodo.map(todoItem => `
       <li class="Item flex">
@@ -156,9 +133,8 @@ function TodoList(allTodo, filteredTodo, selectedTab) {
               onchange="onCheckboxChange(event)">
 
         ${todoItem.isEditable ? `
-          <input type="text" class="TodoInput" data-id=${id(todoItem)} value="${todoItem.name}"
+          <input type="text" class="TodoInput" data-id="${id(todoItem)}" value="${todoItem.name}"
                 onchange="onNameChange(event)"
-                onblur="onNameChange(event)"
         ` : `
           <label for="${id(todoItem)}" data-id="${id(todoItem)}" tabindex="0"
             onclick="onNameClick(event)"
@@ -201,11 +177,11 @@ function getItemsByStatus(todo, status) {
 function addItemToList(todo, name){
   let newItem = {name: name, active: true, id: getItemId(name)};
   todo.push(newItem);
+  return todo;
 }
 
 function deleteItemFromList(todo, id){
-  // let item = todo.find(todoItem => todoItem.id === id);
-  let item = todo.filter(todoItem => todoItem.id === id)[0];
+  let item = findById(todo, id);
 
   // getting the item's index
   let idx = todo.indexOf(item);
@@ -214,29 +190,40 @@ function deleteItemFromList(todo, id){
   return todo;
 }
 
-function renameItem(item, newName){
+function renameItem(todo, id, newName){
+  let item = findById(todo, id);
   item.name = newName;
   item.id = getItemId(newName);
+  return todo;
 }
 
-function toggleItemStatus(item){
+function toggleItemStatus(todo, id){
+  let item = findById(todo, id);
   item.active = !item.active;
+  return todo;
 }
 
-function toggleEditableState(item){
+function toggleEditableState(todo, id){
+  let item = findById(todo, id);
   item.isEditable = !item.isEditable;
+  return todo;
+}
+
+function findById(todo, id) {
+  // return todo.find(item => item.id === id);
+  return todo.filter(item => item.id === id)[0];
 }
 
 // - Storage ------------------------------------------------
-function save(todoArray) {
-  localStorage.setItem('todoArray', JSON.stringify(todoArray));
+function save(state) {
+  localStorage.setItem('state', JSON.stringify(state));
 }
 
-function getSavedTodo() {
-  let value = localStorage.getItem('todoArray');
+function getSavedState() {
+  let value = localStorage.getItem('state');
   if (value) {
     return JSON.parse(value);
   } else {
-    return [];
+    return null;
   }
 }
