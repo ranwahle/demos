@@ -1,27 +1,32 @@
-let todo = [];
-let selectedTab;
+let state = {
+  todo: [],
+  selectedTab: ''
+};
 
 onPageLoad();
+
+
+// - State ------------------------------------------------
+function setState(newState) {
+  // update our state with new state
+  Object.assign(state, newState);
+
+  // render the new state
+  render(state.todo, getItemsByStatus(state.todo, state.selectedTab), state.selectedTab);
+
+  // save the new state
+  save(state.todo);
+}
 
 
 // - Actions ------------------------------------------------
 
 function onPageLoad() {
-  todo = getSavedTodo();
-
-  selectedTab = 'all';
-
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState({todo: getSavedTodo(), selectedTab: 'all'});
 }
 
 function onInputChange(eventObject) {
-  // add item to the array list
-  addItemToList(todo, eventObject.target.value);
-
-  save(todo);
-
-  // use existing method of rendering the full array list
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState({todo: addItemToList(todo, eventObject.target.value)});
 }
 
 function onCheckboxChange(eventObject) {
@@ -44,43 +49,15 @@ function onCheckboxChange(eventObject) {
 }
 
 function onRemoveButtonClick(eventObject) {
-  // remove item from array
-  for (let i = 0; i < todo.length; i++) {
-    if (todo[i].id === eventObject.target.dataset.id) {
-      deleteItemFromList(todo, todo[i]);
-    }
-  }
-
-  save(todo);
-
-  // render the updated array
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState(deleteItemFromList(todo, eventObject.target.dataset.id));
 }
 
-// 1. action
 function onTabClick(eventObject) {
-  // 2. payload (event data): find out which tab was clicked
-
-  // 3. update our state
-  // update selected tab based on the payload
-  selectedTab = eventObject.target.id;
-
-  // filter the todo array according to selectedTab
-  let filteredArray = getItemsByStatus(todo, selectedTab);
-
-  // 4. render
-  // render only the filtered todo array
-  render(todo, filteredArray, selectedTab);
+  setState(todo, eventObject.target.id);
 }
 
 function onClearCompletedClick() {
-  // update the all todo list to be only active
-  todo = getItemsByStatus(todo, 'active');
-
-  save(todo);
-
-  // render
-  render(todo, getItemsByStatus(todo, selectedTab), selectedTab);
+  setState(getItemsByStatus(todo, 'active'));
 }
 
 function onNameClick(eventObject) {
@@ -226,11 +203,15 @@ function addItemToList(todo, name){
   todo.push(newItem);
 }
 
-function deleteItemFromList(todo, item){
+function deleteItemFromList(todo, id){
+  // let item = todo.find(todoItem => todoItem.id === id);
+  let item = todo.filter(todoItem => todoItem.id === id)[0];
+
   // getting the item's index
   let idx = todo.indexOf(item);
   // deleting the item from the array
   todo.splice(idx, 1);
+  return todo;
 }
 
 function renameItem(item, newName){
