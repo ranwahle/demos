@@ -163,15 +163,9 @@ function getItemId(name) {
 }
 
 function getItemsByStatus(todo, status) {
-  let filteredItems = [];
-  for (let i = 0; i < todo.length; i++) {
-    if (status === 'all' || status === 'active' && todo[i].active) {
-      filteredItems.push(todo[i]);
-    } else if (status === 'all' || status === 'completed' && !todo[i].active) {
-      filteredItems.push(todo[i]);
-    }
-  }
-  return filteredItems;
+  return status === 'all' ? todo : todo.filter(item => {
+    return status === 'active' && item.active || status === 'completed' && !item.active;
+  });
 }
 
 function addItemToList(todo, name){
@@ -183,9 +177,7 @@ function addItemToList(todo, name){
 function deleteItemFromList(todo, id){
   let item = findById(todo, id);
 
-  // getting the item's index
   let idx = todo.indexOf(item);
-  // deleting the item from the array
   todo.splice(idx, 1);
   return todo;
 }
@@ -221,9 +213,5 @@ function save(state) {
 
 function getSavedState() {
   let value = localStorage.getItem('state');
-  if (value) {
-    return JSON.parse(value);
-  } else {
-    return null;
-  }
+  return value ? JSON.parse(value) : null;
 }
