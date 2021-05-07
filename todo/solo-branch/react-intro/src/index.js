@@ -10,7 +10,7 @@ ReactDOM.render(
 function App() {
   let getNumber = () => Math.ceil(Math.random() * 1000);
   let [state, setState] = useState({
-    num1: getNumber(),
+    num1: gewtNumber(),
     num2: getNumber()
   });
   return <main>

@@ -42,7 +42,7 @@ function onRemoveButtonClick(eventObject) {
 }
 
 function onTabClick(eventObject) {
-  setState({todo: state.todo, selectedTab: eventObject.target.id});
+  setState({selectedTab: eventObject.target.id});
 }
 
 function onClearCompletedClick() {
