@@ -16,3 +16,19 @@ export const PRODUCTS = [{
   "price": "$85.90",
   "icon": ""
 }];
+
+export function toggleSelected(existingKeys, key) {
+  let selectedKeys = [];
+  let exists = false;
+  for (let k of existingKeys) {
+    if (k === key) {
+      exists = true;
+      continue;
+    }
+    selectedKeys.push(k);
+  }
+  if (exists === false) {
+    selectedKeys.push(key);
+  }
+  return selectedKeys;
+}
