@@ -53,6 +53,7 @@ function Image(props) {
   let url = `https://placeimg.com/${params.size.w}/${params.size.h}/${params.category}${params.filter && `/${params.filter}`}`;
   return <div>
     <img
+      alt={params.category}
       style={{border: '1px dashed'}}
       width={params.size.w} height={params.size.h}
       src={`${url}?timestamp=${params.timestamp}`} />
