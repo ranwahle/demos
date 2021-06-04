@@ -6,6 +6,15 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+let mainStyles = {
+  height: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  gap: '1em',
+};
+
 function App() {
 
   let [state, setState] = useState({
@@ -15,14 +24,7 @@ function App() {
     timestamp: Date.now()
   });
 
-  return <main style={{
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    gap: '1em',
-  }}>
+  return <main style={mainStyles}>
 
       <Image params={state}></Image>
 
