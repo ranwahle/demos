@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 let Post = styled.div({
-  border: '1px solid',
+  borderBottom: '1px solid',
   padding: '0.5em',
   cursor: 'pointer',
 });
