@@ -27,7 +27,7 @@ export function App() {
 
   return <Panes>
     <Pane width={'35%'} minWidth={'300px'}
-      header={'hello'}
+      header={'All Posts'}
       body={<Posts posts={posts} onSelectPost={setSelectedId}></Posts>}>
     </Pane>
     <Pane width={'65%'}
