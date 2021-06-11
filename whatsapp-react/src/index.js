@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+import styled from 'styled-components';
 
 function App() {
   let [posts, setPosts] = useState([]);
@@ -38,55 +34,60 @@ function App() {
   </Panes>;
 }
 
+let Comment = styled.div({
+  border: '1px solid',
+  padding: '0.5em'
+});
+
 function Comments(props) {
   if (!props.post || !props.comments) {
     return '';
   }
-  let commentStyle = {
-    border: '1px solid',
-    padding: '0.5em'
-  };
   return <div>
     <h2>{props.post.title} ({props.post.id})</h2>
     <ul>
-      {props.comments.map(comment => <div key={comment.id} style={commentStyle}>
+      {props.comments.map(comment => <Comment key={comment.id}>
         <p>postId: {comment.postId}</p>
         <p>name: {comment.name}</p>
         <p>email: {comment.email}</p>
         <p>{comment.body}</p>
-      </div>)}
+      </Comment>)}
     </ul>
   </div>
 }
 
+let Post = styled.div({
+  border: '1px solid',
+  padding: '0.5em',
+  cursor: 'pointer',
+});
+
 function Posts(props) {
-  let postStyle = {
-    border: '1px solid',
-    padding: '0.5em',
-    cursor: 'pointer'
-  }
   return <ul>
     {props.posts.map(post => {
-      return <div style={postStyle} key={post.id} onClick={() => props.onSelectPost(post.id)}>
+      return <Post key={post.id} onClick={() => props.onSelectPost(post.id)}>
         {post.title} ({post.id})
-      </div>
+      </Post>
     })}
   </ul>
 }
 
-function Panes(props) {
-  let mainStyle = {
-    display: 'flex',
-    width: '100vw',
-    height: '100vh'
-  };
-  return <main style={mainStyle}>{props.children}</main>
-}
+let Panes = styled.main({
+  display: 'flex',
+  width: '100vw',
+  height: '100vh'
+});
 
-function Pane(props) {
-  let paneStyle = {
-    overflow: 'auto',
+
+let Pane = styled.div(props => ({
+  overflow: 'auto',
     ...props
-  }
-  return <div style={paneStyle}>{props.children}</div>
-}
+}));
+
+
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
