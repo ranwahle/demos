@@ -1,38 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { Comments } from './Comments';
+import { Messages } from './Messages';
 import { Pane, Panes } from './Panes';
-import { Posts } from './Posts';
+import { Chats } from './Chats';
 
 export function App() {
-  let [posts, setPosts] = useState([]);
-  let [selectedId, setSelectedId] = useState(1);
-  let [comments, setComments] = useState([]);
+  let [chats, setChats] = useState([]);
+  let [selectedId, setSelectedId] = useState(null);
+  let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(res => res.json())
-      .then((posts) => setPosts(posts))
+    import('./data/chats.js')
+      .then(module => {
+        let chats = module.chats;
+        setChats(chats);
+        setSelectedId(chats[0].id);
+      });
   }, []);
 
   useEffect(() => {
     if (!selectedId) {
       return;
     }
-    fetch(`https://jsonplaceholder.typicode.com/comments?postId=${selectedId}`)
-      .then(res => res.json())
-      .then((comments) => setComments(comments))
+    import(`./data/messages_${selectedId}.js`)
+      .then((module) => {
+        let messages = module.messages;
+        setMessages(messages);
+      })
   }, [selectedId]);
 
-  let selectedPost = posts.find((p) => p.id === selectedId);
+  let selectedChat = chats.find((p) => p.id === selectedId);
 
   return <Panes>
     <Pane width={'35%'} minWidth={'300px'}
-      header={'All Posts'}
-      body={<Posts posts={posts} onSelectPost={setSelectedId}></Posts>}>
+      header={'All Chats'}
+      body={<Chats chats={chats} onSelectChat={setSelectedId}></Chats>}>
     </Pane>
     <Pane width={'65%'}
-      header={`${selectedPost?.title} (${selectedPost?.id})`}
-      body={<Comments comments={comments}></Comments>}>
+      header={`${selectedChat?.users.map(user => user.name).join(', ')} (${selectedChat?.id})`}
+      body={<Messages messages={messages}></Messages>}>
     </Pane>
   </Panes>;
 }
