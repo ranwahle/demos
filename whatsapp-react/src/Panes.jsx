@@ -22,7 +22,9 @@ let Container = styled.div(props => ({
   ...props
 }));
 
-export function Pane({width, minWidth, header, body, lastScroll}) {
+let Footer = styled.div({});
+
+export function Pane({width, minWidth, header, body, footer, lastScroll}) {
   let ref = useRef(null);
   useEffect(() => {
     ref.current.scrollTo(0, ref.current.scrollHeight);
@@ -30,5 +32,6 @@ export function Pane({width, minWidth, header, body, lastScroll}) {
   return <Container {...{width, minWidth}}>
     <Header>{header}</Header>
     <Body ref={ref}>{body}</Body>
+    {footer && <Footer>{footer}</Footer>}
   </Container>
 }
