@@ -13,6 +13,7 @@ export function Messages(props) {
   return <ul>
       {props.messages.map(message => <Message key={message.id}>
         <p>chatId: {message.chatId}</p>
+        <p>messageId: {message.id}</p>
         <p>user: {message.user.name}</p>
         <p>{message.body}</p>
       </Message>)}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 
 export let Panes = styled.main({
@@ -22,9 +22,13 @@ let Container = styled.div(props => ({
   ...props
 }));
 
-export function Pane({width, minWidth, header, body}) {
+export function Pane({width, minWidth, header, body, lastScroll}) {
+  let ref = useRef(null);
+  useEffect(() => {
+    ref.current.scrollTo(0, ref.current.scrollHeight);
+  }, [lastScroll])
   return <Container {...{width, minWidth}}>
     <Header>{header}</Header>
-    <Body>{body}</Body>
+    <Body ref={ref}>{body}</Body>
   </Container>
 }
