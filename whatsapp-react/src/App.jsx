@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Messages } from './Messages';
 import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
@@ -8,6 +8,7 @@ export function App() {
   let [chatId, setChatId] = useState(null);
   let [messages, setMessages] = useState([]);
   let [lastPoll, setLastPoll] = useState(Date.now());
+  let timer = useRef(null);
 
   useEffect(loadChats, []);
   useEffect(loadMessages, [chatId, lastPoll]);
@@ -32,7 +33,16 @@ export function App() {
 
   function onNewMessage(e) {
     e.preventDefault();
-    alert(`Sending to the server: ${e.target.newMessage.value}`);
+    fetch(`/post/chats/${chatId}/messages`)
+      .then(res => {
+        let newMessage = {
+          body: e.target.newMessage.value,
+          user: {name: 'Serge Krul'},
+          chatId
+        };
+        console.log(`Sending to the server: ${JSON.stringify(newMessage)}`);
+        setLastPoll(Date.now());
+      });
   }
 
   function loadChats() {
@@ -56,7 +66,8 @@ export function App() {
   }
 
   function startTimer() {
-    setTimeout(() => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
       setLastPoll(Date.now());
     }, 5000);
   }
