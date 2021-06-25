@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Messages } from './Messages';
 import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
+import { MessageForm } from './MessageForm';
 
 export function App() {
   let [chats, setChats] = useState([]);
@@ -24,21 +25,18 @@ export function App() {
     <Pane width={'65%'}
       header={`${selectedChat?.users.map(user => user.name).join(', ')} (${selectedChat?.id})`}
       body={<Messages messages={messages}></Messages>}
-      footer={<form onSubmit={onNewMessage}>
-        <input id={'newMessage'}></input>
-      </form>}
+      footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
       lastScroll={lastPoll}>
     </Pane>
   </Panes>;
 
-  function onNewMessage(e) {
-    e.preventDefault();
+  function onNewMessage(body) {
     fetch(`/post/chats/${chatId}/messages`)
       .then(res => {
         let newMessage = {
-          body: e.target.newMessage.value,
+          chatId,
+          body,
           user: {name: 'Serge Krul'},
-          chatId
         };
         console.log(`Sending to the server: ${JSON.stringify(newMessage)}`);
         setLastPoll(Date.now());
