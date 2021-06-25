@@ -3,6 +3,7 @@ import { Messages } from './Messages';
 import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
+import { UsersContext } from './UsersContext';
 
 export function App() {
   let [chats, setChats] = useState([]);
@@ -12,28 +13,35 @@ export function App() {
   let [myUser, setMyUser] = useState({});
   let [friends, setFriends] = useState([]);
   let timer = useRef(null);
+  let usersContext = useRef({});
 
   useEffect(loadMyUser, []);
-  useEffect(loadMyFriends, [myUser?.id]);
-  useEffect(displayFriends, [friends]);
-  useEffect(loadChats, []);
+  useEffect(loadMyFriends, [myUser]);
+  useEffect(updateUsersContext, [myUser, friends]);
+  useEffect(loadChats, [myUser]);
   useEffect(loadMessages, [chatId, lastPoll]);
   useEffect(startTimer, [lastPoll]);
 
   let selectedChat = chats.find((p) => p.id === chatId);
 
-  return <Panes>
-    <Pane width={'35%'} minWidth={'300px'}
-      header={`User: ${myUser.name} (${myUser.id}) (lastPoll: ${lastPoll})`}
-      body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
-    </Pane>
-    <Pane width={'65%'}
-      header={`Chat (${selectedChat?.id}): ${selectedChat?.users.map(user => user.name).join(', ')}`}
-      body={<Messages messages={messages}></Messages>}
-      footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
-      lastScroll={lastPoll}>
-    </Pane>
-  </Panes>;
+  return <UsersContext.Provider value={usersContext.current}>
+      <Panes>
+      <Pane width={'35%'} minWidth={'300px'}
+        header={`User: ${myUser.name} (${myUser.id}) (lastPoll: ${lastPoll})`}
+        body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
+      </Pane>
+      <Pane width={'65%'}
+        header={`Chat (${selectedChat?.id}): ${getChatUsersList(selectedChat)}`}
+        body={<Messages messages={messages}></Messages>}
+        footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
+        lastScroll={lastPoll}>
+      </Pane>
+    </Panes>
+  </UsersContext.Provider>;
+
+  function getChatUsersList(chat) {
+    return chat?.userIds.map(userId => usersContext.current.allUsers?.[userId].name).join(', ');
+  }
 
   function loadMyUser() {
     import('./data/users_me')
@@ -54,8 +62,14 @@ export function App() {
       });
   }
 
-  function displayFriends() {
-    console.log(friends);
+  function updateUsersContext() {
+    usersContext.current = {
+      myUser,
+      allUsers: friends.concat(myUser).reduce((map, friend) => {
+        map[friend.id] = friend;
+        return map;
+      }, {})
+    };
   }
 
   function onNewMessage(body) {
@@ -64,7 +78,7 @@ export function App() {
         let newMessage = {
           chatId,
           body,
-          user: {name: 'Serge Krul'},
+          userId: myUser.id,
         };
         console.log(`Sending to the server: ${JSON.stringify(newMessage)}`);
         setLastPoll(Date.now());
@@ -72,7 +86,10 @@ export function App() {
   }
 
   function loadChats() {
-    import('./data/chats.js')
+    if (!myUser.id) {
+      return;
+    }
+    import(`./data/chats_${myUser.id}.js`)
       .then(module => {
         let chats = module.chats;
         setChats(chats);
