@@ -10,9 +10,12 @@ export function App() {
   let [messages, setMessages] = useState([]);
   let [lastPoll, setLastPoll] = useState(Date.now());
   let [myUser, setMyUser] = useState({});
+  let [friends, setFriends] = useState([]);
   let timer = useRef(null);
 
   useEffect(loadMyUser, []);
+  useEffect(loadMyFriends, [myUser?.id]);
+  useEffect(displayFriends, [friends]);
   useEffect(loadChats, []);
   useEffect(loadMessages, [chatId, lastPoll]);
   useEffect(startTimer, [lastPoll]);
@@ -38,6 +41,21 @@ export function App() {
         let user = module.user;
         setMyUser(user);
       });
+  }
+
+  function loadMyFriends() {
+    if (!myUser.id) {
+      return;
+    }
+    import(`./data/users_${myUser.id}_friends`)
+      .then(module => {
+        let friends = module.friends;
+        setFriends(friends);
+      });
+  }
+
+  function displayFriends() {
+    console.log(friends);
   }
 
   function onNewMessage(body) {
