@@ -2,7 +2,7 @@ export let chats = [
   {
     id: '123123123',
     users: [{
-      id: '13123123123',
+      id: '22222222',
       name: 'Serge Krul'
     }, {
       id: 'sdad813987918723',
