@@ -15,7 +15,7 @@ app.listen(8080, () => console.log("Our server is listening on port 8080... "));
 
 // connecting to MongoDB
 const mongoURL =
-  "mongodb+srv://igal:12081982@mycluster-lgiw8.mongodb.net/netAppDB"; // connection string
+  process.env.WHATSAPP_DB; // connection string
 
 mongoose.set("useUnifiedTopology", true); // use Mongo's new connection drivers
 
