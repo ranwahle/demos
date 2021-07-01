@@ -20,7 +20,7 @@ export function App() {
   useEffect(updateUsersContext, [myUser, friends]);
   useEffect(loadChats, [myUser]);
   useEffect(loadMessages, [chatId, lastPoll]);
-  useEffect(startTimer, [lastPoll]);
+  // useEffect(startTimer, [lastPoll]);
 
   let selectedChat = chats.find((p) => p.id === chatId);
 
@@ -60,6 +60,11 @@ export function App() {
         let friends = module.friends;
         setFriends(friends);
       });
+    fetch('http://localhost:8080/api/users')
+      .then(res => res.json())
+      .then(users => {
+        console.log(users);
+      })
   }
 
   function updateUsersContext() {
