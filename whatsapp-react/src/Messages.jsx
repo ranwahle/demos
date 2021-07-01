@@ -15,12 +15,14 @@ export function Messages(props) {
   }
   return <ul>
       {props.messages.map(message => {
-        let user = usersContext.allUsers?.[message.userId];
-        return <Message key={message.id}>
-          <p>chatId: {message.chatId}</p>
-          <p>messageId: {message.id}</p>
-          <p>user: {user?.name}</p>
-          <p>{message.body}</p>
+        let authorId = message.author._id;
+        let author = usersContext.allUsers?.[authorId];
+        return <Message key={message._id}>
+          <p>chatId: {message.chat}</p>
+          <p>date: {String(new Date(message.date))}</p>
+          <p>messageId: {message._id}</p>
+          <p>user: {author?.userName}</p>
+          <p>{message.text}</p>
         </Message>;
       })}
     </ul>;

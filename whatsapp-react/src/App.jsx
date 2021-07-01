@@ -5,6 +5,8 @@ import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
 import { UsersContext } from './UsersContext';
 
+const API_URL = 'http://localhost:8080/api';
+
 export function App() {
   let [chats, setChats] = useState([]);
   let [chatId, setChatId] = useState(null);
@@ -20,18 +22,18 @@ export function App() {
   useEffect(updateUsersContext, [myUser, friends]);
   useEffect(loadChats, [myUser]);
   useEffect(loadMessages, [chatId, lastPoll]);
-  // useEffect(startTimer, [lastPoll]);
+  useEffect(startTimer, [lastPoll]);
 
-  let selectedChat = chats.find((p) => p.id === chatId);
+  let selectedChat = chats.find((c) => c._id === chatId);
 
   return <UsersContext.Provider value={usersContext.current}>
       <Panes>
       <Pane width={'35%'} minWidth={'300px'}
-        header={`User: ${myUser.name} (${myUser.id}) (lastPoll: ${lastPoll})`}
+        header={`User: ${myUser.userName} (lastPoll: ${lastPoll})`}
         body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
       </Pane>
       <Pane width={'65%'}
-        header={`Chat (${selectedChat?.id}): ${getChatUsersList(selectedChat)}`}
+        header={`Chat (${selectedChat?._id}): ${getChatUsersList(selectedChat)}`}
         body={<Messages messages={messages}></Messages>}
         footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
         lastScroll={lastPoll}>
@@ -40,65 +42,78 @@ export function App() {
   </UsersContext.Provider>;
 
   function getChatUsersList(chat) {
-    return chat?.userIds.map(userId => usersContext.current.allUsers?.[userId].name).join(', ');
+    // TODO hack, userIds should be an array
+    let userIds = chat?.userIds.map(user => user._id);
+    return userIds?.map(userId => usersContext.current.allUsers?.[userId]?.userName).join(', ');
   }
 
   function loadMyUser() {
-    import('./data/users_me')
-      .then(module => {
-        let user = module.user;
+    // TODO this should be saved in a cookie and sent to /api/users/me
+    const MY_USER_ID = '60bddb8019094d60c42557cf';
+    fetch(`${API_URL}/users/${MY_USER_ID}`)
+      .then(res => res.json())
+      .then(user => {
         setMyUser(user);
       });
   }
 
   function loadMyFriends() {
-    if (!myUser.id) {
+    if (!myUser._id) {
       return;
     }
-    import(`./data/users_${myUser.id}_friends`)
-      .then(module => {
-        let friends = module.friends;
+    // TODO its a hack, should bring only users that are my contacts
+    fetch(`${API_URL}/users`)
+      .then(res => res.json())
+      .then(allUsers => {
+        let friends = allUsers.filter(u => u._id !== myUser._id);
+        console.log('friends', friends);
         setFriends(friends);
       });
-    fetch('http://localhost:8080/api/users')
-      .then(res => res.json())
-      .then(users => {
-        console.log(users);
-      })
   }
 
   function updateUsersContext() {
     usersContext.current = {
       myUser,
       allUsers: friends.concat(myUser).reduce((map, friend) => {
-        map[friend.id] = friend;
+        map[friend._id] = friend;
         return map;
       }, {})
     };
   }
 
-  function onNewMessage(body) {
-    fetch(`/post/chats/${chatId}/messages`)
-      .then(res => {
-        let newMessage = {
-          chatId,
-          body,
-          userId: myUser.id,
-        };
-        console.log(`Sending to the server: ${JSON.stringify(newMessage)}`);
+  function onNewMessage(text) {
+    let newMessage = {
+      chat: chatId, // TODO rename to chatId
+      text,
+      date: String(new Date()), // TODO should be timestamp
+      picURL: '',
+      author: myUser, // TODO should only send userId
+    };
+
+    fetch(`${API_URL}/chats/${chatId}/messages`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newMessage)
+    }).then(res => {
+        console.log(`Sent to the server: ${JSON.stringify(newMessage)}`);
         setLastPoll(Date.now());
       });
   }
 
   function loadChats() {
-    if (!myUser.id) {
+    if (!myUser._id) {
       return;
     }
-    import(`./data/chats_${myUser.id}.js`)
-      .then(module => {
-        let chats = module.chats;
+    // TODO rename this api to /chats?userId=XXX
+    fetch(`${API_URL}/friends/${myUser._id}`)
+      .then(res => res.json())
+      .then(chats => {
+        console.log('chats', chats);
         setChats(chats);
-        setChatId(chats[0].id);
+        setChatId(chats[0]._id);
       });
   }
 
@@ -106,10 +121,11 @@ export function App() {
     if (!chatId) {
       return;
     }
-    import(`./data/messages_${chatId}.js`)
-      .then((module) => {
-        let messages = module.messages;
-        setMessages(addFakeMessage(messages));
+    fetch(`${API_URL}/chats/${chatId}/messages`)
+      .then(res => res.json())
+      .then((messages) => {
+        console.log('messages', messages);
+        setMessages(messages);
       })
   }
 
@@ -119,11 +135,4 @@ export function App() {
       setLastPoll(Date.now());
     }, 5000);
   }
-}
-
-function addFakeMessage(messages) {
-  let messageBeforeLast = messages[messages.length - 2];
-  let newMessage = {...messageBeforeLast, id: Date.now()};
-  messages.push(newMessage);
-  return messages;
 }
