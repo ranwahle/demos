@@ -10,8 +10,8 @@ let Chat = styled.div({
 export function Chats(props) {
   return <ul>
     {props.chats.map(chat => {
-      return <Chat key={chat.id} onClick={() => props.onSelectChat(chat.id)}>
-        {chat.title} ({chat.id})
+      return <Chat key={chat._id} onClick={() => props.onSelectChat(chat._id)}>
+        ({chat._id})
       </Chat>
     })}
   </ul>

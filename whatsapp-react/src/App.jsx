@@ -4,6 +4,9 @@ import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
 
+const MY_USER_ID = '60bddb8019094d60c42557cf';
+let get = (route) => fetch(`http://localhost:8080/api/${route}`).then(res => res.json())
+
 export function App() {
   let [chats, setChats] = useState([]);
   let [chatId, setChatId] = useState(null);
@@ -18,17 +21,17 @@ export function App() {
   useEffect(displayFriends, [friends]);
   useEffect(loadChats, []);
   useEffect(loadMessages, [chatId, lastPoll]);
-  useEffect(startTimer, [lastPoll]);
+  // useEffect(startTimer, [lastPoll]);
 
-  let selectedChat = chats.find((p) => p.id === chatId);
+  let selectedChat = chats.find((chat) => chat._id === chatId);
 
   return <Panes>
     <Pane width={'35%'} minWidth={'300px'}
-      header={`User: ${myUser.name} (${myUser.id}) (lastPoll: ${lastPoll})`}
+      header={`User: ${myUser.userName} (${myUser._id}) (lastPoll: ${lastPoll})`}
       body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
     </Pane>
     <Pane width={'65%'}
-      header={`Chat (${selectedChat?.id}): ${selectedChat?.users.map(user => user.name).join(', ')}`}
+      header={`Chat (${selectedChat?._id}): ${selectedChat?.userIds.map(user => user._id).join(', ')}`}
       body={<Messages messages={messages}></Messages>}
       footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
       lastScroll={lastPoll}>
@@ -36,9 +39,8 @@ export function App() {
   </Panes>;
 
   function loadMyUser() {
-    import('./data/users_me')
-      .then(module => {
-        let user = module.user;
+    get(`users/${MY_USER_ID}`)
+      .then(user => {
         setMyUser(user);
       });
   }
@@ -72,22 +74,19 @@ export function App() {
   }
 
   function loadChats() {
-    import('./data/chats.js')
-      .then(module => {
-        let chats = module.chats;
-        setChats(chats);
-        setChatId(chats[0].id);
-      });
+    get('chats').then(chats => {
+      setChats(chats);
+      setChatId(chats[0]._id);
+    });
   }
 
   function loadMessages() {
     if (!chatId) {
       return;
     }
-    import(`./data/messages_${chatId}.js`)
-      .then((module) => {
-        let messages = module.messages;
-        setMessages(addFakeMessage(messages));
+    get(`chats/${chatId}/messages`)
+      .then((messages) => {
+        setMessages(messages);
       })
   }
 
@@ -97,11 +96,4 @@ export function App() {
       setLastPoll(Date.now());
     }, 5000);
   }
-}
-
-function addFakeMessage(messages) {
-  let messageBeforeLast = messages[messages.length - 2];
-  let newMessage = {...messageBeforeLast, id: Date.now()};
-  messages.push(newMessage);
-  return messages;
 }

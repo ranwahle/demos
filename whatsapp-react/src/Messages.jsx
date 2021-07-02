@@ -11,11 +11,11 @@ export function Messages(props) {
     return '';
   }
   return <ul>
-      {props.messages.map(message => <Message key={message.id}>
-        <p>chatId: {message.chatId}</p>
-        <p>messageId: {message.id}</p>
-        <p>user: {message.user.name}</p>
-        <p>{message.body}</p>
+      {props.messages.map(message => <Message key={message._id}>
+        <p>chatId: {message.chat}</p>
+        <p>messageId: {message._id}</p>
+        <p>user: {message.author._id}</p>
+        <p>{message.text}</p>
       </Message>)}
     </ul>;
 }
