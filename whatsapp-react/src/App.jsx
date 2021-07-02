@@ -3,6 +3,7 @@ import { Messages } from './Messages';
 import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
+import { getChatUsersList } from './utils';
 
 const MY_USER_ID = '60bddb8019094d60c42557cf';
 let get = (route) => fetch(`http://localhost:8080/api/${route}`).then(res => res.json())
@@ -23,31 +24,28 @@ export function App() {
   useEffect(loadMyUser, []);
   useEffect(loadMyFriends, [myUser?._id]);
   useEffect(updateUsersContext, [myUser, friends]);
-  useEffect(loadChats, []);
+  useEffect(loadChats, [myUser?._id]);
   useEffect(loadMessages, [chatId, lastPoll]);
-  // useEffect(startTimer, [lastPoll]);
+  useEffect(startTimer, [lastPoll]);
 
   let selectedChat = chats.find((chat) => chat._id === chatId);
+  let lastPollDisplay = (() => {
+    let now = new Date(lastPoll);
+    return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+  })();
 
   return <Panes>
     <Pane width={'35%'} minWidth={'300px'}
-      header={`User: ${myUser.userName} (${myUser._id}) (lastPoll: ${lastPoll})`}
-      body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
+      header={`User: ${myUser.userName} (lastPoll: ${lastPollDisplay})`}
+      body={<Chats chats={chats} onSelectChat={setChatId} usersContext={usersContext}></Chats>}>
     </Pane>
     <Pane width={'65%'}
-      header={`Chat (${selectedChat?._id}): ${getChatUsersList(selectedChat)}`}
+      header={`Chat: ${getChatUsersList(selectedChat, usersContext)}`}
       body={<Messages messages={messages} usersContext={usersContext}></Messages>}
       footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
       lastScroll={lastPoll}>
     </Pane>
   </Panes>;
-
-  function getChatUsersList(chat) {
-    return chat?.userIds.map(user => {
-      let fullUser = usersContext.allUsers[user._id] || {};
-      return fullUser.userName;
-    }).join(', ');
-  }
 
   function loadMyUser() {
     get(`users/${MY_USER_ID}`)
@@ -81,7 +79,10 @@ export function App() {
   }
 
   function loadChats() {
-    get('chats').then(chats => {
+    if (!myUser._id) {
+      return;
+    }
+    get(`friends/${myUser._id}`).then(chats => {
       setChats(chats);
       setChatId(chats[0]._id);
     });
