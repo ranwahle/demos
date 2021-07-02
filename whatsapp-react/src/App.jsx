@@ -14,11 +14,15 @@ export function App() {
   let [lastPoll, setLastPoll] = useState(Date.now());
   let [myUser, setMyUser] = useState({});
   let [friends, setFriends] = useState([]);
+  let [usersContext, setUsersContext] = useState({
+    myUser: {},
+    allUsers: {}
+  });
   let timer = useRef(null);
 
   useEffect(loadMyUser, []);
-  useEffect(loadMyFriends, [myUser?.id]);
-  useEffect(displayFriends, [friends]);
+  useEffect(loadMyFriends, [myUser?._id]);
+  useEffect(updateUsersContext, [myUser, friends]);
   useEffect(loadChats, []);
   useEffect(loadMessages, [chatId, lastPoll]);
   // useEffect(startTimer, [lastPoll]);
@@ -31,12 +35,19 @@ export function App() {
       body={<Chats chats={chats} onSelectChat={setChatId}></Chats>}>
     </Pane>
     <Pane width={'65%'}
-      header={`Chat (${selectedChat?._id}): ${selectedChat?.userIds.map(user => user._id).join(', ')}`}
-      body={<Messages messages={messages}></Messages>}
+      header={`Chat (${selectedChat?._id}): ${getChatUsersList(selectedChat)}`}
+      body={<Messages messages={messages} usersContext={usersContext}></Messages>}
       footer={<MessageForm onNewMessage={onNewMessage}></MessageForm>}
       lastScroll={lastPoll}>
     </Pane>
   </Panes>;
+
+  function getChatUsersList(chat) {
+    return chat?.userIds.map(user => {
+      let fullUser = usersContext.allUsers[user._id] || {};
+      return fullUser.userName;
+    }).join(', ');
+  }
 
   function loadMyUser() {
     get(`users/${MY_USER_ID}`)
@@ -46,18 +57,14 @@ export function App() {
   }
 
   function loadMyFriends() {
-    if (!myUser.id) {
+    if (!myUser._id) {
       return;
     }
-    import(`./data/users_${myUser.id}_friends`)
-      .then(module => {
-        let friends = module.friends;
+    get('users')
+      .then(users => {
+        let friends = users.filter(user => user._id !== myUser._id);
         setFriends(friends);
       });
-  }
-
-  function displayFriends() {
-    console.log(friends);
   }
 
   function onNewMessage(body) {
@@ -95,5 +102,16 @@ export function App() {
     timer.current = setTimeout(() => {
       setLastPoll(Date.now());
     }, 5000);
+  }
+
+  function updateUsersContext() {
+    let newUsersContext = {
+      myUser,
+      allUsers: friends.concat(myUser).reduce((map, user) => {
+        map[user._id] = user;
+        return map;
+      }, {})
+    };
+    setUsersContext(newUsersContext)
   }
 }

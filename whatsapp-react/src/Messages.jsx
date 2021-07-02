@@ -11,11 +11,14 @@ export function Messages(props) {
     return '';
   }
   return <ul>
-      {props.messages.map(message => <Message key={message._id}>
-        <p>chatId: {message.chat}</p>
-        <p>messageId: {message._id}</p>
-        <p>user: {message.author._id}</p>
-        <p>{message.text}</p>
-      </Message>)}
+      {props.messages.map(message => {
+        let fullUser = props.usersContext.allUsers[message.author._id] || {};
+        return <Message key={message._id}>
+          <p>chatId: {message.chat}</p>
+          <p>messageId: {message._id}</p>
+          <p>user: {fullUser.userName}</p>
+          <p>{message.text}</p>
+        </Message>;
+      })}
     </ul>;
 }
