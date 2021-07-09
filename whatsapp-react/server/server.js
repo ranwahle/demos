@@ -81,3 +81,6 @@ app.post("/api/chats", Chats.createNew);
 
 // create a new message in a specific chat
 app.post("/api/chats/:id/messages", Messages.createNew);
+
+// delete a chat
+app.delete("/api/chats/:id", Chats.delete);

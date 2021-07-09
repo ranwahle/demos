@@ -4,24 +4,13 @@ import { Pane, Panes } from './Panes';
 import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
 import { getChatUsersList } from './utils';
-
-let get = (route) => fetch(`http://localhost:8080/api/${route}`, {
-  credentials: 'include',
-  mode: 'cors'
-}).then(res => res.json())
-
-let post = (route, body) => fetch(`http://localhost:8080/api/${route}`, {
-  method: 'POST',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(body)
-});
+import { FindUsers } from './FindUsers';
+import { get, post } from './utils';
 
 export function App() {
   let [chats, setChats] = useState([]);
   let [chatId, setChatId] = useState(null);
+  let [newChatId, setNewChatId] = useState(null);
   let [messages, setMessages] = useState([]);
   let [lastPoll, setLastPoll] = useState(Date.now());
   let [myUser, setMyUser] = useState({});
@@ -31,13 +20,15 @@ export function App() {
     allUsers: {}
   });
   let timer = useRef(null);
+  let lastChatId = useRef(null);
 
   useEffect(loadMyUser, []);
   useEffect(loadMyFriends, [myUser?._id]);
   useEffect(updateUsersContext, [myUser, friends]);
-  useEffect(loadChats, [myUser?._id]);
+  useEffect(loadChats, [myUser?._id, newChatId, lastPoll]);
   useEffect(loadMessages, [chatId, lastPoll]);
   useEffect(startTimer, [lastPoll]);
+  useEffect(saveLastChatId, [chatId])
 
   let selectedChat = chats.find((chat) => chat._id === chatId);
   let lastPollDisplay = (() => {
@@ -48,7 +39,11 @@ export function App() {
   return <Panes>
     <Pane width={'35%'} minWidth={'300px'}
       header={`User: ${myUser.userName} (lastPoll: ${lastPollDisplay})`}
-      body={<Chats chats={chats} onSelectChat={setChatId} usersContext={usersContext}></Chats>}>
+      body={<>
+        <FindUsers onFoundUserClick={onFoundUserClick}></FindUsers>
+        Chats:
+        <Chats chats={chats} onSelectChat={setChatId} usersContext={usersContext}></Chats>
+      </>}>
     </Pane>
     <Pane width={'65%'}
       header={`Chat: ${getChatUsersList(selectedChat, usersContext)}`}
@@ -86,8 +81,14 @@ export function App() {
     };
     post(`chats/${chatId}/messages`, newMessage)
       .then(res => {
-        console.log(`Server responded with: ${JSON.stringify(res)}`);
         setLastPoll(Date.now());
+      });
+  }
+
+  function onFoundUserClick(foundUserId) {
+    post('chats', {userIds: [myUser._id, foundUserId]})
+      .then(newChat => {
+        setNewChatId(newChat._id);
       });
   }
 
@@ -97,7 +98,11 @@ export function App() {
     }
     get(`chats?userid=${myUser._id}`).then(chats => {
       setChats(chats);
-      setChatId(chats[0]._id);
+      if (!chats.length) {
+        return;
+      }
+      let defaultChat = lastChatId.current || chats[0]._id;
+      setChatId(defaultChat)
     });
   }
 
@@ -116,6 +121,10 @@ export function App() {
     timer.current = setTimeout(() => {
       setLastPoll(Date.now());
     }, 5000);
+  }
+
+  function saveLastChatId() {
+    lastChatId.current = chatId;
   }
 
   function updateUsersContext() {

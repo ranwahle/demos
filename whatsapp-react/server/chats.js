@@ -66,3 +66,22 @@ module.exports.createNew = (req, res) => {
     }
   });
 };*/
+
+module.exports.delete = (req, res) => {
+  Chat.findByIdAndRemove(req.params.id)
+    .then((chat) => {
+      if (chat) {
+        res.json(chat);
+      } else {
+        res
+          .status(404)
+          .send(
+            `404: chat #${req.params.id} wasn't found and cannot be deleted`
+          );
+      }
+    })
+    .catch((err) => {
+      // TODO: investigate error
+      res.status(500).send(`internal server error: ${err}`);
+    });
+};

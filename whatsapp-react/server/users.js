@@ -28,14 +28,14 @@ module.exports.getAll = (req, res) => {
 
   let filter = {};
   // creating a search filter if provided
-  if (req.body.search) {
+  if (req.query.search) {
     // searching by first name only
     // using regular expression, finding all users containing the search string
     // (i = case insensitive)
-    // filter.firstName = new RegExp(req.body.search, "i");
+    // filter.firstName = new RegExp(req.query.search, "i");
 
     // searching on first & last names together
-    let regExp = new RegExp(req.body.search, "i");
+    let regExp = new RegExp(req.query.search, "i");
     filter = { $or: [{ firstName: regExp }, { lastName: regExp }] };
   }
   User.find(filter).then((result) => res.json(result));
