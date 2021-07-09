@@ -13,7 +13,13 @@ const chatSchema = new mongoose.Schema({
 let Chat = mongoose.model("Chat", chatSchema);
 
 module.exports.getAll = (req, res) => {
-  Chat.find()
+  let filter = {};
+
+  // getting from the URL query string (?userid=XXXXX)
+  if (req.query.userid) {
+    filter.userIds = req.query.userid;
+  }
+  Chat.find(filter)
     .populate("userIds", "userName")
     .then((result) => res.json(result));
 };

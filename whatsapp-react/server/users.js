@@ -26,16 +26,36 @@ module.exports.getAll = (req, res) => {
   // model.find() without parameters, returns all objects in a collection
   // https://mongoosejs.com/docs/api.html#model_Model.find
 
-  User.find().then((result) => res.json(result));
+  let filter = {};
+  // creating a search filter if provided
+  if (req.body.search) {
+    // searching by first name only
+    // using regular expression, finding all users containing the search string
+    // (i = case insensitive)
+    // filter.firstName = new RegExp(req.body.search, "i");
+
+    // searching on first & last names together
+    let regExp = new RegExp(req.body.search, "i");
+    filter = { $or: [{ firstName: regExp }, { lastName: regExp }] };
+  }
+  User.find(filter).then((result) => res.json(result));
 };
 
 module.exports.getById = (req, res) => {
-  User.findById(req.params.id)
+  getUserById(req.params.id, res);
+};
+
+module.exports.getLoggedUserByCookie = (req, res) => {
+  getUserById(req.cookies.userId, res);
+};
+
+const getUserById = (userId, res) => {
+  User.findById(userId)
     .then((user) => {
       if (user) {
         res.json(user);
       } else {
-        res.status(404).send(`404: user #${req.params.id} wasn't found`);
+        res.status(404).send(`404: user #${userId} wasn't found`);
       }
     })
     .catch((err) => {

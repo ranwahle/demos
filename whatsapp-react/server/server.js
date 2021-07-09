@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose"); // a package for communicating with MongoDB
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
+
 const Users = require("./users");
 const Messages = require("./messages");
 const Chats = require("./chats");
@@ -8,14 +10,19 @@ const Chats = require("./chats");
 // Initializing Server
 const app = express(); // express is a function that returns an instance
 app.use(express.json()); // this makes it easier to process JSON requests
-app.use(cors({
-  origin: "http://localhost:3000"
-}));
 app.listen(8080, () => console.log("Our server is listening on port 8080... ")); // Now we're live!
+app.use(
+  //enable cross-origin requests
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  })
+);
+app.use(cookieParser()); //  Middleware that enable working with cookies
 
 // connecting to MongoDB
 const mongoURL =
-  process.env.WHATSAPP_DB; // connection string
+process.env.WHATSAPP_DB; // connection string
 
 mongoose.set("useUnifiedTopology", true); // use Mongo's new connection drivers
 
@@ -36,6 +43,8 @@ app.get("/", (req, res) => {
 app.get("/api/users", Users.getAll);
 
 app.get("/api/users/:id", Users.getById);
+
+app.get("/api/me", Users.getLoggedUserByCookie);
 
 app.post("/api/users", Users.createNew);
 
@@ -65,7 +74,7 @@ app.get("/api/chats/:id", Chats.getById);
 app.get("/api/chats/:id/messages", Messages.getByChat);
 
 // get all chats for a specific user
-app.get("/api/friends/:id", Chats.getFriends);
+//app.get("/api/friends/:id", Chats.getFriends);
 
 // create a new chat
 app.post("/api/chats", Chats.createNew);

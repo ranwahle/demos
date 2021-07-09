@@ -5,8 +5,10 @@ import { Chats } from './Chats';
 import { MessageForm } from './MessageForm';
 import { getChatUsersList } from './utils';
 
-const MY_USER_ID = '60bddb8019094d60c42557cf';
-let get = (route) => fetch(`http://localhost:8080/api/${route}`).then(res => res.json())
+let get = (route) => fetch(`http://localhost:8080/api/${route}`, {
+  credentials: 'include',
+  mode: 'cors'
+}).then(res => res.json())
 
 export function App() {
   let [chats, setChats] = useState([]);
@@ -48,7 +50,7 @@ export function App() {
   </Panes>;
 
   function loadMyUser() {
-    get(`users/${MY_USER_ID}`)
+    get('me')
       .then(user => {
         setMyUser(user);
       });
@@ -82,7 +84,7 @@ export function App() {
     if (!myUser._id) {
       return;
     }
-    get(`friends/${myUser._id}`).then(chats => {
+    get(`chats?userid=${myUser._id}`).then(chats => {
       setChats(chats);
       setChatId(chats[0]._id);
     });
