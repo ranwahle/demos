@@ -20,7 +20,7 @@ module.exports.getAll = (req, res) => {
     filter.userIds = req.query.userid;
   }
   Chat.find(filter)
-    .populate("userIds", "userName")
+    // .populate("userIds", "userName")
     .then((result) => res.json(result));
 };
 

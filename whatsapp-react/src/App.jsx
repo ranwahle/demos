@@ -10,6 +10,15 @@ let get = (route) => fetch(`http://localhost:8080/api/${route}`, {
   mode: 'cors'
 }).then(res => res.json())
 
+let post = (route, body) => fetch(`http://localhost:8080/api/${route}`, {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(body)
+});
+
 export function App() {
   let [chats, setChats] = useState([]);
   let [chatId, setChatId] = useState(null);
@@ -67,15 +76,17 @@ export function App() {
       });
   }
 
-  function onNewMessage(body) {
-    fetch(`/post/chats/${chatId}/messages`)
+  function onNewMessage(text) {
+    let newMessage = {
+      chat: chatId, // TODO rename to chatId
+      text,
+      date: String(new Date()), // TODO should be timestamp
+      picURL: '',
+      author: myUser, // TODO should only send userId
+    };
+    post(`chats/${chatId}/messages`, newMessage)
       .then(res => {
-        let newMessage = {
-          chatId,
-          body,
-          user: {name: 'Serge Krul'},
-        };
-        console.log(`Sending to the server: ${JSON.stringify(newMessage)}`);
+        console.log(`Server responded with: ${JSON.stringify(res)}`);
         setLastPoll(Date.now());
       });
   }

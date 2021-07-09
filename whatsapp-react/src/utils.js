@@ -1,6 +1,6 @@
 export function getChatUsersList(chat, usersContext) {
-  return chat?.userIds.map(user => {
-    let fullUser = usersContext.allUsers[user._id] || {};
+  return chat?.userIds.map(userId => {
+    let fullUser = usersContext.allUsers[userId] || {};
     return fullUser.userName;
   }).join(', ');
 }
