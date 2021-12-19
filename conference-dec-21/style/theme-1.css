@@ -1,0 +1,9 @@
+:root {
+  --color-background: #283F50;
+  --color-on-background: white;
+  --color-surface: white;
+  --color-on-surface: #333;
+  --color-primary: #5C817B;
+  --gradient: linear-gradient(90deg, #a1d3b0, #f6f1d3);
+  --color-on-gradient: #666;
+}
