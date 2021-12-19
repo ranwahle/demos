@@ -42,27 +42,6 @@ a:hover {
   color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  .theme {
-    background-color: white;
-    color: #333;
-  }
-
-  .theme .theme-negative {
-    background-color: #283F50;
-    color: white;
-  }
-  .theme--alt {
-    background-color: white;
-    color: #333;
-  }
-
-  .theme--alt .theme-negative {
-    background-color: #283F50;
-    color: white;
-  }
-}
-
 .layout {
   text-align: center;
 }
