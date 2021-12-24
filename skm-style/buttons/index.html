@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buttons exercise</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: rebeccapurple;
+      background-image: linear-gradient(180deg, rgba(85,3,148,1) 0%, rgba(101,9,121,1) 35%, rgba(255,0,194,1) 100%);
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 16px;
+      border: 8px solid;
+
+      /*  This is needed for the background image to stay
+          in the same place even when scrolling. When it's
+          100% height it covers all content even if the
+          page is higher than the viewport.
+      */
+      background-attachment: fixed;
+
+      /*  This is needed to remove scrollbars when adding
+          padding, cause with the default content-box
+          box-sizing the padding is added to the height
+          and we get more than 100%.
+       */
+      box-sizing: border-box;
+
+      /*  This is needed to stretch the body element
+          to the full height even without content
+          but still allow it to grow when more content
+          is added.
+      */
+      min-height: 100%;
+    }
+    html {
+      /*  This is needed for the viewport to stretch
+          to the full height. Without it giving
+          body {height: 100%;} wouldn't have any effect.
+      */
+      height: 100%;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .button {
+      border: 1px solid;
+      border-radius: 4px;
+      display: inline-block;
+      padding: 8px;
+      margin-right: 8px;
+      transition:
+        background-color .2s linear,
+        color .2s linear;
+    }
+    .button:hover {
+      background-color: white;
+      color: rebeccapurple;
+      text-decoration: none;
+    }
+    .menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      display: inline-block;
+      margin-right: 8px;
+      border-top: 1px solid;
+      padding-top: 8px;
+      text-transform: uppercase;
+    }
+    .menu li:hover {
+      border-top-color: gold;
+    }
+    .menu a {
+      transition: color .2s ease;
+    }
+    .menu a:hover {
+      text-decoration: none;
+      color: gold;
+    }
+    button.button {
+      font-family: inherit;
+      font-size: inherit;
+      background-color: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Buttons exercise</h1>
+  <a href="" class="button">I look like a button</a>
+  <button class="button">Real button</button>
+  <a href="" class="">I look  like a link</a>
+  <h2>Menu exercise</h2>
+  <nav>
+    <ul class="menu">
+      <li><a href="">One</a></li>
+      <li><a href="">Two</a></li>
+      <li><a href="">Three</a></li>
+      <li><a href="">Four</a></li>
+      <li><a href="">Five</a></li>
+    </ul>
+  </nav>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui ea nisi aut quod mollitia, ab ratione! Est, a eaque nobis et quam quo? Commodi vel explicabo natus molestias porro sint exercitationem ad sit aspernatur illo, quae, alias debitis quia vero ipsum eum mollitia, facilis velit similique sequi possimus. Labore nulla consequuntur alias magnam, accusantium corrupti autem rerum aperiam fugiat iure quos illo cumque laborum quis inventore, ipsum sequi at aliquid quam! Nisi aliquam voluptate ea repellendus eius veritatis aspernatur, perferendis magni maiores asperiores, velit eum illum commodi in tenetur mollitia, cupiditate pariatur accusantium eaque hic illo. Mollitia nostrum odit fugiat.</p>
+  <p>Quos voluptatem vitae deleniti hic, quibusdam consectetur sapiente facilis minima. Quas porro excepturi adipisci ipsam, nostrum modi in quam, quos, laudantium earum nisi odio similique distinctio mollitia! Sunt cupiditate quos alias similique consequatur delectus est. Praesentium, delectus eum totam dolorum libero earum consequatur necessitatibus dolore possimus sint beatae dolores minus consequuntur sed ipsa fugiat. Voluptate nihil deserunt possimus alias magnam vel enim aut? Dolorum beatae ex ab est nulla aut nemo similique libero exercitationem explicabo accusamus voluptate omnis soluta doloribus, nesciunt aspernatur sapiente fugiat expedita vel. Iusto aliquid doloremque, unde illo dignissimos soluta beatae autem excepturi asperiores totam incidunt hic.</p>
+  <p>Sunt eius doloremque assumenda cumque debitis! Molestias possimus accusantium vel voluptatibus inventore natus tenetur, ullam provident neque quibusdam sequi officiis fuga, id iure doloribus sit veniam ipsum quas atque. Nisi commodi totam accusantium labore nam, eaque magnam et ratione deserunt hic quos atque, rem fugiat ipsa eos, laboriosam nobis beatae. Quae odit eos sint facere ea quo placeat id a perferendis ex accusamus odio quisquam adipisci veritatis dolor, suscipit accusantium tempora nemo inventore voluptatum omnis similique. Natus nisi quos iure repellat dignissimos quod quam ab sed. Illum, quia quos culpa explicabo, reiciendis, dicta quam at a nulla totam sunt impedit!</p>
+  <p>Nobis earum explicabo fugiat quisquam eveniet? Suscipit ea odit, atque ducimus cupiditate obcaecati distinctio quis totam sed natus magni corporis accusantium voluptatem esse consequuntur in! Reiciendis maiores esse modi id blanditiis, soluta neque! Consequuntur molestiae repudiandae amet ut quae est tempore! Modi placeat unde veritatis nisi ex, fugiat nemo labore, iste dolores exercitationem mollitia fugit quas nobis! Enim perspiciatis nulla molestias provident, quod adipisci expedita minima, reprehenderit pariatur id ullam obcaecati laudantium repellat nobis sapiente rem labore laboriosam aliquid rerum ad amet? Perferendis quos ea architecto perspiciatis mollitia qui ratione id! Consectetur quae, veniam esse libero voluptas error voluptates facilis?</p>
+  <p>Asperiores aperiam magnam porro temporibus deleniti. Repudiandae unde eligendi ea quos facilis tempore quae sit aliquid sed dolores, sapiente fugit dolor officia amet blanditiis, ab optio facere praesentium! Temporibus sunt harum, tenetur placeat sint suscipit autem beatae, amet inventore vel pariatur iusto doloremque perferendis nulla quidem optio aliquam aperiam odit nesciunt facilis perspiciatis saepe, sapiente libero. Mollitia perspiciatis temporibus obcaecati maiores magnam. Quia at quod nisi cum fuga provident culpa dolores. Quos doloremque veniam necessitatibus debitis ad fuga eum quo at! Inventore alias illo reprehenderit rerum id nihil natus nam a ea molestias dolorem, repudiandae exercitationem, perferendis eligendi nemo officiis.</p>
+</body>
+</html>
