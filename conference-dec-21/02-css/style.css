@@ -32,27 +32,17 @@ a:hover {
   color: #333;
 }
 
-.theme--alt {
-  background-color: white;
-  color: #333;
-}
-
-.theme--alt .theme-negative {
-  background-color: #283F50;
-  color: white;
-}
-
 .layout {
   text-align: center;
 }
 
-ul.menu {
+.menu {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-ul.menu li {
+.menu li {
   display: inline-block;
 }
 
