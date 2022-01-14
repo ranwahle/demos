@@ -4,6 +4,9 @@ body {
 
 body.is-modal-open {
   overflow: hidden;
+
+  /* account for common scrollbar width so there's no content jump */
+  padding-right: 15px;
 }
 
 .modal {
@@ -18,6 +21,9 @@ body.is-modal-open {
   align-items: center;
 
   transition: opacity .2s ease-in;
+
+  /* add a delay to wait for body scrollbar to disappear */
+  transition-delay: .2s;
 }
 
 .modal.is-hidden {
