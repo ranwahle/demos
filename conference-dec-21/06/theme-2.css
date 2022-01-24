@@ -1,0 +1,42 @@
+html {
+  --color-primary: #7cc6f8;
+  --color-background: #ffd7a9;
+  --color-on-background: rgb(59, 59, 59);
+  --color-background-alt: #fff;
+  --color-on-background-alt: #333;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+.bg-container {
+  background-color: var(--color-background-alt);
+  color: var(--color-on-background-alt);
+}
+
+h2 {
+  color: var(--color-primary);
+}
+
+header .text-right {
+  color: var(--color-primary);
+}
+
+.page-lead {
+  background-image: linear-gradient(90deg, #A1D4B1 0%, #F4F1D3 100%);
+  color: gray;
+}
+
+.speaker {
+  color: gray;
+}
+
+.speaker a {
+  color: var(--color-primary);
+}
+
+.speaker figure {
+  border: 1px solid gray;
+}
