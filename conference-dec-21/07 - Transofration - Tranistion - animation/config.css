@@ -1,0 +1,15 @@
+html {
+  --space: 0.15em;
+  --font-size: 2rem;
+}
+
+img {
+  animation: opacity 1s;
+}
+
+@keyframes opecity {
+  from {opacity: 0;}
+  to {opacity 1}
+}
+/* SASS */
+/* SCSS */
