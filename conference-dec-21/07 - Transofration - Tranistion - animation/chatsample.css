@@ -1,27 +1,40 @@
 :root {
     --chatbox-height: 300px;
-    --circle-size: 10px;
+    --circle-size: 5px;
 }
 .chat-box {
     border: 1px solid;
     position: fixed;
     bottom: 0;
     width: 25%;
-    min-height: 10px;
+     min-height: 10px; 
     transition: min-height 1s;
     display: flex;
     flex-direction: column;
 }
+
+.chat-box:hover {
+    /* min-height: var(--chatbox-height); */
+}
+
 .chat-box div {
     display: flex;
     flex-direction: row;
+    gap: calc(var(--circle-size)/2);
+}
+.chat-box div:hover .chatbox-round-div{
+    animation: circle-animation-translate 1s infinite;
 }
 
-.chat-box:hover {
-    min-height: var(--chatbox-height);
-    /* height: var(--chatbox-height); */
+.chat-box div:hover .chatbox-round-div:nth-child(1) {
+    animation-delay: 250ms;
 }
-
+.chat-box div:hover .chatbox-round-div:nth-child(2) {
+    animation-delay: 500ms;
+}
+.chat-box div:hover .chatbox-round-div:nth-child(3) {
+    animation-delay: 750ms;
+}
 .chatbox-round-div {
     background-color: black;
     border: solid 1px;
@@ -29,11 +42,22 @@
     height: var(--circle-size);
     width: var(--circle-size);
     align-self: center;
-    margin: 0 calc(var(--circle-size)/2);
-    animation: circle-animation 1s infinite;
+    /* margin: 0 calc(var(--circle-size)/2); */
 }
 
-.chatbox-round-div:nth-child(1) {
+
+@keyframes circle-animation {
+    0% {transform: scale(0.5);}
+    50% {transform: scale(1);}
+    100% {transform: scale(0.5);}
+}
+
+@keyframes circle-animation-translate {
+    0% {transform: translate(0, 0);}
+    50% {transform: translate(0, var(--circle-size));}
+    100% {transform: translate(0, 0);}
+}
+ .chatbox-round-div:nth-child(1) {
     animation-delay: 250ms;
 }
 .chatbox-round-div:nth-child(2) {
@@ -43,13 +67,8 @@
     animation-delay: 750ms;
 }
 
-@keyframes circle-animation {
-    0% {transform: scale(0.5);}
-    50% {transform: scale(1);}
-    100% {transform: scale(0.5);}
-}
-@keyframes circle-animation-down {
+/*@keyframes circle-animation-down {
     0% {transform: scale(1);}
     50% {transform: scale(0.5);}
     100% {transform: scale(1);}
-}
+} */

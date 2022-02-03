@@ -24,18 +24,28 @@ a {
 
 img {
   max-width: 100%;
-  animation: opecity 3s;
+  animation: my-rotation 3s infinite;
+  animation-delay: 1s;
 }
 
-@keyframes myRotation {
-  from {transform: rotate(90deg);}
-  to {transform: rotate(0);}
+@keyframes my-rotation {
+  0% {transform: rotate(90deg);}
+  25% {transform: rotate(0);}
+  50% {transform: rotate(270deg);}
+  65% {transform: rotate(270deg);}
+  75% {transform: rotate(180deg);}
+  100% {transform: rotate(90deg);}
+
+
+
 
 }
 
 @keyframes opecity {
-  from {opacity: 0}
-  to {opacity: 1}
+  0% {opacity: 0}
+  50% {opacity: 1}
+  100% {opacity: 0}
+
 }
 
 .content-container {

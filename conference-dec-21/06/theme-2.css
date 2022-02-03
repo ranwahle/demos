@@ -39,4 +39,10 @@ header .text-right {
 
 .speaker figure {
   border: 1px solid gray;
+  transition : transform 0.5s;
+}
+
+.speaker figure:hover {
+  transform: scale(1.1);
+
 }
