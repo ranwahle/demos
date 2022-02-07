@@ -13,10 +13,6 @@
     flex-direction: column;
 }
 
-.chat-box:hover {
-    /* min-height: var(--chatbox-height); */
-}
-
 .chat-box div {
     display: flex;
     flex-direction: row;
@@ -42,7 +38,6 @@
     height: var(--circle-size);
     width: var(--circle-size);
     align-self: center;
-    /* margin: 0 calc(var(--circle-size)/2); */
 }
 
 
@@ -66,9 +61,3 @@
 .chatbox-round-div:nth-child(3) {
     animation-delay: 750ms;
 }
-
-/*@keyframes circle-animation-down {
-    0% {transform: scale(1);}
-    50% {transform: scale(0.5);}
-    100% {transform: scale(1);}
-} */

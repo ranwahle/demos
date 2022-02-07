@@ -1,0 +1,19 @@
+:root {
+   --column-number: 4;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(2,1em);
+    grid-template-rows: 2fr auto;
+  }
+  
+  .board-container div {
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+  }
+  

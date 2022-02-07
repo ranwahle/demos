@@ -1,0 +1,13 @@
+html {
+  --space: 0.15em;
+  --font-size: 2rem;
+}
+
+img {
+  animation: show-image-gradualy 3s infinite;
+}
+
+@keyframes show-image-gradualy {
+  from {opacity: 0;}
+  to {opacity: 0.5;}
+}

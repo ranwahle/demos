@@ -1,0 +1,65 @@
+:root {
+  --chatbox-height: 300px;
+  --circle-size: 5px;
+}
+
+.chat-box {
+  border: 1px solid;
+  position: fixed;
+  bottom: 0;
+  width: 25%;
+  min-height: 10px;
+  transition: min-height 1s;
+  display: flex;
+  flex-direction: column;
+}
+.chat-box div {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--circle-size) / 2);
+}
+.chat-box div:hover .chatbox-round-div {
+  animation: circle-animation-translate 1s infinite;
+}
+
+.chat-box div:hover .chatbox-round-div:nth-child(1) {
+  animation-delay: 250ms;
+}
+
+.chat-box div:hover .chatbox-round-div:nth-child(2) {
+  animation-delay: 250ms;
+}
+
+.chatbox-round-div {
+  background-color: black;
+  border: solid 1px;
+  border-radius: 50%;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  align-self: center;
+}
+
+@keyframes circle-animation {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.5);
+  }
+}
+@keyframes circle-animation-translate {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, var(--circle-size));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/*# sourceMappingURL=chatsample.css.map */
