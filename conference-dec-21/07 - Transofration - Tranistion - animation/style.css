@@ -24,7 +24,7 @@ a {
 
 img {
   max-width: 100%;
-  animation: my-rotation 3s infinite;
+  /* animation: my-rotation 3s infinite; */
   animation-delay: 1s;
 }
 

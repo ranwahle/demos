@@ -49,15 +49,15 @@
 
 @keyframes circle-animation-translate {
     0% {transform: translate(0, 0);}
-    50% {transform: translate(0, var(--circle-size));}
+    50% {transform: translate(0, calc(-1*var(--circle-size)));}
     100% {transform: translate(0, 0);}
 }
  .chatbox-round-div:nth-child(1) {
-    animation-delay: 250ms;
+    animation-delay: 0;
 }
 .chatbox-round-div:nth-child(2) {
-    animation-delay: 500ms;
+    animation-delay: 250ms;
 }
 .chatbox-round-div:nth-child(3) {
-    animation-delay: 750ms;
+    animation-delay: 500ms;
 }

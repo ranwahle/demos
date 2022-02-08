@@ -13,6 +13,7 @@
     transition: min-height 1s;
     display: flex;
     flex-direction: column;
+
     div {
         display: flex;
         flex-direction: row;
@@ -30,15 +31,15 @@
 //     animation: circle-animation-translate 1s infinite;
 // }
 
-@mixin animation-delay {
-    @for $index from 1 to 3 {
+@mixin animation-delay($length) {
+    @for $index from 1 to $length+1 {
         .chat-box div:hover .chatbox-round-div:nth-child(#{$index}) {
-            animation-delay: 250ms;
+            animation-delay: $index*250ms;
         }
     }    
 }
 
-@include animation-delay();
+@include animation-delay(3);
 
 // .chat-box div:hover .chatbox-round-div:nth-child(1) {
 //     animation-delay: 250ms;
@@ -53,8 +54,8 @@
     background-color: black;
     border: solid 1px;
     border-radius: 50%;
-    height: var(--circle-size);
-    width: var(--circle-size);
+    height: $circleSize;
+    width: $circleSize;
     align-self: center;
 }
 
