@@ -1,0 +1,39 @@
+$containerWidth: 40px;
+
+:root {
+    --container-width: $containerWidth;
+}
+
+.toggle-button-container {
+    width: $containerWidth;
+    height: calc($containerWidth / 2);
+    border-radius: calc($containerWidth / 4);
+    border: 1px solid;
+    display: flex;
+    transition: background-color 1s;
+}  
+.toggle-button-container.on {
+    /* flex-direction: row-reverse; */
+    background-color: plum;
+    opacity: 0.7;
+}
+
+.toggle-button-container.on .toggle-button{
+    transform: translate(calc($containerWidth/2), 0)
+}
+
+
+.toggle-button{
+     height: calc($containerWidth / 2);
+     width: calc($containerWidth / 2);
+
+     border-radius: calc($containerWidth / 4);
+    opacity: 1;
+    /* border: inherit; */
+    background-color: blue;
+    transition: transform 1s;
+}
+
+@keyframes toggle-on {
+    from {transform: translate}
+}

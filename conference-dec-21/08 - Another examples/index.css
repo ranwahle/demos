@@ -1,0 +1,40 @@
+:root {
+  --container-width: $containerWidth;
+}
+
+.toggle-button-container {
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid;
+  display: flex;
+  transition: background-color 1s;
+}
+
+.toggle-button-container.on {
+  /* flex-direction: row-reverse; */
+  background-color: plum;
+  opacity: 0.7;
+}
+
+.toggle-button-container.on .toggle-button {
+  transform: translate(20px, 0);
+}
+
+.toggle-button {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  opacity: 1;
+  /* border: inherit; */
+  background-color: blue;
+  transition: transform 1s;
+}
+
+@keyframes toggle-on {
+  from {
+    transform: translate;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
