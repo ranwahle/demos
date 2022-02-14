@@ -1,0 +1,169 @@
+/*
+
+- BASE
+- CONFIG
+- THEME
+- TEXT / TYPOGRAPHY
+- UTILITY CLASSES (UTILITIES)
+- COMPONENTS
+
+*/
+
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0;
+
+
+  text-align: center;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  animation: my-rotation 3s infinite;
+  animation-delay: 1s;
+}
+
+@keyframes my-rotation {
+  @for $index from 1 through 4 {
+    #{$index*25}% {transform: rotate(#{$index*90}deg)}
+  }}
+
+@keyframes opecity {
+  0% {opacity: 0}
+  50% {opacity: 1}
+  100% {opacity: 0}
+
+}
+
+.content-container {
+  padding: calc(var(--space) * 4);
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.grid-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-columns > * {
+}
+
+.menu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  margin-top: 16px;
+}
+
+.menu li {
+  display: inline-block;
+}
+
+.menu a {
+  text-transform: uppercase;
+  font-size: smaller;
+}
+
+.menu li:not(:last-child) {
+  margin-right: 8px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (min-width: 42rem) {
+  body {
+    text-align: initial;
+  }
+  h1 {
+    width: 250px;
+    margin: 0;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 0.5rem;
+  }
+}
+
+* {
+  /* border: 1px solid; */
+}
+
+h2 {
+  font-size: calc(var(--font-size) * 1.125);
+}
+
+
+
+main span {
+  font-size: calc(var(--font-size) * 1.2);
+}
+
+.page-lead {
+  padding: calc(var(--space) * 8);
+  text-align: center;
+}
+
+.speaker {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.speaker h4 {
+  text-transform: uppercase;
+  font-size: smaller;
+}
+
+.speaker img {
+  max-width: 150px;
+  border-radius: 50%;
+  margin-top: -80px;
+}
+
+.speaker figure {
+  border-radius: 4px;
+  margin: 0;
+  max-width: 250px;
+  text-align: center;
+  padding: calc(var(--space) * 8);
+  margin-top: 80px;
+}
+
+.speaker figure ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  margin-top: 1em;
+}
+
+.speaker figure li {
+  margin-top: 0.2em;
+}

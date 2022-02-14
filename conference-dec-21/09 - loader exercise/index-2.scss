@@ -1,0 +1,6 @@
+@import './colors';
+
+.loader {
+    color: $initial-color;
+    border: $border-width solid;
+}

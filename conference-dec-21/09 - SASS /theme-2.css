@@ -1,0 +1,48 @@
+html {
+  --color-primary: #7cc6f8;
+  --color-background: #ffd7a9;
+  --color-on-background: rgb(59, 59, 59);
+  --color-background-alt: #fff;
+  --color-on-background-alt: #333;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+h2, header .text-right {
+  color: var(--color-primary);
+}
+
+.page-lead, .speaker {
+  color: gray;
+}
+
+.bg-container {
+  background-color: var(--color-background-alt);
+  color: var(--color-on-background-alt);
+}
+
+.page-lead {
+  background-image: -webkit-gradient(linear, left top, right top, from(#A1D4B1), to(#F4F1D3));
+  background-image: linear-gradient(90deg, #A1D4B1 0%, #F4F1D3 100%);
+}
+
+.speaker a {
+  color: var(--color-primary);
+}
+
+.speaker figure {
+  border: 1px solid gray;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.speaker figure:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=theme-2.css.map */

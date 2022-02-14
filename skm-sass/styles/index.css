@@ -1,31 +1,48 @@
 .box-red {
   width: 200px;
   height: 200px;
-  background-color: red; }
-  .box-red:hover {
-    background-color: #ff6666; }
-  @media (min-width: 37.5em) {
-    .box-red {
-      background-color: #990000; } }
+  background-color: red;
+}
+
+.box-red:hover {
+  background-color: #ff6666;
+}
+
+@media (min-width: 37.5em) {
+  .box-red {
+    background-color: #990000;
+  }
+}
 
 .box-green {
   width: 200px;
   height: 200px;
-  background-color: green; }
-  .box-green:hover {
-    background-color: #00e600; }
-  @media (min-width: 37.5em) {
-    .box-green {
-      background-color: #001a00; } }
+  background-color: green;
+}
+
+.box-green:hover {
+  background-color: #00e600;
+}
+
+@media (min-width: 37.5em) {
+  .box-green {
+    background-color: #001a00;
+  }
+}
 
 .box-blue {
   width: 200px;
   height: 200px;
-  background-color: blue; }
-  .box-blue:hover {
-    background-color: #6666ff; }
-  @media (min-width: 37.5em) {
-    .box-blue {
-      background-color: #000099; } }
+  background-color: blue;
+}
 
+.box-blue:hover {
+  background-color: #6666ff;
+}
+
+@media (min-width: 37.5em) {
+  .box-blue {
+    background-color: #000099;
+  }
+}
 /*# sourceMappingURL=index.css.map */

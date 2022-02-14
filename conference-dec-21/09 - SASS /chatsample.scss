@@ -1,6 +1,5 @@
 @import './variables.scss';
-@import './circle-styles';
-$rounds-length: 5;
+
 
 :root {
     --chatbox-height: 300px;
@@ -18,32 +17,47 @@ $rounds-length: 5;
 
     div {
         display: flex;
-        hyphens: 4 > 2;
         flex-direction: row;
-        gap: calc(var(--circle-size)/2); 
+        gap: cal(var(--circle-size)/2); 
         &:hover{
             .chatbox-round-div{
-                animation: circle-animation-translate $rounds-length*250ms infinite;
+                animation: circle-animation-translate 1s infinite;
             }
         }  
     }
 }
 
 
+// .chat-box div:hover .chatbox-round-div{
+//     animation: circle-animation-translate 1s infinite;
+// }
+
 @mixin animation-delay($length) {
     @for $index from 1 to $length+1 {
-        .chat-box div:hover .chatbox-round-div:nth-child(#{$index+1}) {
+        .chat-box div:hover .chatbox-round-div:nth-child(#{$index}) {
             animation-delay: $index*250ms;
         }
     }    
 }
-@include animation-delay($rounds-length);
 
+@include animation-delay(3);
 
-
-
+// .chat-box div:hover .chatbox-round-div:nth-child(1) {
+//     animation-delay: 250ms;
+// }
+// .chat-box div:hover .chatbox-round-div:nth-child(2) {
+//     animation-delay: 500ms;
+// }
+// .chat-box div:hover .chatbox-round-div:nth-child(3) {
+//     animation-delay: 750ms;
+// }
 .chatbox-round-div {
-   @extend %round-div-style;
+    background-color: black;
+    border: solid 1px;
+    border-radius: 50%;
+    height: $circleSize;
+    width: $circleSize;
+    align-self: center;
 }
 
 

@@ -1,0 +1,57 @@
+.row {
+    display: flex;  
+    width: 100%;
+}
+
+%hidden {
+    display: none;
+}
+
+.col {
+    border: 1px solid;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+// .col-1 {
+//     min-width: 100%*1/12;
+// }
+
+// .col-2 {
+//     min-width: 2*100%/12;
+// }
+
+
+.col-0 {
+    @extend %hidden;
+} 
+
+
+@for $index from 1 to 13 {
+    .col-#{$index} {
+      min-width: $index*100%/12;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 768px) {
+    .col-md-0 {
+       display: none;
+    } 
+    @for $index from 1 to 13 {
+        .col-md-#{$index} {
+          min-width: $index*100%/12;
+        }
+      } 
+  }
+
+  @media (max-width: 576px){
+    .col-sm-0 {
+       display: none;
+    } 
+    @for $index from 1 to 13 {
+        .col-sm-#{$index} {
+          min-width: $index*100%/12;
+        }
+      } 
+  }

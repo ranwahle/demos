@@ -1,23 +1,58 @@
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .loader {
-    border-top: 5px solid;
-    border-right: 5px solid;
-animation: rotateloader 2s infinite;
-width: 50px;
-height: 50px;
-border-radius: 50px;
+  border-top: 5px solid;
+  border-right: 5px solid;
+  -webkit-animation: rotateloader 2s infinite;
+          animation: rotateloader 2s infinite;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+@-webkit-keyframes rotateloader {
+  0% {
+    -webkit-transform: rotate(0) scale(0.5);
+            transform: rotate(0) scale(0.5);
+    color: red;
+  }
+  50% {
+    -webkit-transform: rotate(180deg) scale(2);
+            transform: rotate(180deg) scale(2);
+    color: blue;
+  }
+  100% {
+    -webkit-transform: rotate(360deg) scale(0.5);
+            transform: rotate(360deg) scale(0.5);
+    color: red;
+  }
 }
 
 @keyframes rotateloader {
-    0% {transform: rotate(0) scale(0.5); color: yellow;}
-
-    50% {transform: rotate(180deg) scale(2); color: blue;}
-    100% {transform: rotate(360deg) scale(0.5); color: yellow;}
-
-
+  0% {
+    -webkit-transform: rotate(0) scale(0.5);
+            transform: rotate(0) scale(0.5);
+    color: red;
+  }
+  50% {
+    -webkit-transform: rotate(180deg) scale(2);
+            transform: rotate(180deg) scale(2);
+    color: blue;
+  }
+  100% {
+    -webkit-transform: rotate(360deg) scale(0.5);
+            transform: rotate(360deg) scale(0.5);
+    color: red;
+  }
 }
+/*# sourceMappingURL=index.css.map */

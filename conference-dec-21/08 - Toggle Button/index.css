@@ -4,10 +4,13 @@
 
 .toggle-button-container {
   width: 40px;
-  height: 20px;
-  border-radius: 10px;
+  height: calc($containerWidth / 2);
+  border-radius: calc($containerWidth / 4);
   border: 1px solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-transition: background-color 1s;
   transition: background-color 1s;
 }
 
@@ -18,23 +21,34 @@
 }
 
 .toggle-button-container.on .toggle-button {
-  transform: translate(20px, 0);
+  -webkit-transform: translate(calc($containerWidth/2), 0);
+          transform: translate(calc($containerWidth/2), 0);
 }
 
 .toggle-button {
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
+  height: calc($containerWidth / 2);
+  width: calc($containerWidth / 2);
+  border-radius: calc($containerWidth / 4);
   opacity: 1;
   /* border: inherit; */
   background-color: blue;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
   transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+@-webkit-keyframes toggle-on {
+  from {
+    -webkit-transform: translate;
+            transform: translate;
+  }
 }
 
 @keyframes toggle-on {
   from {
-    transform: translate;
+    -webkit-transform: translate;
+            transform: translate;
   }
 }
-
 /*# sourceMappingURL=index.css.map */

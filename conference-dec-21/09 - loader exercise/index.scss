@@ -1,0 +1,32 @@
+@import './colors.scss';
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border-top: $border-width solid;
+  border-right: $border-width solid;
+  animation: rotateloader 2s infinite;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+@keyframes rotateloader {
+  0% {
+    transform: rotate(0) scale(0.5);
+    color: $initial-color;
+  }
+
+  50% {
+    transform: rotate(180deg) scale(2);
+    color: blue;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.5);
+    color: $initial-color;;
+  }
+}
